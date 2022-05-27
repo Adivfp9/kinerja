@@ -199,26 +199,36 @@
               $total = $final_attitude + $final_skills + $final_know +$final_other ;
               ?>
      <tr>
+       
+     <?php
+        foreach($get_nilai as $n){
+          $s_know = $n->s_knowledge;
+          $s_skil = $n->s_skills;
+          $s_att = $n->s_attitude;
+          $s_ind = $n->s_individual;
+        }
+     ?>
+     
      <td>KNOWLEDGE</td>
-     <td></td>
+     <td><?= $s_know; ?></td>
      <td><?= $rata_know; ?></td>
      <td><?= $final_know; ?></td>
      </tr>
      <tr>
      <td>SKILLS</td>
-     <td></td>
+     <td><?=  $s_skil; ?></td>
      <td><?= $rata_skills; ?></td>
      <td><?= $final_skills; ?></td>
      </tr>
      <tr>
      <td>ATTITUDE</td>
-     <td></td>
+     <td><?= $s_att; ?></td>
      <td><?= $rata_att; ?></td>
      <td><?= $final_attitude; ?></td>
      </tr>
      <tr>
-     <td>Individual</td>
-     <td></td>
+     <td>Deliverables</td>
+     <td><?= $s_ind; ?></td>
      <td><?= $rata_other; ?></td>
      <td><?= $final_other; ?></td>
      </tr>
