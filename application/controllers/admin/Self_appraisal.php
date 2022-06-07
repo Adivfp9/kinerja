@@ -30,14 +30,13 @@ class Self_appraisal extends MY_Controller {
 		$nama_jabatan = $kode[7];
 		$id_jabatan = $kode[8];
 		$kode = $kode[9];
-		
+
 		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
 		foreach ($kry->result() as $row2)
 		{
 			$nik = $row2->nik;
 		}
-		// var_dump($nik);
-
+		
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
 		foreach ($query->result() as $row)
@@ -60,10 +59,11 @@ class Self_appraisal extends MY_Controller {
 		$data['hitung_self_skills'] = $this->transaksi_model->hitung_self_skills($kondisi2,$kode);	
 		$data['hitung_self_attitude'] = $this->transaksi_model->hitung_self_attitude($kondisi3,$kode);
 		$data['hitung_self_other'] = $this->transaksi_model->hitung_self_other($kondisi4,$kode);	
-	
 		$where = array('nik' => $nik);
+
 		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
-		// var_dump($data['get_nilai']);
+
+		// var_dump($data);
 		
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/self/lihat', $data);

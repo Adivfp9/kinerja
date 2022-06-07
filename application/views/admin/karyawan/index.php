@@ -80,7 +80,7 @@
                 <td><?= $row['nama_golongan']; ?></td>
      
                 <td>
-                <a href="/kinerja/admin/karyawan/edit/<?= $row['id_karyawan']; ?>" class="view btn btn-sm btn-warning" ><i class="nav-icon fa fa-pencil-square-o"></i> UBAH </a>
+                <!-- <a href="/kinerja/admin/karyawan/edit/<?= $row['id_karyawan']; ?>" class="view btn btn-sm btn-warning" ><i class="nav-icon fa fa-pencil-square-o"></i> UBAH </a> -->
                 <a href="/kinerja/admin/karyawan/delete/<?= $row['id_karyawan']; ?>" class="view btn btn-sm btn-danger" onclick="return confirmDelete();">
                 <i class="nav-icon fa fa-close" ></i> HAPUS </a>
               </td>
