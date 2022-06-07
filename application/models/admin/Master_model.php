@@ -124,6 +124,17 @@ public function get_karyawan(){
     $this->db->order_by("karyawan.nama_karyawan", "asc");
     return $this->db->get()->result_array();
 }
+
+public function get_karyawan_filter($where){
+    $this->db->select('*,karyawan.id as id_karyawan,perusahaan.*,golongan.*');
+    $this->db->from('karyawan');
+	$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
+	$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
+	$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner');
+	$this->db->join('perusahaan', 'perusahaan.id_perusahaan = karyawan.id_perusahaan', 'inner')->where('perusahaan.id_perusahaan',$where);
+    $this->db->order_by("karyawan.nama_karyawan", "asc");
+    return $this->db->get()->result_array();
+}
 public function get_karyawan_final(){
     $this->db->select('*,karyawan.id as id_karyawan,karyawan.id_jabatan as id_jabatan');
     $this->db->from('karyawan');
@@ -181,6 +192,13 @@ public function Updatekaryawan($where,$data,$table){
     $this->db->update($table,$data);
 }
 // akhir model untuk master karyawan
+
+// model master company //
+public function get_company(){
+    $this->db->select('*');
+    $this->db->from('perusahaan');
+    return $this->db->get()->result_array();
+}
 
 // form 360 model //
 public function get_pertanyaan_360($where,$table){		

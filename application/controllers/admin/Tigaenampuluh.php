@@ -76,6 +76,7 @@ class Tigaenampuluh extends MY_Controller {
 /* Email Ke Rekan Kerja 1 */
 		
 		$data['get_email_rekan'] = $this->transaksi_model->get_email_rekan($rekan_kerja);
+		var_dump($data);
 		$get_email_rekan = $data['get_email_rekan'];
 		foreach($get_email_rekan as $row){
 			$email = $row['email'];
@@ -88,7 +89,7 @@ class Tigaenampuluh extends MY_Controller {
 			
 				
 		$this->load->library('email');
-			$from	= "hrd@pinc.group";
+			$from	= "hrd@pincgroup.id";
 			$ellen	= "ellen@pincgroup.id";
 			$to	= $email;
 			$subject = "360 Feedback Form - $nama_karyawan";
@@ -115,6 +116,7 @@ class Tigaenampuluh extends MY_Controller {
 			
 		try{
 			$this->email->send();
+			var_dump("Done");
 			echo 'Message has been sent.';
 			}catch(Exception $e){
 			echo $e->getMessage();
@@ -134,8 +136,8 @@ foreach($get_email_rekan2 as $row){
 		$kode2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye2";
 		$urlx2= base64_encode($kode2);
 		//$urlx2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
-$this->load->library('email');
-	$from	= "hrd@pinc.group";
+	$this->load->library('email');
+	$from	= "hrd@pincgroup.id";
 	$ellen	= "ellen@pincgroup.id";
 	$to	= $email2;
 	$subject = "360 Feedback Form - $nama_karyawan";
@@ -183,7 +185,7 @@ foreach($get_email_rekan3 as $row){
 		$urlx3= base64_encode($kode3);
 		//$urlx3 ="+$id_karyawan+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
 $this->load->library('email');
-	$from	= "hrd@pinc.group";
+	$from	= "hrd@pincgroup.id";
 	$ellen	= "ellen@pincgroup.id";
 	$to	= $email3;
 	$subject = "360 Feedback Form - $nama_karyawan";
@@ -221,9 +223,10 @@ $this->load->library('email');
 		alert("Email Form 360 Berhasil Di Kirim"); 
 		</script>';
 		redirect('admin/tigaenampuluh/index');
-
 	
 	}
+
+
 	public function add(){
 		$data['get_departemen'] = $this->master_model->get_departemen();
 		$data['get_jabatan'] = $this->master_model->get_jabatan();
@@ -325,6 +328,8 @@ $this->load->library('email');
 			$rekan_kerja = $this->input->post('rekan_kerja');
 			$departemen = $this->input->post('departemen');
 			$jabatan = $this->input->post('jabatan');
+			$jenis_kelamin = $this->input->post('jenis_kelamin');
+			$golongan = $this->input->post('golongan');
 	
 			
 			$data = array(

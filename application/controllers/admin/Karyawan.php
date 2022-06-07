@@ -10,6 +10,19 @@ class Karyawan extends MY_Controller {
 	public function index(){
 		$data['title'] = 'Table karyawan';
 		$data['get_karyawan'] = $this->master_model->get_karyawan();
+		$data['get_company'] = $this->master_model->get_company();
+		
+		$this->load->view('admin/includes/_header');
+		$this->load->view('admin/karyawan/index', $data);
+		$this->load->view('admin/includes/_footer');
+	}
+
+	public function filter_company(){
+		$data['title'] = 'Table karyawan';
+		$idPerush = $this->input->get('company');
+		$data['get_karyawan'] = $this->master_model->get_karyawan_filter($idPerush);
+		$data['get_company'] = $this->master_model->get_company();
+		
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/karyawan/index', $data);
 		$this->load->view('admin/includes/_footer');
@@ -113,7 +126,8 @@ class Karyawan extends MY_Controller {
 			$rekan_kerja = $this->input->post('rekan_kerja');
 			$departemen = $this->input->post('departemen');
 			$jabatan = $this->input->post('jabatan');
-	
+			$jenis_kelamin = $this->input->post('jenis_kelamin');
+			$golongan = $this->input->post('golongan');
 			
 			$data = array(
 			'nama_karyawan' => $nama_karyawan,

@@ -96,7 +96,7 @@ class Self_appraisal extends MY_Controller {
 		/* ini emailnya */
 
 			$this->load->library('email');
-			$from	= "hrd@pinc.group";
+			$from	= "hrd@pincgroup.id";
 			$ellen	= "ellen@pincgroup.id";
 	
 			$to	= $email;
@@ -240,6 +240,8 @@ class Self_appraisal extends MY_Controller {
 			$rekan_kerja = $this->input->post('rekan_kerja');
 			$departemen = $this->input->post('departemen');
 			$jabatan = $this->input->post('jabatan');
+			$golongan = $this->input->post('golongan');
+			$jenis_kelamin = $this->input->post('jenis_kelamin');
 	
 			
 			$data = array(
