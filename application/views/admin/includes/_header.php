@@ -79,22 +79,22 @@
 
 $username = $this->session->userdata('username');
 
-// if ($username==''){
+if ($username==''){
 
-//  if(!isset($sidebar)):
+ if(!isset($sidebar)):
 
-//    $this->load->view('admin/includes/_sidebarx'); 
+   $this->load->view('admin/includes/_sidebarx'); 
   
-//    endif; 
+   endif; 
 
-// }else {
+}else {
 
-// if(!isset($sidebar)):
+if(!isset($sidebar)):
 
-// $this->load->view('admin/includes/_sidebar');
+$this->load->view('admin/includes/_sidebar');
 
-// endif;
-// }
+endif;
+}
 
 ?>
 
