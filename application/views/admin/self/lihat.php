@@ -180,8 +180,8 @@
                   $s_ind = $n->s_individual;
                   $w_ind = $n->s_individual;
 
-                  $total_prev_score = $s_know+$s_skil+$s_att+$s_ind;
-                  $total_prev_wight = $w_know+$w_skil+$w_att+$w_ind;
+                  $total_prev_score = round($s_know+$s_skil+$s_att+$s_ind,2);
+                  $total_prev_wight = round($w_know+$w_skil+$w_att+$w_ind,2);
                 }
             ?>
             
@@ -194,7 +194,7 @@
                $final_knowx = (25/100)*$rata_knowx;
                $final_know = round($final_knowx,2);
 
-               $prog_know = round((($final_know-$w_know)/$w_know)*100,0);
+               $prog_know = round((($final_know-$w_know)/$w_know)*100,2);
                 }?>
               
               <?php foreach($hitung_self_skills as $row5) { 
@@ -205,18 +205,18 @@
                $final_skills = (25/100)*$rata_skillsx;
                $final_skills = round($final_knowx,2);
 
-               $prog_skill = round((($final_skills-$w_skil)/$w_skil)*100,0);
+               $prog_skill = round((($final_skills-$w_skil)/$w_skil)*100,2);
                 }?>
 
           <?php foreach($hitung_self_attitude as $row6) { 
                $nilai_att = $row6['nilai'];
                $jumlah = $row6['jumlah'];
-               $rata_attx = $nilai_att / $jumlah ;
+               $rata_attx = round($nilai_att / $jumlah,2) ;
                $rata_att = round($rata_attx,2);
-               $final_att = (45/100)*$rata_attx;
+               $final_att = round((45/100)*$rata_attx,2);
                $final_attitude = round($final_att,2);
 
-               $prog_att = round((($final_attitude-$w_att)/$w_att)*100,0);
+               $prog_att = round((($final_attitude-$w_att)/$w_att)*100,2);
                 }?>
 
 
@@ -228,9 +228,9 @@
                $final_otherx = (5/100)*$rata_other;
                $final_other = round($final_otherx,2);
                if ($nilai_att > 0){
-                $prog_other = round((($final_other-$w_ind)/$w_ind)*100,0);
+                $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
                }else{ 
-                $prog_other = 0;
+                $prog_other = 0.00;
                }
 
                 }?>
@@ -239,57 +239,57 @@
               $total_actual_score = $rata_know+$rata_skills+$rata_att+$rata_other;
               $total = $final_attitude + $final_skills + $final_know +$final_other ;
 
-              $inTotal = round((($total-$total_prev_wight)/$total_prev_wight)*100,0);
+              $inTotal = round((($total-$total_prev_wight)/$total_prev_wight)*100,2);
               ?>
     
      <tr>
 
      <td>KNOWLEDGE</td>
      <td>25 %</td>
-      <td><?= $s_know; ?></td>
-      <td><?= $w_know; ?></td>
-      <td><?= $rata_know; ?></td>
-      <td><?= $final_know; ?></td>
-      <td><?= $prog_know; ?> %</td>
+      <td><?= number_format($s_know,2); ?></td>
+      <td><?= number_format($w_know,2); ?></td>
+      <td><?= number_format($rata_know,2); ?></td>
+      <td><?= number_format($final_know,2); ?></td>
+      <td><?= number_format($prog_know,2); ?> %</td>
      </tr>
      <tr>
      <td>SKILLS</td>
      <td>25 %</td>
-     <td><?=  $s_skil; ?></td>
-     <td><?= $w_skil; ?></td>
-     <td><?= $rata_skills; ?></td>
-     <td><?= $final_skills; ?></td>
-     <td><?= $prog_skill; ?> %</td>
+     <td><?= number_format($s_skil,2); ?></td>
+     <td><?= number_format($w_skil,2); ?></td>
+     <td><?= number_format($rata_skills,2); ?></td>
+     <td><?= number_format($final_skills,2); ?></td>
+     <td><?= number_format($prog_skill,2); ?> %</td>
      </tr>
      <tr>
       <td>ATTITUDE</td>
       <td>45 %</td>
-      <td><?= $s_att; ?></td>
-      <td><?= $w_att; ?></td>
-      <td><?= $rata_att; ?></td>
-      <td><?= $final_attitude; ?></td>
-      <td><?= $prog_att ?> %</td>
+      <td><?= number_format($s_att,2); ?></td>
+      <td><?= number_format($w_att,2); ?></td>
+      <td><?= number_format($rata_att,2); ?></td>
+      <td><?= number_format($final_attitude,2); ?></td>
+      <td><?= number_format($prog_att,2); ?> %</td>
       <td style="font-weight: bold;">In Total</td>
      </tr>
 
      <tr>
       <td>Deliverables</td>
       <td>5 %</td>
-      <td><?= $s_ind; ?></td>
-      <td><?= $w_ind; ?></td>
-      <td><?= $rata_other; ?></td>
-      <td><?= $final_other; ?></td>
-      <td><?= $prog_other; ?> %</td>
+      <td><?= number_format($s_ind,2); ?></td>
+      <td><?= number_format($w_ind,2); ?></td>
+      <td><?= number_format($rata_other,2); ?></td>
+      <td><?= number_format($final_other,2); ?></td>
+      <td><?= number_format($prog_other,2); ?> %</td>
       <td style="font-weight: bold;"><?= $inTotal; ?> %</td>
      </tr>
 
      <tr style="font-weight: bold;">
       <td align="center">Subtotal</td>
       <td>100 %</td>
-      <td><?= $total_prev_score; ?></td>
-      <td><?= $total_prev_wight; ?></td>
-      <td><?= $total_actual_score; ?></td>
-      <td><?= $total; ?></td>
+      <td><?= number_format($total_prev_score,2); ?></td>
+      <td><?= number_format($total_prev_wight,2); ?></td>
+      <td><?= number_format($total_actual_score,2); ?></td>
+      <td><?= number_format($total,2); ?></td>
      </tr>
       </tbody>
       </tfoot>
