@@ -163,31 +163,20 @@ $tanggal_input = date("Y/m/d");
                               </tr>
                             <?php } ?>
                             <!--end set of ATTITUDE -->
-
+                            </table>
+<br>
                             <!--Individual Deliverables -->
-                            <tr>
-                              <td colspan="3"><b> Individual Deliverables<b>
-                            </tr>
-                            <tr>
-
-                              <?php
-                              $no++;
-                              ?>
-
-                              <div class="col-md-12">
-                                <div class="card">
-                                  <div class="card-body">
-                          <tbody class="field_wrapper">
-                            <tr>
-                              <td width="50"> <a href="javascript:void(0);" class="add_button btn btn-sm btn-primary" title="Add field"><i class="fa fa-plus"></i></a>
-                              </td>
-                              <input type="hidden" name="jenis_form<?php echo $no; ?>" class="form-control" value="other">
-                              <td><input type="text" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value=""></td>
-                              <td width="70px"><input type="number" name="jawaban<?php echo $no; ?>" class="form-control" value="" max="4" step="0.01"></td>
-                            </tr>
-                          </tbody>
-                        </table>
-
+                            <table id="TabelTransaksi" class="table table-bordered table-striped">
+                            <thead>
+                              <tr>
+                                <th width="50"><button id='BarisBaru' class='btn btn-primary pull-left'><i class='fa fa-plus fa-fw'></i> </th>
+                                <th colspan="2"><b> Individual Deliverables<b>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                            </table>
+                        <br>
 
                         <div class="form-group">
                     <label for="summary" class="col-md-12 control-label">Summary </label>
@@ -347,12 +336,10 @@ $tanggal_input = date("Y/m/d");
                       </td>
                       <td>
                         <span id="v_score_individu_act"></span>
-                        <?php echo "4.00";?>
                         <input type="hidden" id="score_individu_act" value="0">
                       </td>
                       <td>
                         <span id="v_weight_individu_act"></span>
-                        <?php echo "0.20";?>
                         <input type="hidden" id="weight_individu_act" value="0">
                       </td>
                       <td></td>
@@ -367,17 +354,22 @@ $tanggal_input = date("Y/m/d");
                         <?php echo $s_total;?>
                       </th>
                       <th>
-                      <?php echo $w_total;?>
+                        <span id="v_tot_weight_prev"></span>
+                        <?php echo $w_total;?>
+                      </th>
+                      <th>
+                        <span id="v_tot_scored_act"></span>
+                        <input type="hidden" id="tot_scored_act_dec" value="0">
+                      </th>
+                      <th>
+                        <span id="v_tot_weight_acc"></span>
+                        <input type="hidden" id="tot_weight_acc_dec" value="0">
                       </th>
                       <td></td>
-                      <td></td>
-                      <td></td>
-
                     </tr>
                   </tbody>
                 </table>
                   
-
                 <table id="example1" class="table table-bordered table-striped text-center">
                   <thead>
                     <tr>
@@ -389,25 +381,25 @@ $tanggal_input = date("Y/m/d");
                   </thead>
                   <tbody>
 
-                    <tr class="bg-danger">
+                    <tr>
                       <td>1 to 1,49</td>
                       <td>Poor</td>
                       <td>0</td>
                     </tr>
 
-                    <tr class="bg-warning">
+                    <tr>
                       <td>1,5 to 2,25</td>
                       <td>Adequate </td>
                       <td>0</td>
                     </tr>
 
-                    <tr class="bg-success">
+                    <tr>
                       <td>2,26 to 3,49</td>
                       <td>Good</td>
                       <td>5-10%</td>
                     </tr>
 
-                    <tr class="bg-primary">
+                    <tr>
                       <td>3,5 to 4</td>
                       <td>Great </td>
                       <td>10-X%</td>
@@ -465,16 +457,93 @@ if(!empty($get_pertanyaan_self_attitude)){
 }
 ?>
 
-<script type="text/javascript">
-   $(document).ready(function(){
-      $("#score_know_prev, #score_skills_prev, #score_attitude_prev, #score_individu_prev").on("keyup change",function(){
-        calculate_scored_prev();
-      });
+<script>
+  $(document).ready(function(){
+    for(B=1; B<=1; B++){
+      BarisBaru();
+    }
 
-      $("#weight_know_prev, #weight_skills_prev, #weight_attitude_prev, #weight_individu_prev").on("keyup change",function(){
-        calculate_weight_prev();
-      }); 
+    $('#BarisBaru').click(function(){
+      BarisBaru();
+    });
+
+    // $("#TabelTransaksi tbody").find('input[type=text],textarea,select').filter(':visible:first').focus();
   });
+
+  function BarisBaru()
+  {
+  var Nomor = $('#TabelTransaksi tbody tr').length + 1;
+  var Baris = "<tr>";
+  // Kolom tombol remove
+    Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-times' style='color:red;'></i></button></td>";
+  // kolom input text deliverable
+    Baris += "<td>";
+      Baris += "<input type='text' class='form-control' name='add_deliv[]'";
+    Baris += "</td>";
+    // Baris += "<td>";
+    //   Baris += "<input type='hidden' name='nilai_deliv[]'>";
+    // Baris += "</td>";
+    Baris += "<td width='100px'><input type='number' min='1' max='4' class='form-control' id='nilai_deliv' value='' required step='0.01'></td>";
+    Baris += "</tr>";
+
+    $('#TabelTransaksi tbody').append(Baris);
+
+    $('#TabelTransaksi tbody tr').each(function(){
+      // $(this).find('td:nth-child(3) input').focus();
+    });
+
+    HitungDeliverables();
+  }
+
+  // Key down
+  $(document).on('keydown', '#nilai_deliv', function(e){
+    var charCode = e.which || e.keyCode;
+    if(charCode == 9){
+      var Indexnya = $(this).parent().parent().index() + 1;
+      var TotalIndex = $('#TabelTransaksi tbody tr').length;
+      // if(Indexnya == TotalIndex){
+      //   BarisBaru();
+      //   return false;
+      // }
+    }
+    HitungDeliverables();
+  });
+  // Key Up
+  $(document).on('keyup', '#nilai_deliv', function(e){
+    var charCode = e.which || e.keyCode;
+    if(charCode == 9){
+      var Indexnya = $(this).parent().parent().index() + 1;
+      var TotalIndex = $('#TabelTransaksi tbody tr').length;
+      // if(Indexnya == TotalIndex){
+      //   BarisBaru();
+      //   return false;
+      // }
+    }
+    HitungDeliverables();
+  });
+
+  function HitungDeliverables()
+  {
+    var TotDeliv = $('#TabelTransaksi tbody tr').length;
+    var sum = 0;
+    $('#TabelTransaksi tbody tr').each(function(){
+      if($(this).find('td:nth-child(3) input').val() > 0)
+      {
+        var answer = $(this).find('td:nth-child(3) input').val();
+        // Total = parseInt(Total) + parseInt(SubTotal);
+        sum = parseFloat(sum)+parseFloat(answer);
+      }
+    });
+    // $('#TotalDeliv').val(sum);
+    var scored = parseFloat(sum / parseInt(TotDeliv)).toFixed(2);
+    var weight = parseFloat(scored * (5 / 100)).toFixed(2);
+
+    $("#score_individu_act").val(scored);
+    $("#weight_individu_act").val(weight);
+    $("#v_score_individu_act").html(scored);
+    $("#v_weight_individu_act").html(weight);
+    calculate_scored_act();
+  }
 
   function count_know() {
     var tot_know = <?php echo $tot_know;?>;
@@ -488,12 +557,13 @@ if(!empty($get_pertanyaan_self_attitude)){
     var scored = parseFloat(sum / parseInt(tot_know)).toFixed(2);
     var weight = parseFloat(scored * (25 / 100)).toFixed(2);
 
-    // console.log(scored);
 
     $("#score_know_act").val(scored);
     $("#weight_know_act").val(weight);
     $("#v_score_know_act").html(scored);
     $("#v_weight_know_act").html(weight);
+    calculate_weight_acc();
+    calculate_scored_act();
   }
 
   function count_skills() {
@@ -515,6 +585,8 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#weight_skills_act").val(weight);
     $("#v_score_skills_act").html(scored);
     $("#v_weight_skills_act").html(weight);
+    calculate_weight_acc();
+    calculate_scored_act();
   }
 
   function count_attitude() {
@@ -536,7 +608,42 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#weight_attitude_act").val(weight);
     $("#v_score_attitude_act").html(scored);
     $("#v_weight_attitude_act").html(weight);
+    calculate_scored_act();
+    calculate_weight_acc();
   }
+
+  function count_deliverables(){
+    var Totaldeliv = 0;
+      $('#TbPertanyaan tbody tr').each(function(){
+      if($(this).find('td:nth-child(6) input').val() > 0)
+      {
+        var SubTotal = $(this).find('td:nth-child(6) input').val();
+        Total = parseInt(Total) + parseInt(SubTotal);
+      }
+    });
+    calculate_scored_act();
+    calculate_weight_acc();
+  }
+
+
+   $(document).ready(function(){
+      $("#score_know_prev, #score_skills_prev, #score_attitude_prev, #score_individu_prev").on("keyup change",function(){
+        calculate_scored_prev();
+      });
+
+      $("#weight_know_prev, #weight_skills_prev, #weight_attitude_prev, #weight_individu_prev").on("keyup change",function(){
+        calculate_weight_prev();
+      }); 
+
+      $("#score_know_act, #score_skills_act, #score_attitude_act, #score_individu_act").on("keyup change",function(){
+        calculate_scored_act();
+      });
+
+      $("#weight_know_act, #weight_skills_act, #weight_attitude_act, #weight_individu_act").on("keyup change",function(){
+        calculate_weight_acc();
+      });
+  });
+
 
   function calculate_scored_prev(){
     var scored_know_prev = $("#score_know_prev").val();
@@ -553,7 +660,6 @@ if(!empty($get_pertanyaan_self_attitude)){
 
     var tot_scored_prev = parseFloat(scored_know_prev)+parseFloat(scored_skills_prev)+parseFloat(scored_attitude_prev)+parseFloat(scored_individu_prev);
     var tot_scored_prev_dec = tot_scored_prev.toFixed(2);
-    //console.log(scored_know_prev);
     $("#v_tot_scored_prev").html(tot_scored_prev_dec);
   }
 
@@ -572,8 +678,43 @@ if(!empty($get_pertanyaan_self_attitude)){
 
     var tot_weight_prev = parseFloat(weight_know_prev)+parseFloat(weight_skills_prev)+parseFloat(weight_attitude_prev)+parseFloat(weight_individu_prev);
     var tot_weight_prev_dec = tot_weight_prev.toFixed(2);
-    //console.log(weight_know_prev);
     $("#v_tot_weight_prev").html(tot_weight_prev_dec);
+  }
+
+  function calculate_scored_act(){
+    var scored_know_act = $("#score_know_act").val();
+    var scored_skills_act = $("#score_skills_act").val();
+    var scored_attitude_act = $("#score_attitude_act").val();
+    var scored_individu_act = $("#score_individu_act").val();
+
+    if(scored_know_act == "" || scored_skills_act == "" || scored_attitude_act == "" || scored_individu_act == "") {
+      var scored_know_act = 0;
+      var scored_skills_act = 0;
+      var scored_attitude_act = 0;
+      var scored_individu_act = 0;
+    }
+    var tot_scored_act = parseFloat(scored_know_act)+parseFloat(scored_skills_act)+parseFloat(scored_attitude_act)+parseFloat(scored_individu_act);
+    var tot_scored_act_dec = tot_scored_act.toFixed(2);
+
+    $("#v_tot_scored_act").html(tot_scored_act_dec);
+  }
+
+  function calculate_weight_acc(){
+    var weight_know_acc = $("#weight_know_act").val();
+    var weight_skills_acc = $("#weight_skills_act").val();
+    var weight_attitude_acc = $("#weight_attitude_act").val();
+    var weight_individu_acc = $("#weight_individu_act").val();
+
+    if(weight_know_acc== "" || weight_skills_acc == "" || weight_attitude_acc == "" || weight_individu_acc == "") {
+      var weight_know_acc = 0;
+      var weight_skills_acc = 0;
+      var weight_attitude_acc = 0;
+      var weight_individu_acc = 0;
+    }
+
+    var tot_weight_acc = parseFloat(weight_know_acc)+parseFloat(weight_skills_acc)+parseFloat(weight_attitude_acc)+parseFloat(weight_individu_acc);
+    var tot_weight_acc_dec = tot_weight_acc.toFixed(2);
+    $("#v_tot_weight_acc").html(tot_weight_acc_dec);
   }
 
   function hitungrata_att() {
@@ -594,7 +735,6 @@ if(!empty($get_pertanyaan_self_attitude)){
 
     var final_a = document.getElementById("final_att").innerHTML == '' ? 0 : document.getElementById("final_att").innerHTML;
 
-    // console.log(parseFloat(final_p)+parseFloat(final_a));
 
     document.getElementById("total_score").innerHTML = parseFloat(final_p) + parseFloat(final_a)
 
@@ -602,95 +742,3 @@ if(!empty($get_pertanyaan_self_attitude)){
   }
 
 </script>
-
-
-<script type="text/javascript">
-    $(function(){
-
-      //---------------------------------------------------------------
-      $('#customer').change(function(e){
-        var id = $('#customer').val();
-        var post_data = {
-          '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
-        };
-        $.ajax({
-          type: 'POST',
-          url: '<?= base_url("admin/invoices/customer_detail/"); ?>'+id,
-          data: post_data,
-          success: function(response){
-            var data = JSON.parse(response);
-            console.log(data.id);
-            $('#firstname').val(data.firstname);
-            $('#address').val(data.address);
-            $('#email').val(data.email);
-            $('#mobile_no').val(data.mobile_no);
-          }
-        });
-
-      });
-
-      //---------------------------------------------------------------
-      $(document).on("click change paste keyup", ".calcEvent", function() {
-        calculate_total();
-      });
-
-      var max_field = 10;
-      var add_button = $('.add_button');
-      var wrapper = $('.field_wrapper');
-      var html_fields = '<tr class="item"><td> <a href="javascript:void(0);" class="remove_button btn btn-sm btn-danger" title="Remove field"><i class="fa fa-minus"></i></a> </td> <td> <div class="form-group"> <input type="hidden"  name="jenis_form[]" class="form-control" value="other" ><input type="text" name="pertanyaan[]" class="form-control calcEvent" id="pertanyaan[]" placeholder="" required> </div> </td> <td> <div class="form-group"> <input type="number"  name="jawaban[]" class="form-control" value=" " max="5" required step="0.01"> </div> </td>   </tr>';
-      var x = 1; // 
-
-      $(add_button).click(function(){
-        if(x < max_field){
-          x++;
-          $(wrapper).append(html_fields);
-        }
-
-      });
-
-      $(wrapper).on('click', '.remove_button', function(e){
-        e.preventDefault();
-        $(this).closest('tr').remove(); //Remove field html
-        x--; //Decrement field counter
-      });
-
-    });
-
-
-     //---------------------------------------------------------------
-     function calculate_total(){
-
-        var sub_total    = 0;
-        var total       = 0;
-        var amountDue   = 0;
-        var total_tax    = 0;
-
-        $('tr.item').each(function(){
-          var quantity = parseFloat($(this).find(".quantity").val());
-          var price = parseFloat($(this).find(".price").val());
-          var item_tax = $(this).find(".tax").val();
-
-          var item_total = parseFloat(quantity * price) > 0 ? parseFloat(quantity * price) : 0 ;
-          sub_total += parseFloat(price * quantity) > 0 ? parseFloat(price * quantity) : 0;
-          total_tax += parseFloat(price * quantity * item_tax/100) > 0 ? parseFloat(price * quantity * item_tax/100) : 0;
-
-          $(this).find('.item_total').text( item_total.toFixed(2) );
-          $(this).find('.item_total').val( item_total.toFixed(2) ); 
-        });
-
-        var discount    = parseFloat($("[name='discount']").val()) > 0 ? parseFloat($("[name='discount']").val()) : 0;
-        total += parseFloat(sub_total + total_tax - discount);
-
-        $( '.sub_total' ).text( sub_total.toFixed(2) );
-        $( '.sub_total' ).val( sub_total.toFixed(2) ); // for hidden field
-
-        $( '.total_tax' ).text( total_tax.toFixed(2) );
-        $( '.total_tax' ).val( total_tax.toFixed(2) ); // for hidden field
-
-        $( '#grand_total' ).text( total.toFixed(2) );
-        $( '.grand_total' ).val( total.toFixed(2) ); // for hidden field
-
-     }
-
-
-  </script>

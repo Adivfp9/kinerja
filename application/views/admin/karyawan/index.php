@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="<?= base_url()?>assets/plugins/datatables/dataTables.bootstrap4.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
+
 <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.0.1/css/fixedColumns.dataTables.min.css">
 
 
@@ -40,10 +41,20 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="departemen" class="control-label">Appraisal Date</label>
-                    <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <!-- <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%" name="tanggal">
                     <i class="fa fa-calendar"></i>&nbsp;
-                    <span></span> <i class="fa fa-caret-down pull-right"></i>
-                </div>
+                    <span></span> <i class="fa fa-caret-down pull-right"></i> -->
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="date" name="tgl_mulai" class="form-control">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="date" name="tgl_sampai" class="form-control">
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
@@ -133,7 +144,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>         
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>          -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <script src="<?= base_url()?>assets/plugins/datatables/jquery.dataTables.js"></script>
 <script src="<?= base_url()?>assets/plugins/datatables/dataTables.bootstrap4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/4.0.1/js/dataTables.fixedColumns.min.js"></script>
@@ -164,7 +176,7 @@
   }
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(function() {
 
     var start = moment().subtract(29, 'days');
@@ -186,10 +198,12 @@ $(function() {
            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
         }
     }, cb);
+    $('input[name="tanggal"]').daterangepicker();
+
 
     cb(start, end);
 
 });
-</script>
+</script> -->
 </body>
 </html>

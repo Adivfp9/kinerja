@@ -20,7 +20,10 @@ class Karyawan extends MY_Controller {
 	public function filter_company(){
 		$data['title'] = 'Table karyawan';
 		$idPerush = $this->input->get('company');
-		$data['get_karyawan'] = $this->master_model->get_karyawan_filter($idPerush);
+		$TglMulai = $this->input->get('tgl_mulai');
+		$TglSampai = $this->input->get('tgl_sampai');
+		// var_dump($TglMulai);
+		$data['get_karyawan'] = $this->master_model->get_karyawan_filter($idPerush, $TglMulai, $TglSampai);
 		$data['get_company'] = $this->master_model->get_company();
 		
 		$this->load->view('admin/includes/_header');

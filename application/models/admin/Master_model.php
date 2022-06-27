@@ -125,14 +125,16 @@ public function get_karyawan(){
     return $this->db->get()->result_array();
 }
 
-public function get_karyawan_filter($where){
+public function get_karyawan_filter($idperush, $tglmulai, $tglsampai){
     $this->db->select('*,karyawan.id as id_karyawan,perusahaan.*,golongan.*');
     $this->db->from('karyawan');
 	$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
 	$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
 	$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner');
-	$this->db->join('perusahaan', 'perusahaan.id_perusahaan = karyawan.id_perusahaan', 'inner')->where('perusahaan.id_perusahaan',$where);
-    $this->db->order_by("karyawan.nama_karyawan", "asc");
+	$this->db->join('perusahaan', 'perusahaan.id_perusahaan = karyawan.id_perusahaan', 'inner')->where('perusahaan.id_perusahaan',$idperush);
+    
+    $this->db->where('karyawan.tgl_appraisal >=', $tglmulai)
+    ->where('karyawan.tgl_appraisal <=', $tglsampai)->order_by("karyawan.nama_karyawan", "asc");
     return $this->db->get()->result_array();
 }
 public function get_karyawan_final(){

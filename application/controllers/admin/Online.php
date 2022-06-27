@@ -286,7 +286,7 @@ class Online extends MY_Controller {
 			$mark_now = $mark + 1;
 			$data = array(
 				'mark' => $mark_now,);
-			$where = array(
+					$where = array(
 				'id' => $id_karyawan
 			);
 			$this->master_model->Updatekaryawan($where,$data,'karyawan');

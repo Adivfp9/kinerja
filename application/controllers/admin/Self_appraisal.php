@@ -96,15 +96,17 @@ class Self_appraisal extends MY_Controller {
 		/* ini emailnya */
 
 			$this->load->library('email');
-			$from	= "hrd@pincgroup.id";
+			$from	= "hrd@pinc.group";
 			$ellen	= "ellen@pincgroup.id";
-	
+			$sara	= "sara@pincgroup.id";
+			$linkurl = base_url('admin/online/self/'.$url.'/');
+
 			$to	= $email;
 			$subject = "Self Appraisal - $nama_karyawan";
 			$message ="
 			<html><body>
 			<p>Dear $nama_karyawan,</p>
-			<p>Berikut adalah link terkait Self Appraisal form (<a href='http://182.16.171.166/kinerja/admin/online/self/$url/'>Isi Self Appraisal form</a>) terhadap diri anda
+			<p>Berikut adalah link terkait Self Appraisal form (<a href='$linkurl'>Isi Self Appraisal form</a>) terhadap diri anda
 			<p>Mohon perhatikan petunjuk pengisian dan timeline & Employee Performance Appraisal berikut :</p><br>
 
 			<p><center><b>Petunjuk Pelaksanaan Employee Performance Appraisal</b></center></p>
@@ -120,16 +122,19 @@ class Self_appraisal extends MY_Controller {
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);
-			$this->email->cc($ellen);
+			// $this->email->cc($sara);
+			// $this->email->bcc($ellen);
+
 			$this->email->subject($subject);
 			$this->email->set_mailtype("html");
 			$this->email->message($message);
 			try{
-			$this->email->send();
-			echo 'Message has been sent.';
-	
+				$this->email->send();
+				echo 'Message has been sent.';
 			}catch(Exception $e){
-			echo $e->getMessage();
+				echo 'Email tidak berhasil dikirim';
+               	echo '<br />';
+				echo $e->getMessage();
 			}
 			
 		echo '<script>
