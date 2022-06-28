@@ -80,6 +80,7 @@ class Tigaenampuluh extends MY_Controller {
 		$get_email_rekan = $data['get_email_rekan'];
 		foreach($get_email_rekan as $row){
 			$email = $row['email'];
+			$nama_rekan	= $row['nama_karyawan'];
 		}
 				/* ini emailnya */
 
@@ -91,11 +92,12 @@ class Tigaenampuluh extends MY_Controller {
 		$this->load->library('email');
 			$from	= "hrd@pincgroup.id";
 			$ellen	= "ellen@pincgroup.id";
+			$sara	= "sara@pincgroup.id";
 			$to	= $email;
 			$subject = "360 Feedback Form - $nama_karyawan";
 			$message ="
 			<html><body>
-			<p>Dear $rekan_kerja,</p>
+			<p>Dear $nama_rekan,</p>
 			<p>Berikut adalah link terkait 360 feedback form (<a href='182.16.171.166/kinerja/admin/online/tigaenampuluh/$urlx1/'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
 			<p>Mohon perhatikan petunjuk pengisian dan timeline & activity 360 form berikut :</p><br>
 			<p><center><b>Petunjuk Pelaksanaan 360 Form Feedback</b></center></p>
@@ -109,7 +111,8 @@ class Tigaenampuluh extends MY_Controller {
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);
-			$this->email->cc($ellen);
+			$this->email->cc($sara);
+			$this->email->bcc($ellen);
 			$this->email->subject($subject);
 			$this->email->set_mailtype("html");
 			$this->email->message($message);
@@ -129,6 +132,7 @@ $data['get_email_rekan2'] = $this->transaksi_model->get_email_rekan2($rekan_kerj
 $get_email_rekan2 = $data['get_email_rekan2'];
 foreach($get_email_rekan2 as $row){
 	$email2 = $row['email'];
+	$nama_rekan2	= $row['nama_karyawan'];
 
 	
 }
@@ -143,7 +147,7 @@ foreach($get_email_rekan2 as $row){
 	$subject = "360 Feedback Form - $nama_karyawan";
 	$message2 ="
 	<html><body>
-	<p>Dear $rekan_kerja2,</p>
+	<p>Dear $nama_rekan2,</p>
 	<p>Berikut adalah link terkait 360 feedback form (<a href='182.16.171.166/kinerja/admin/online/tigaenampuluh/$urlx2/'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
 	<p>Mohon perhatikan petunjuk pengisian dan timeline & activity 360 form berikut :</p><br>
 	<p><center><b>Petunjuk Pelaksanaan 360 Form Feedback</b></center></p>
@@ -177,8 +181,8 @@ $data['get_email_rekan3'] = $this->transaksi_model->get_email_rekan3($rekan_kerj
 $get_email_rekan3 = $data['get_email_rekan3'];
 foreach($get_email_rekan3 as $row){
 	$email3 = $row['email'];
+	$nama_rekan3	= $row['nama_karyawan'];
 
-	
 }
 		/* ini emailnya */
 		$kode3 ="+$id_karyawan+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye3";
@@ -191,7 +195,7 @@ $this->load->library('email');
 	$subject = "360 Feedback Form - $nama_karyawan";
 	$message3 ="
 	<html><body>
-	<p>Dear $rekan_kerja3,</p>
+	<p>Dear $nama_rekan3,</p>
 	<p>Berikut adalah link terkait 360 feedback form (<a href='182.16.171.166/kinerja/admin/online/tigaenampuluh/$urlx3/'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
 	<p>Mohon perhatikan petunjuk pengisian dan timeline & activity 360 form berikut :</p><br>
 	<p><center><b>Petunjuk Pelaksanaan 360 Form Feedback</b></center></p>

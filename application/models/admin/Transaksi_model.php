@@ -277,12 +277,12 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		
 			return $this->db->get()->result_array();
 		}
-		public function get_id_rekan_kerja($inisial,$kode_form){
-			$this->db->select('*');
-			$this->db->from('karyawan');
-			$this->db->where('nama_karyawan',$atasan);
-			return $this->db->get()->result_array();
-		}
+		// public function get_id_rekan_kerja($inisial,$kode_form){
+		// 	$this->db->select('*');
+		// 	$this->db->from('karyawan');
+		// 	$this->db->where('nama_karyawan',$atasan);
+		// 	return $this->db->get()->result_array();
+		// }
 		public function get_karyawan(){
 			$this->db->select('*,karyawan.id as id_karyawan');
 			$this->db->from('karyawan');

@@ -96,7 +96,7 @@ class Self_appraisal extends MY_Controller {
 		/* ini emailnya */
 
 			$this->load->library('email');
-			$from	= "hrd@pinc.group";
+			$from	= "hrd@pincgroup.id";
 			$ellen	= "ellen@pincgroup.id";
 			$sara	= "sara@pincgroup.id";
 			$linkurl = base_url('admin/online/self/'.$url.'/');
@@ -122,9 +122,8 @@ class Self_appraisal extends MY_Controller {
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);
-			// $this->email->cc($sara);
-			// $this->email->bcc($ellen);
-
+			$this->email->cc($sara);
+			$this->email->bcc($ellen);
 			$this->email->subject($subject);
 			$this->email->set_mailtype("html");
 			$this->email->message($message);
