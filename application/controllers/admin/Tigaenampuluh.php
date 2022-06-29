@@ -83,7 +83,7 @@ class Tigaenampuluh extends MY_Controller {
 		$skye3 = "$tanggal_appraisal$inisial$rekan_kerja3";
 		//print $tanggal_appraisal;exit;
 
-/* Email Ke Rekan Kerja 1 */
+		/* Email Ke Rekan Kerja 1 */
 		
 		$data['get_email_rekan'] = $this->transaksi_model->get_email_rekan($rekan_kerja);
 		$get_email_rekan = $data['get_email_rekan'];
@@ -121,8 +121,8 @@ class Tigaenampuluh extends MY_Controller {
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);
-			$this->email->cc($sara);
-			$this->email->bcc($ellen);
+			// $this->email->cc($sara);
+			// $this->email->bcc($ellen);
 			$this->email->subject($subject);
 			$this->email->set_mailtype("html");
 			$this->email->message($message);
@@ -149,6 +149,7 @@ foreach($get_email_rekan2 as $row){
 		/* ini emailnya */
 		$kode2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye2";
 		$urlx2= base64_encode($kode2);
+		$linkurl2 = base_url('admin/online/tigaenampuluh/'.$urlx2.'/');
 		//$urlx2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
 	$this->load->library('email');
 	$from	= "hrd@pincgroup.id";
@@ -158,7 +159,7 @@ foreach($get_email_rekan2 as $row){
 	$message2 ="
 	<html><body>
 	<p>Dear $nama_rekan2,</p>
-	<p>Berikut adalah link terkait 360 feedback form (<a href='182.16.171.166/kinerja/admin/online/tigaenampuluh/$urlx2/'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
+	<p>Berikut adalah link terkait 360 feedback form (<a href='$linkurl2'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
 	<p>Mohon perhatikan petunjuk pengisian dan timeline & activity 360 form berikut :</p><br>
 	<p><center><b>Petunjuk Pelaksanaan 360 Form Feedback</b></center></p>
 	<p>1. Berikan penilaian terhadap performance (knowledge & skill) & attitude dari rekan kerja/ subordinate tidak langsung secara objektif.</p>
@@ -197,6 +198,7 @@ foreach($get_email_rekan3 as $row){
 		/* ini emailnya */
 		$kode3 ="+$id_karyawan+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye3";
 		$urlx3= base64_encode($kode3);
+		$linkurl3 = base_url('admin/online/tigaenampuluh/'.$urlx3.'/');
 		//$urlx3 ="+$id_karyawan+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
 $this->load->library('email');
 	$from	= "hrd@pincgroup.id";
@@ -206,7 +208,7 @@ $this->load->library('email');
 	$message3 ="
 	<html><body>
 	<p>Dear $nama_rekan3,</p>
-	<p>Berikut adalah link terkait 360 feedback form (<a href='182.16.171.166/kinerja/admin/online/tigaenampuluh/$urlx3/'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
+	<p>Berikut adalah link terkait 360 feedback form (<a href='$linkurl3'>Isi 360 Form</a>) terhadap rekan kerja anda  $nama_karyawan</p>
 	<p>Mohon perhatikan petunjuk pengisian dan timeline & activity 360 form berikut :</p><br>
 	<p><center><b>Petunjuk Pelaksanaan 360 Form Feedback</b></center></p>
 	<p>1. Berikan penilaian terhadap performance (knowledge & skill) & attitude dari rekan kerja/ subordinate tidak langsung secara objektif.</p>
