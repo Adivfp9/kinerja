@@ -279,7 +279,11 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_know_act"></span>
                         <input type="hidden" id="weight_know_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                        <span id="v_prog_total_know"></span>
+                        <!-- <input type="hidden" id="" value="0"> -->
+                      
+                      </td>
                     </tr>
 
                     <tr>
@@ -586,12 +590,15 @@ if(!empty($get_pertanyaan_self_attitude)){
     var scored = parseFloat(sum / parseInt(tot_skills)).toFixed(2);
     var weight = parseFloat(scored * (25 / 100)).toFixed(2);
 
+    var progskills = round((($weight-$w_ind)/$w_ind)*100,2);
     // console.log(sum);
 
     $("#score_skills_act").val(scored);
     $("#weight_skills_act").val(weight);
     $("#v_score_skills_act").html(scored);
     $("#v_weight_skills_act").html(weight);
+
+
     calculate_weight_acc();
     calculate_scored_act();
   }
@@ -617,6 +624,7 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#v_weight_attitude_act").html(weight);
     calculate_scored_act();
     calculate_weight_acc();
+    calculate_prog();
   }
 
   function count_deliverables(){
@@ -686,6 +694,15 @@ if(!empty($get_pertanyaan_self_attitude)){
     var tot_weight_prev = parseFloat(weight_know_prev)+parseFloat(weight_skills_prev)+parseFloat(weight_attitude_prev)+parseFloat(weight_individu_prev);
     var tot_weight_prev_dec = tot_weight_prev.toFixed(2);
     $("#v_tot_weight_prev").html(tot_weight_prev_dec);
+  }
+
+  function calculate_prog(){
+    var weight_know_prev = $("#weight_know_prev").val();
+    var weight_know_acc = $("#weight_know_act").val();
+
+    var prog_total_know = round((weight_know_acc-weight_know_prev)/weight_know_prev);
+    var prog_total_know_dec = prog_total_know.toFixed(2);
+    $("#v_prog_total_know").html(prog_total_know_dec);
   }
 
   function calculate_scored_act(){

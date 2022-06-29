@@ -134,7 +134,7 @@ class Final_appraisal extends MY_Controller {
 			'npwp' => $npwp,
 			'no_rek' => $no_rek,
 			'agama' => $agama,
-			'jenis_kelamin' => $jenis_kelamin,
+			// 'jenis_kelamin' => $jenis_kelamin,
 			'phone' => $phone,
 			'alamat' => $alamat,
 			'no_ktp' => $no_ktp,
@@ -145,7 +145,7 @@ class Final_appraisal extends MY_Controller {
 			'rekan_kerja' => $rekan_kerja,
 			'departemen' => $departemen,
 			'jabatan' => $jabatan,
-			'golongan' => $golongan,
+			// 'golongan' => $golongan,
 			);
 			$where = array(
 				'id' => $id
@@ -211,7 +211,7 @@ class Final_appraisal extends MY_Controller {
 				$kondisi3= $row->kondisi3;
 				
 		}
-		$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
+		// $data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
 		$data['get_karyawan_self_know'] = $this->transaksi_model->get_karyawan_self_know($kondisi1,$kode);
 		$data['get_karyawan_self_skills'] = $this->transaksi_model->get_karyawan_self_skills($kondisi2,$kode);
 		$data['get_karyawan_self_att'] = $this->transaksi_model->get_karyawan_self_att($kondisi3,$kode);
@@ -234,7 +234,7 @@ class Final_appraisal extends MY_Controller {
 			/* ini emailnya */
 
 			$this->load->library('email');
-			$from	= "hrd@pinc.group";
+			$from	= "hrd@pincgroup.id";
 			$to	= $email;
 			$subject = "Data Appraisal - $nama_karyawan";
 
@@ -258,7 +258,6 @@ class Final_appraisal extends MY_Controller {
 			$this->email->message($message);
 			$this->email->attach( $filename360);
 			$this->email->attach( $filenameself);
-			
 			try{
 			$this->email->send();
 			echo 'Message has been sent.';
@@ -336,7 +335,7 @@ class Final_appraisal extends MY_Controller {
 				$kondisi3= $row->kondisi3;
 				
 		}
-		$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
+		// $data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
 		$data['get_karyawan_self_know'] = $this->transaksi_model->get_karyawan_self_know($kondisi1,$kode);
 		$data['get_karyawan_self_skills'] = $this->transaksi_model->get_karyawan_self_skills($kondisi2,$kode);
 		$data['get_karyawan_self_att'] = $this->transaksi_model->get_karyawan_self_att($kondisi3,$kode);
