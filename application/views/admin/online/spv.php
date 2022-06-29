@@ -382,25 +382,25 @@ $tanggal_input = date("Y/m/d");
                   </thead>
                   <tbody>
 
-                    <tr class="bg-danger">
+                    <tr>
                       <td>1 to 1,49</td>
                       <td>Poor</td>
                       <td>0</td>
                     </tr>
 
-                    <tr class="bg-warning">
+                    <tr>
                       <td>1,5 to 2,25</td>
                       <td>Adequate </td>
                       <td>0</td>
                     </tr>
 
-                    <tr class="bg-success">
+                    <tr>
                       <td>2,26 to 3,49</td>
                       <td>Good</td>
                       <td>5-10%</td>
                     </tr>
 
-                    <tr class="bg-primary">
+                    <tr>
                       <td>3,5 to 4</td>
                       <td>Great </td>
                       <td>10-X%</td>

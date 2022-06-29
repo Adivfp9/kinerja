@@ -71,7 +71,19 @@ class Self_appraisal extends MY_Controller {
 	}
 	public function kirim(){
 		$data['title'] = 'Table 360 Form';
+		$data['get_company'] = $this->master_model->get_company();
 		$data['get_karyawan'] = $this->master_model->get_karyawan();
+		$this->load->view('admin/includes/_header');
+		$this->load->view('admin/self/kirim', $data);
+		$this->load->view('admin/includes/_footer');
+	}
+	public function filter_company_self(){
+		$idPerush = $this->input->get('company');
+		$TglMulai = $this->input->get('tgl_mulai');
+		$TglSampai = $this->input->get('tgl_sampai');
+		$data['get_karyawan'] = $this->master_model->get_karyawan_filter($idPerush, $TglMulai, $TglSampai);
+		$data['get_company'] = $this->master_model->get_company();
+		
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/self/kirim', $data);
 		$this->load->view('admin/includes/_footer');

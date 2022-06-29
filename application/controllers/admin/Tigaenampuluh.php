@@ -13,10 +13,12 @@ class Tigaenampuluh extends MY_Controller {
 	public function index(){
 		$data['title'] = 'Table karyawan';
 		$data['hasil_360'] = $this->transaksi_model->hasil_360();
+		$data['get_company'] = $this->master_model->get_company();
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/tigaenampuluh/index', $data);
 		$this->load->view('admin/includes/_footer');
 	}
+
 	public function lihat_form(){
 		$kode = $this->uri->segment(4);
 		$url = $this->uri->segment(4);
@@ -39,12 +41,25 @@ class Tigaenampuluh extends MY_Controller {
 		$this->load->view('admin/includes/_footer');
 	}
 	public function kirim(){
-		
+		$data['get_company'] = $this->master_model->get_company();
 		$data['get_karyawan'] = $this->master_model->get_karyawan();
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/tigaenampuluh/kirim', $data);
 		$this->load->view('admin/includes/_footer');
 	}
+
+	public function filter_company_360(){
+		$idPerush = $this->input->get('company');
+		$TglMulai = $this->input->get('tgl_mulai');
+		$TglSampai = $this->input->get('tgl_sampai');
+		$data['get_karyawan'] = $this->master_model->get_karyawan_filter($idPerush, $TglMulai, $TglSampai);
+		$data['get_company'] = $this->master_model->get_company();
+		
+		$this->load->view('admin/includes/_header');
+		$this->load->view('admin/tigaenampuluh/kirim', $data);
+		$this->load->view('admin/includes/_footer');
+	}
+
 	public function kirim_form(){
 		$kode = $this->uri->segment(4);
 		$url = $this->uri->segment(4);

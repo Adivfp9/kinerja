@@ -23,6 +23,41 @@
               </h5>
             </div>
             <div class="card-body">
+              <!-- Filter Company -->
+              <form method="get" action="<?php echo base_url('admin/Self_appraisal/filter_company_self')?>">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="departemen" class="control-label">Company</label>
+                  <select class="form-control" name="company" id="company">
+                  <?php  foreach($get_company as $row) {  ?>
+                  <option value="<?= $row['id_perusahaan']; ?>"><?= $row['nama_perusahaan']; ?></option>
+                  <?php } ?>
+                  </select> 
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="departemen" class="control-label">Appraisal Date</label>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <input type="date" name="tgl_mulai" class="form-control">
+                      </div>
+                      <div class="col-md-6">
+                        <input type="date" name="tgl_sampai" class="form-control">
+                      </div>
+                    </div>
+                    
+                    
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="submit" name="submit" value="Search" class="btn btn-primary">
+              </button>
+                </div>
+                
+              </div>
+            </form>
             <table id="example1" class="table table-bordered nowrap" style="width:100%">
                 <thead>
                 <tr>

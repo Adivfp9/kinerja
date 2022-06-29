@@ -478,7 +478,7 @@ if(!empty($get_pertanyaan_self_attitude)){
     Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-times' style='color:red;'></i></button></td>";
   // kolom input text deliverable
     Baris += "<td>";
-      Baris += "<input type='text' class='form-control' name='add_deliv[]'";
+      Baris += "<input type='text' class='form-control' required name='add_deliv[]'";
     Baris += "</td>";
     // Baris += "<td>";
     //   Baris += "<input type='hidden' name='nilai_deliv[]'>";
@@ -519,6 +519,13 @@ if(!empty($get_pertanyaan_self_attitude)){
       //   return false;
       // }
     }
+    HitungDeliverables();
+  });
+
+  $(document).on('click', '#HapusBaris', function(e){
+    e.preventDefault();
+    $(this).parent().parent().remove();
+
     HitungDeliverables();
   });
 

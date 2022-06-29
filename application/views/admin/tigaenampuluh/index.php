@@ -23,6 +23,8 @@
               </h5>
             </div>
             <div class="card-body">
+              <!-- Filter Company -->
+              
             <table id="example1" class="table table-bordered nowrap" style="width:100%">
                 <thead>
                 <tr>

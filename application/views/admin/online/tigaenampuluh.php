@@ -143,9 +143,9 @@ $tanggal_input = date("Y/m/d");
                   </div>
                   </table>
                   <div class="form-group">
-                    <label for="deskripsi" class="col-md-12 control-label">Masukan Lainnya </label>
+                    <label for="deskripsi" class="col-md-12 control-label">Others Feedback</label>
                     <div class="col-md-12">
-                      <textarea class="form-control" id="deskripsi" name="deskripsi" rows="5"></textarea>
+                      <textarea class="form-control" required id="deskripsi" name="deskripsi" rows="5"></textarea>
                     </div>
                   </div>
                   <div class="form-group">
@@ -220,6 +220,7 @@ $tanggal_input = date("Y/m/d");
 <!-- iCheck 1.0.1 -->
 <script src="<?= base_url() ?>assets/plugins/iCheck/icheck.min.js"></script>
 <script>
+
   function hitungrata_per() {
     // var tot_per = document.getElementById('total_per').value;
     // var tot_att = document.getElementById('total_att').value;
@@ -244,7 +245,7 @@ $tanggal_input = date("Y/m/d");
 
     // console.log(parseFloat(final_p)+parseFloat(final_a));
 
-    document.getElementById("total_score").innerHTML = parseFloat(final_p) + parseFloat(final_a)
+    document.getElementById("total_score").innerHTML = number_format(parseFloat(final_p) + parseFloat(final_a),2)
 
   }
 
