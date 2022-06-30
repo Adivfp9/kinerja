@@ -126,11 +126,15 @@
              <?php } ?> 
 
              <tr> <th colspan="2">Individual Deliverables</th></tr>
+             <!-- <tr>
+              <td></td>
+              <td></td>
+             </tr> -->
                 <?php foreach($get_karyawan_self_other as $row) { ?>
                 <tr>
-              <td><?= $row['id_pertanyaan']; ?></td>
-             <td><?= $row['nilai']; ?></td>
-            </tr>
+                  <td><?= $row['id_pertanyaan']; ?></td>
+                  <td><?= $row['nilai']; ?></td>
+               </tr>
              <?php } ?> 
             
             
@@ -220,7 +224,7 @@
                 }?>
 
 
-        <?php foreach($hitung_self_other as $row7) { 
+        <!-- <?php foreach($hitung_self_other as $row7) { 
                $nilai_att = $row7['nilai'];
                $jumlah = $row7['jumlah'];
                $rata_otherx = $nilai_att / $jumlah ;
@@ -240,7 +244,7 @@
               $total = $final_attitude + $final_skills + $final_know +$final_other ;
 
               $inTotal = round((($total-$total_prev_wight)/$total_prev_wight)*100,2);
-              ?>
+              ?> -->
     
      <tr>
 
@@ -273,7 +277,7 @@
      </tr>
 
      <tr>
-      <td>Deliverables</td>
+      <td>Individual Deliverables</td>
       <td>5 %</td>
       <td><?= number_format($s_ind,2); ?></td>
       <td><?= number_format($w_ind,2); ?></td>

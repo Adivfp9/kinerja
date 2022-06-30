@@ -62,8 +62,6 @@ class Self_appraisal extends MY_Controller {
 		$where = array('nik' => $nik);
 
 		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
-
-		// var_dump($data);
 		
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/self/lihat', $data);

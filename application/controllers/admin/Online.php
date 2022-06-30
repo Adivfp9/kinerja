@@ -229,8 +229,10 @@ class Online extends MY_Controller {
 		
 	}
 	public function proses_self(){
+		$pertanyaan_ind = $this->input->post('add_deliv');
+		$JmlDeliv	= count($pertanyaan_ind);
+		$nilai_ind = $this->input->post('nilai_deliv');
 
-		
 
 		$pertanyaan = $this->input->post('pertanyaan');
 		$jumlah_berkas = count($pertanyaan);
@@ -249,7 +251,6 @@ class Online extends MY_Controller {
 		$kode_form=$this->input->post('kode_form');
 		$summary=$this->input->post('summary');
 		$action=$this->input->post('action');
-
 		
 		$r = $this->input->post('r');
 
@@ -270,6 +271,24 @@ class Online extends MY_Controller {
 
 
 		}
+		for($i = 0; $i < $JmlDeliv;$i++)
+		{
+			 $a=$i+1;
+		     $data_ind[]=array('id_karyawan' => $id_karyawan,
+							'posisi' => $posisi,
+							'team' => $team,
+							'tgl_appraisal' => $tanggal,
+							'atasan' => $atasan,
+							'id_pertanyaan' => $pertanyaan_ind[$a],
+							'nilai'=>$nilai_ind[$a],
+							'summary'=>$summary,
+							'action'=>$action,
+							'kode_form'=>'individual',
+							'jenis_form'=>'individual');
+
+
+		}
+
 		$query = $this->db->query("SELECT * FROM self_appraisal where kode_form='$kode_form'");
 		$jumlah = $query->num_rows();
 
@@ -287,6 +306,14 @@ class Online extends MY_Controller {
             {
             $this->db->insert_batch('self_appraisal', $data);
             }
+		
+		$insert_ind = count($data_ind);
+
+
+		if($insert_ind)
+		{
+			$this->db->insert_batch('self_appraisal', $data_ind);
+		}
 
 			$query = $this->db->query("select mark from karyawan where id='$id_karyawan'");
 			foreach ($query->result() as $row){	$mark=  $row->mark;}

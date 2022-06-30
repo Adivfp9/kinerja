@@ -374,8 +374,8 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->select('self_appraisal.*');
 			$this->db->from('self_appraisal');
 		
-			$this->db->where('self_appraisal.kode_form',$kode);
-			$this->db->where('self_appraisal.jenis_form',$kondisi4);
+			$this->db->where('self_appraisal.kode_form','individual');
+			$this->db->where('self_appraisal.jenis_form','individual');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_spv_att($kondisi3,$kode){
@@ -400,8 +400,8 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_self_other($kondisi4,$kode){
 			$this->db->select('count(nilai) as jumlah,sum(nilai) as nilai');
 			$this->db->from('self_appraisal');
-			$this->db->where('kode_form',$kode);
-			$this->db->where('jenis_form',$kondisi4);
+			$this->db->where('kode_form','individual');
+			$this->db->where('jenis_form','individual');
 			return $this->db->get()->result_array();
 		}
 		public function hitung_spv_know($kondisi1,$kode){

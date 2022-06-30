@@ -488,18 +488,22 @@ if(!empty($get_pertanyaan_self_attitude)){
 
   function BarisBaru()
   {
-  var Nomor = $('#TabelTransaksi tbody tr').length + 1;
-  var Baris = "<tr>";
+    var Nomor = $('#TabelTransaksi tbody tr').length + 1;
+    var Baris = "<tr>";
+
   // Kolom tombol remove
     Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-times' style='color:red;'></i></button></td>";
   // kolom input text deliverable
     Baris += "<td>";
-      Baris += "<input type='text' class='form-control' required name='add_deliv[]'";
+      Baris += "<input type='text' class='form-control' required name='add_deliv[";
+      Baris += Nomor;
+      Baris += "]'";
     Baris += "</td>";
-    // Baris += "<td>";
-    //   Baris += "<input type='hidden' name='nilai_deliv[]'>";
-    // Baris += "</td>";
-    Baris += "<td width='100px'><input type='number' min='1' max='4' class='form-control' id='nilai_deliv' value='' required step='0.01'></td>";
+
+    Baris += "<td width='100px'><input type='number' min='1' max='4' class='form-control'     id='nilai_deliv' value='' name='nilai_deliv[";
+    Baris += Nomor;
+    Baris += "]'";
+    Baris += " required step='0.01'></td>";
     Baris += "</tr>";
 
     $('#TabelTransaksi tbody').append(Baris);
