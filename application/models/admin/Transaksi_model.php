@@ -161,7 +161,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form);
-			$this->db->where('form_360.id_pertanyaan<','5');
+			$this->db->where('form_360.id_pertanyaan <','3');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_360_nilai_per2($kode_form2){
@@ -169,7 +169,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form2);
-			$this->db->where('form_360.id_pertanyaan<','5');
+			$this->db->where('form_360.id_pertanyaan>','3');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_360_nilai_per3($kode_form3){
@@ -185,7 +185,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form);
-			$this->db->where('form_360.id_pertanyaan>','4');
+			$this->db->where('form_360.id_pertanyaan>','2');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_360_nilai_att2($kode_form2){
@@ -227,7 +227,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
 			$this->db->where('form_360.inisial',$inisial);
-			$this->db->where('form_360.id_pertanyaan<','5');
+			$this->db->where('form_360.id_pertanyaan<','3');
 			$this->db->where('form_360.kode_form',$kode_form);
 		
 			return $this->db->get()->result_array();
@@ -254,7 +254,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
 			$this->db->where('form_360.inisial',$inisial);
-			$this->db->where('form_360.id_pertanyaan>','4');
+			$this->db->where('form_360.id_pertanyaan>','2');
 			$this->db->where('form_360.kode_form',$kode_form);
 		
 			return $this->db->get()->result_array();

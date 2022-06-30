@@ -125,6 +125,16 @@ public function get_karyawan(){
     return $this->db->get()->result_array();
 }
 
+public function get_karyawan_byinisial($key){
+    $this->db->select('*,karyawan.id as id_karyawan,perusahaan.*,golongan.*');
+    $this->db->from('karyawan');
+	$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
+	$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
+	$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner');
+	$this->db->join('perusahaan', 'perusahaan.id_perusahaan = karyawan.id_perusahaan', 'inner')->where('karyawan.inisial', $key);
+    return $this->db->get()->result_array();
+}
+
 public function get_karyawan_filter($idperush, $tglmulai, $tglsampai){
     $this->db->select('*,karyawan.id as id_karyawan,perusahaan.*,golongan.*');
     $this->db->from('karyawan');

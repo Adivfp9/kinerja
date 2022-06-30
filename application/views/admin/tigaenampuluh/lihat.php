@@ -57,7 +57,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                <td>Initial : <?= $inisial; ?></td>
+                <td>Employee Name : <?= $inisial; ?></td>
                 </tr>
                 <tr>
                 <td>Job position: <?= $jabatan; ?></td>

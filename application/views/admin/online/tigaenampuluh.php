@@ -41,11 +41,18 @@ $tanggal_input = date("Y/m/d");
             <div class="box">
               <div class="box-body">
                 <?php $this->load->view('admin/includes/_messages.php') ?>
-                <?php echo form_open(base_url('admin/online/proses'), array('class' => 'form-horizontal', 'id' => 'formCalc'));  ?>
+                <?php echo form_open(base_url('admin/online/proses'), array('class' => 'form-horizontal', 'id' => 'formCalc')); 
+                foreach ($get_karyawan_360 as $row_360) {
+                  $nama_karyawan= $row_360['nama_karyawan'];
+                }
+                foreach ($get_rekan_360 as $rekan_360) {
+                  $nama_rekan= $rekan_360['nama_karyawan'];
+                }
+                ?>
                 <div class="form-group">
-                  <label for="nama" class="col-md-12 control-label">Nama Karyawan</label>
+                  <label for="nama" class="col-md-12 control-label">Employee Name</label>
                   <div class="col-md-12">
-                    <input type="text" readonly name="nama_karyawan" class="form-control" id="nama_karyawan" placeholder="" value="<?= $inisial; ?>">
+                    <input type="text" readonly name="nama_karyawan" class="form-control" id="nama_karyawan" placeholder="" value="<?= $nama_karyawan; ?>">
                     <input type="hidden" readonly name="id_karyawan" class="form-control" id="id_karyawan" placeholder="" value="<?= $id_karyawan; ?>">
                     <?php foreach ($get_pertanyaan_360_rekan as $rowx) { ?>
                       <input type="hidden" readonly name="id_karyawan_penilai" class="form-control" id="id_karyawan_penilai" placeholder="" value="<?= $rowx['id']; ?>xx">
@@ -54,7 +61,7 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
-                  <label for="posisi" class="col-md-12 control-label">Posisi</label>
+                  <label for="posisi" class="col-md-12 control-label">Position</label>
                   <div class="col-md-12">
                     <input type="hidden" readonly name="id_karyawan_penilai" class="form-control" id="id_karyawan_penilai" placeholder="" value="<?= $rowx['id']; ?>xx">
                     <input type="hidden" readonly name="kode" class="form-control" id="kode" placeholder="" value="<?= $kode; ?>">
@@ -71,16 +78,16 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
-                  <label for="tanggal" class="col-md-12 control-label">Tanggal</label>
+                  <label for="tanggal" class="col-md-12 control-label">Date</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="rekan" class="col-md-12 control-label">Nama Rekan Kerja</label>
+                  <label for="rekan" class="col-md-12 control-label">Colleague Name</label>
                   <div class="col-md-12">
-                    <input type="text" readonly name="rekan" class="form-control" id="rekan" placeholder="" value="<?= $rekan_kerja; ?>">
+                    <input type="text" readonly name="rekan" class="form-control" id="rekan" placeholder="" value="<?= $nama_rekan; ?>">
                   </div>
                 </div>
 
@@ -120,7 +127,7 @@ $tanggal_input = date("Y/m/d");
                               </tr>
                             <?php } ?>
                             <tr>
-                              <th colspan="3">Atittude (55%)</th>
+                              <th colspan="3">Attitude (55%)</th>
                             </tr>
                             </tr>
                             <input type="hidden" name="total_per" value="<?php echo $jml_360per; ?>" id="total_per">
@@ -154,10 +161,10 @@ $tanggal_input = date("Y/m/d");
                       <table id="example1" class="table table-bordered table-striped">
                         <thead>
                           <tr>
-                            <th>Total Penilaian 360</th>
-                            <th>Bobot</th>
-                            <th>Skor Rata-Rata</th>
-                            <th>Skor Final</th>
+                            <th>Summary Score 360</th>
+                            <th>Weight</th>
+                            <th>Average Score</th>
+                            <th>Final Score</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -182,7 +189,7 @@ $tanggal_input = date("Y/m/d");
                             </td>
                           </tr>
                           <tr>
-                            <th colspan="3" class="text-center">T O T A L &nbsp &nbsp S K O R</th>
+                            <th colspan="3" class="text-center">T O T A L &nbsp &nbsp S C O R E</th>
                             <td>
                               <div id="total_score">
                             </td>
@@ -245,7 +252,9 @@ $tanggal_input = date("Y/m/d");
 
     // console.log(parseFloat(final_p)+parseFloat(final_a));
 
-    document.getElementById("total_score").innerHTML = number_format(parseFloat(final_p) + parseFloat(final_a),2)
+    var tot_final_score = parseFloat(final_p) + parseFloat(final_a);
+
+    document.getElementById("total_score").innerHTML = tot_final_score.toFixed(2);
 
   }
 
@@ -268,8 +277,9 @@ $tanggal_input = date("Y/m/d");
     var final_a = document.getElementById("final_att").innerHTML == '' ? 0 : document.getElementById("final_att").innerHTML;
 
     // console.log(parseFloat(final_p)+parseFloat(final_a));
+    var tot_final_score = parseFloat(final_p) + parseFloat(final_a);
 
-    document.getElementById("total_score").innerHTML = parseFloat(final_p) + parseFloat(final_a)
+    document.getElementById("total_score").innerHTML = tot_final_score.toFixed(2);
 
 
   }

@@ -25,6 +25,10 @@ class Online extends MY_Controller {
 		$jabatan = $kode[5];
 		$inisial = $kode[6];
 		$kode = $kode[7];
+		
+		$data['get_karyawan_360'] = $this->master_model->get_karyawan_byinisial($inisial);
+		$data['get_rekan_360'] = $this->master_model->get_karyawan_byinisial($rekan_kerja);
+
 		$data['get_pertanyaan_360_rekan'] = $this->transaksi_model->get_pertanyaan_360_rekan($rekan_kerja);
 		$data['get_pertanyaan_360_per'] = $this->transaksi_model->get_pertanyaan_360_per($kondisi1);
 		$data['get_pertanyaan_360_att'] = $this->transaksi_model->get_pertanyaan_360_att($kondisi2);
@@ -59,6 +63,9 @@ class Online extends MY_Controller {
 		$jabatan = $kode[7];
 		$kode_form = $kode[8];
 		$id_jabatan = $kode[9];
+
+		$data['get_spv_self'] = $this->master_model->get_karyawan_byinisial($atasan);
+	// var_dump($data['get_spv_self']);
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
 		foreach ($query->result() as $row)
@@ -215,7 +222,7 @@ class Online extends MY_Controller {
 			);
 			$this->master_model->Updatekaryawan($where,$data,'karyawan');
 
-			echo '<script>alert("Data 360 Form Berhasil Di Isi")</script>';
+			echo '<script>alert("Thank you for your submission.")</script>';
 			echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
 			exit;
 			return redirect('admin/auth/login');
@@ -291,10 +298,10 @@ class Online extends MY_Controller {
 			);
 			$this->master_model->Updatekaryawan($where,$data,'karyawan');
 
-			echo '<script>alert("Data Appraisal Berhasil Di Isi")</script>';
+			echo '<script>alert("Thank you for your submission")</script>';
 			echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
 			exit;
-            return redirect('admin/auth/login');
+            // return redirect('admin/auth/login');
 		
 	}
 

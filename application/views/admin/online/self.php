@@ -69,14 +69,15 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
-                  <label for="tanggal" class="col-md-12 control-label">Tanggal</label>
+                  <label for="tanggal" class="col-md-12 control-label">Date</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
                   </div>
                 </div>
-
+                
+              
                 <div class="form-group">
-                  <label for="rekan" class="col-md-12 control-label">Atasan</label>
+                  <label for="rekan" class="col-md-12 control-label">Supervisor</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="atasan" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?>">
                   </div>
@@ -181,14 +182,14 @@ $tanggal_input = date("Y/m/d");
                         <div class="form-group">
                     <label for="summary" class="col-md-12 control-label">Summary </label>
                     <div class="col-md-12">
-                      <textarea class="form-control" id="summary" name="summary" rows="5"></textarea>
+                      <textarea class="form-control" required id="summary" name="summary" rows="5"></textarea>
                     </div>
                   </div>
 
                   <div class="form-group">
                     <label for="action" class="col-md-12 control-label">Next Action </label>
                     <div class="col-md-12">
-                      <textarea class="form-control" id="action" name="action" rows="5"></textarea>
+                      <textarea class="form-control" required id="action" name="action" rows="5"></textarea>
                     </div>
                   </div>
                         <!--end Individual Deliverables -->
@@ -270,6 +271,7 @@ $tanggal_input = date("Y/m/d");
                      </td>
                       <td width="8%">
                       <?php echo $w_knowledge;?>
+                      <input type="hidden" id="w_know_prev" value="<?= $w_knowledge; ?> ">
                      </td>
                       <td>
                         <span id="v_score_know_act"></span>
@@ -280,9 +282,8 @@ $tanggal_input = date("Y/m/d");
                         <input type="hidden" id="weight_know_act" value="0">
                       </td>
                       <td>
-                        <span id="v_prog_total_know"></span>
-                        <!-- <input type="hidden" id="" value="0"> -->
-                      
+                        <span id="v_prog_know"></span> %
+                        <input type="hidden" id="prog_know_dec" value="0">
                       </td>
                     </tr>
 
@@ -290,10 +291,11 @@ $tanggal_input = date("Y/m/d");
                       <th>2. S K I L L</th>
                       <th>25%</th>
                       <td width="8%">
-                      <?php echo $s_skills;?>
+                        <?php echo $s_skills;?>
                       </td>
                       <td width="8%">
-                      <?php echo $w_skills;?>
+                        <?php echo $w_skills;?>
+                        <input type="hidden" id="w_skill_prev" value="<?= $w_skills; ?> ">
                      </td>
                       <td>
                         <span id="v_score_skills_act"></span>
@@ -303,7 +305,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_skills_act"></span>
                         <input type="hidden" id="weight_skills_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                        <span id="v_prog_skill"></span> %
+                        <input type="hidden" id="prog_skill_dec" value="0">
+                      </td>
 
                     </tr>
 
@@ -315,7 +320,7 @@ $tanggal_input = date("Y/m/d");
                       </td>
                       <td width="8%">
                       <?php echo $w_attitude;?>
-                        
+                      <input type="hidden" id="w_attitude_prev" value="<?= $w_attitude; ?> ">
                    </td>
                       <td>
                         <span id="v_score_attitude_act"></span>
@@ -325,7 +330,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_attitude_act"></span>
                         <input type="hidden" id="weight_attitude_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                        <span id="v_prog_attitude"></span> %
+                        <input type="hidden" id="prog_attitude_dec" value="0">
+                      </td>
 
                     </tr>
 
@@ -337,6 +345,7 @@ $tanggal_input = date("Y/m/d");
                       </td>
                       <td width="8%">
                       <?php echo $w_individual;?>
+                      <input type="hidden" id="w_indi_prev" value="<?= $w_individual; ?> ">
                       </td>
                       <td>
                         <span id="v_score_individu_act"></span>
@@ -346,7 +355,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_individu_act"></span>
                         <input type="hidden" id="weight_individu_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                      <span id="v_prog_ind"></span> %
+                        <input type="hidden" id="prog_ind_dec" value="0">
+                      </td>
 
                     </tr>
 
@@ -463,9 +475,9 @@ if(!empty($get_pertanyaan_self_attitude)){
 
 <script>
   $(document).ready(function(){
-    for(B=1; B<=1; B++){
-      BarisBaru();
-    }
+    // for(B=1; B<=1; B++){
+    //   BarisBaru();
+    // }
 
     $('#BarisBaru').click(function(){
       BarisBaru();
@@ -545,7 +557,7 @@ if(!empty($get_pertanyaan_self_attitude)){
         sum = parseFloat(sum)+parseFloat(answer);
       }
     });
-    // $('#TotalDeliv').val(sum);
+
     var scored = parseFloat(sum / parseInt(TotDeliv)).toFixed(2);
     var weight = parseFloat(scored * (5 / 100)).toFixed(2);
 
@@ -553,7 +565,9 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#weight_individu_act").val(weight);
     $("#v_score_individu_act").html(scored);
     $("#v_weight_individu_act").html(weight);
+
     calculate_scored_act();
+    calc_progress();
   }
 
   function count_know() {
@@ -573,8 +587,11 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#weight_know_act").val(weight);
     $("#v_score_know_act").html(scored);
     $("#v_weight_know_act").html(weight);
+    // calculate_weight_prev();
     calculate_weight_acc();
     calculate_scored_act();
+    calc_progress();
+
   }
 
   function count_skills() {
@@ -590,17 +607,16 @@ if(!empty($get_pertanyaan_self_attitude)){
     var scored = parseFloat(sum / parseInt(tot_skills)).toFixed(2);
     var weight = parseFloat(scored * (25 / 100)).toFixed(2);
 
-    var progskills = round((($weight-$w_ind)/$w_ind)*100,2);
-    // console.log(sum);
-
     $("#score_skills_act").val(scored);
     $("#weight_skills_act").val(weight);
     $("#v_score_skills_act").html(scored);
     $("#v_weight_skills_act").html(weight);
 
-
+    // calculate_weight_prev();
     calculate_weight_acc();
     calculate_scored_act();
+    calc_progress();
+
   }
 
   function count_attitude() {
@@ -622,9 +638,10 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#weight_attitude_act").val(weight);
     $("#v_score_attitude_act").html(scored);
     $("#v_weight_attitude_act").html(weight);
+    // calculate_weight_prev();
     calculate_scored_act();
     calculate_weight_acc();
-    calculate_prog();
+    calc_progress();
   }
 
   function count_deliverables(){
@@ -636,8 +653,10 @@ if(!empty($get_pertanyaan_self_attitude)){
         Total = parseInt(Total) + parseInt(SubTotal);
       }
     });
+    // calculate_weight_prev();
     calculate_scored_act();
     calculate_weight_acc();
+    calc_progress();
   }
 
 
@@ -690,20 +709,12 @@ if(!empty($get_pertanyaan_self_attitude)){
       var weight_attitude_prev = 0;
       var weight_individu_prev = 0;
     }
-
+    console.log(weight_know_prev);
     var tot_weight_prev = parseFloat(weight_know_prev)+parseFloat(weight_skills_prev)+parseFloat(weight_attitude_prev)+parseFloat(weight_individu_prev);
     var tot_weight_prev_dec = tot_weight_prev.toFixed(2);
     $("#v_tot_weight_prev").html(tot_weight_prev_dec);
   }
 
-  function calculate_prog(){
-    var weight_know_prev = $("#weight_know_prev").val();
-    var weight_know_acc = $("#weight_know_act").val();
-
-    var prog_total_know = round((weight_know_acc-weight_know_prev)/weight_know_prev);
-    var prog_total_know_dec = prog_total_know.toFixed(2);
-    $("#v_prog_total_know").html(prog_total_know_dec);
-  }
 
   function calculate_scored_act(){
     var scored_know_act = $("#score_know_act").val();
@@ -739,6 +750,73 @@ if(!empty($get_pertanyaan_self_attitude)){
     var tot_weight_acc = parseFloat(weight_know_acc)+parseFloat(weight_skills_acc)+parseFloat(weight_attitude_acc)+parseFloat(weight_individu_acc);
     var tot_weight_acc_dec = tot_weight_acc.toFixed(2);
     $("#v_tot_weight_acc").html(tot_weight_acc_dec);
+  }
+
+  function calc_progress(){
+    //**  rumus ((actualweight-prevweight)/prevweight)  */
+
+    // * Knowledge */
+    var weight_know_acc2 = $("#weight_know_act").val();
+    var weight_know_prev2 = $("#w_know_prev").val();
+
+    if(weight_know_acc2== "" || weight_know_prev2 == "")
+    {
+      var weight_know_acc2 = 0;
+      var weight_know_prev2 = 0;
+    }
+    var prog_know = ((parseFloat(weight_know_acc2)-parseFloat(weight_know_prev2))/parseFloat(weight_know_prev2))*100;
+
+    var prog_know_dec =prog_know.toFixed(2);
+    $("#v_prog_know").html(prog_know_dec);
+
+    // * Skill */
+    var weight_skill_acc2 = $("#weight_skills_act").val();
+    var weight_skill_prev2 = $("#w_skill_prev").val();
+    if(weight_skill_acc2== "" || weight_skill_prev2 == "")
+    {
+      var weight_skill_acc2 = 0;
+      var weight_skill_prev2 = 0;
+    }
+
+    var prog_skill = ((parseFloat(weight_skill_acc2)-parseFloat(weight_skill_prev2))/parseFloat(weight_skill_prev2))*100;
+
+    var prog_skill_dec =prog_skill.toFixed(2);
+    $("#v_prog_skill").html(prog_skill_dec);
+
+
+    // * Attitude */
+    var weight_attitude_acc2 = $("#weight_attitude_act").val();
+    var weight_attitude_prev2 = $("#w_attitude_prev").val();
+    if(weight_attitude_acc2== "" || weight_attitude_prev2 == "")
+    {
+      var weight_attitude_acc2 = 0;
+      var weight_attitude_prev2 = 0;
+    }
+
+    var prog_attitude = ((parseFloat(weight_attitude_acc2)-parseFloat(weight_attitude_prev2))/parseFloat(weight_attitude_prev2))*100;
+
+    var prog_attitude_dec =prog_attitude.toFixed(2);
+    $("#v_prog_attitude").html(prog_attitude_dec);
+
+
+    // * Individual */
+    var weight_indi_acc2 = $("#weight_individu_act").val();
+    var weight_indi_prev2 = $("#w_indi_prev").val();
+    if(weight_indi_acc2== "" || weight_indi_prev2 == "")
+    {
+      var weight_indi_acc2 = 0;
+      var weight_indi_prev2 = 0;
+    }
+    console.log(weight_indi_acc2);
+    console.log(weight_indi_prev2);
+
+    var prog_individual = ((parseFloat(weight_indi_acc2)-parseFloat(weight_indi_prev2))/parseFloat(weight_indi_prev2))*100;
+    console.log(prog_individual);
+
+    var prog_ind_dec =prog_individual.toFixed(2);
+    $("#v_prog_ind").html(prog_ind_dec);
+
+
   }
 
   function hitungrata_att() {

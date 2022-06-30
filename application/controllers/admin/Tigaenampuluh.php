@@ -81,6 +81,8 @@ class Tigaenampuluh extends MY_Controller {
 		$skye1 = "$tanggal_appraisal$inisial$rekan_kerja";
 		$skye2 = "$tanggal_appraisal$inisial$rekan_kerja2";
 		$skye3 = "$tanggal_appraisal$inisial$rekan_kerja3";
+		$ellen	= "ellen@pincgroup.id";
+		$sara	= "sara@pincgroup.id";
 		//print $tanggal_appraisal;exit;
 
 		/* Email Ke Rekan Kerja 1 */
@@ -92,7 +94,7 @@ class Tigaenampuluh extends MY_Controller {
 			$nama_rekan	= $row['nama_karyawan'];
 		}
 				/* ini emailnya */
-			$linkurl = base_url('admin/online/tigaenampuluh/'.$url.'/');
+			$linkurl = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$url.'/';
 			$kode1 ="+$id_karyawan+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye1";
 			$urlx1= base64_encode($kode1);
 
@@ -116,7 +118,7 @@ class Tigaenampuluh extends MY_Controller {
 			<p>3. Pada bagian Atittude , cara penilaian ditentukan berdasarkan kontribusi karyawan yang bersangkutan terhadap kinerja tim, apakah Individu tersebut memberikan kinerja kerja tim yang baik, solutif, gigih serta selalu berupaya memberikan performa terbaik untuk kepentingan tim.</p>
 			<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 			<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
-			<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR (Sara Putrikita/sara@pinc.group/ +62851 5788 1097)</p>
+			<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR (Gani Setiadi/ gani@pincgroup.id/ +62 878-23269818)</p>
 			</body></html>";
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
@@ -149,11 +151,10 @@ foreach($get_email_rekan2 as $row){
 		/* ini emailnya */
 		$kode2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye2";
 		$urlx2= base64_encode($kode2);
-		$linkurl2 = base_url('admin/online/tigaenampuluh/'.$urlx2.'/');
+		$linkurl2 = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$urlx2.'/';
 		//$urlx2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
 	$this->load->library('email');
 	$from	= "hrd@pincgroup.id";
-	$ellen	= "ellen@pincgroup.id";
 	$to	= $email2;
 	$subject = "360 Feedback Form - $nama_karyawan";
 	$message2 ="
@@ -167,12 +168,13 @@ foreach($get_email_rekan2 as $row){
 	<p>3. Pada bagian Atittude , cara penilaian ditentukan berdasarkan kontribusi karyawan yang bersangkutan terhadap kinerja tim, apakah Individu tersebut memberikan kinerja kerja tim yang baik, solutif, gigih serta selalu berupaya memberikan performa terbaik untuk kepentingan tim.</p>
 	<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 	<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
-	<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR (Gani Setiadi/ gani@pinc.group/ +62 878-23269818)</p>
+	<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR (Gani Setiadi/ gani@pincgroup.id/ +62 878-23269818)</p>
 	</body></html>";
 	$this->email->set_newline("\r\n");
 	$this->email->from($from);
 	$this->email->to($to);
-	$this->email->cc($ellen);
+	// $this->email->cc($sara);
+	// $this->email->bcc($ellen);
 	$this->email->subject($subject);
 	$this->email->set_mailtype("html");
 	$this->email->message($message2);
@@ -198,11 +200,10 @@ foreach($get_email_rekan3 as $row){
 		/* ini emailnya */
 		$kode3 ="+$id_karyawan+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye3";
 		$urlx3= base64_encode($kode3);
-		$linkurl3 = base_url('admin/online/tigaenampuluh/'.$urlx3.'/');
+		$linkurl3 = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$urlx3.'/';
 		//$urlx3 ="+$id_karyawan+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
 $this->load->library('email');
 	$from	= "hrd@pincgroup.id";
-	$ellen	= "ellen@pincgroup.id";
 	$to	= $email3;
 	$subject = "360 Feedback Form - $nama_karyawan";
 	$message3 ="
@@ -221,7 +222,8 @@ $this->load->library('email');
 	$this->email->set_newline("\r\n");
 	$this->email->from($from);
 	$this->email->to($to);
-	$this->email->cc($ellen);
+	// $this->email->cc($sara);
+	// $this->email->bcc($ellen);
 	$this->email->subject($subject);
 	$this->email->set_mailtype("html");
 	$this->email->message($message3);
