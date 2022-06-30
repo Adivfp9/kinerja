@@ -93,7 +93,7 @@ class Tigaenampuluh extends MY_Controller {
 			$email = $row['email'];
 			$nama_rekan	= $row['nama_karyawan'];
 		}
-				/* ini emailnya */
+			/* ini emailnya */
 			$linkurl = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$url.'/';
 			$kode1 ="+$id_karyawan+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye1";
 			$urlx1= base64_encode($kode1);

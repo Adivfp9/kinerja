@@ -147,13 +147,13 @@ public function get_karyawan_filter($idperush, $tglmulai, $tglsampai){
     ->where('karyawan.tgl_appraisal <=', $tglsampai)->order_by("karyawan.nama_karyawan", "asc");
     return $this->db->get()->result_array();
 }
-public function get_karyawan_final(){
-    $this->db->select('*,karyawan.id as id_karyawan,karyawan.id_jabatan as id_jabatan');
+public function get_final_spv(){
+    $key = 4;
+    $this->db->select('*, karyawan.id as id_karyawan,karyawan.id_jabatan as id_jabatan');
     $this->db->from('karyawan');
-	$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
-	$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
-	$this->db->join('golongan', 'golongan.id = karyawan.id_golongan', 'inner');
-    $this->db->where('karyawan.mark','4');
+	$this->db->join('departemen', 'departemen.kode_departemen = karyawan.id_departemen', 'inner');
+	$this->db->join('jabatan', 'jabatan.kode_jabatan = karyawan.id_jabatan', 'inner');
+	$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner')->where('karyawan.mark', $key)->order_by("karyawan.nama_karyawan", "asc");
     return $this->db->get()->result_array();
 }
 

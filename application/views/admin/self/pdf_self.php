@@ -188,6 +188,24 @@ $html .='
 
 <?php
 $html .='
+<tr style="background-color: #f2f2f2;"><td colspan=2>INDIVIDUAL DELIVERABLES</td></tr>';
+	?>
+<?php
+foreach($get_karyawan_self_other as $dnilai)
+	{
+		$no++; ?>
+
+<?php
+$html .='
+  <tr>
+    <td>'.$dnilai['id_pertanyaan'].'</td>
+    <td>'.$dnilai['nilai'].'</td>
+ </tr>
+'; 
+  }  ?>
+
+<?php
+$html .='
 </table>';
 	?>
 
@@ -223,15 +241,48 @@ $html .='
                $final_attitude = round($final_att,2);
                 }?>
 
+<?php foreach($hitung_self_other as $row7) { 
+               $nilai_att = $row7['nilai'];
+               $jumlah = $row7['jumlah'];
+               $rata_otherx = $nilai_att / $jumlah ;
+               $rata_other = round($rata_otherx,2);
+               $final_otherx = (5/100)*$rata_other;
+               $final_other = round($final_otherx,2);
+               if ($nilai_att > 0){
+                $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
+               }else{ 
+                $prog_other = 0.00;
+               }
+
+                }?>
+
               <?php
               
-              $total = $final_attitude + $final_skills + $final_know;
+              $total = $final_attitude + $final_skills + $final_know+$final_other;
               ?>
+			
+			
 
 
 
 <?php
-		
+			 foreach($get_nilai as $n){
+			   $s_know = $n->s_knowledge;
+			   $w_know = $n->w_knowledge;
+			   
+			   $s_skil = $n->s_skills;
+			   $w_skil = $n->w_skills;
+			   
+			   $s_att = $n->s_attitude;
+			   $w_att = $n->w_attitude;
+
+			   $s_ind = $n->s_individual;
+			   $w_ind = $n->w_individual;
+
+			   $total_prev_score = round($s_know+$s_skil+$s_att+$s_ind,2);
+			   $total_prev_wight = round($w_know+$w_skil+$w_att+$w_ind,2);
+			 }
+		 
 $html .='
 
 <br><br>
@@ -245,24 +296,31 @@ $html .='
 
 <tr>
 <td>KNOWLEDGE</td>
-<td></td>
+<td>'.$s_know.'</td>
 <td>'.$rata_know.'</td>
 <td>'.$final_know.'</td>
 </tr>
 
 <tr>
 <td>SKILLS</td>
-<td></td>
+<td>'.$s_skil.'</td>
 <td>'.$rata_skills.'</td>
 <td>'.$final_skills.'</td>
 </tr>
 
-
 <tr>
 <td>ATTITUDE</td>
-<td></td>
+<td>'.$s_att.'</td>
 <td>'.$rata_att.'</td>
 <td>'.$final_attitude.'</td>
+</tr>
+<tr>
+
+<tr>
+<td>INDIVIDUAL DELIVERABLES</td>
+<td>'.$s_ind.'</td>
+<td>'.$rata_other.'</td>
+<td>'.$final_other.'</td>
 </tr>
 <tr>
 <td colspan=3></td>

@@ -24,9 +24,11 @@ class Online extends MY_Controller {
 		$atasan = $kode[4];
 		$jabatan = $kode[5];
 		$inisial = $kode[6];
+		$getinisial=$kode[8];
 		$kode = $kode[7];
 		
-		$data['get_karyawan_360'] = $this->master_model->get_karyawan_byinisial($inisial);
+		
+		$data['get_karyawan_360'] = $this->master_model->get_karyawan_byinisial($getinisial);
 		$data['get_rekan_360'] = $this->master_model->get_karyawan_byinisial($rekan_kerja);
 
 		$data['get_pertanyaan_360_rekan'] = $this->transaksi_model->get_pertanyaan_360_rekan($rekan_kerja);
@@ -53,7 +55,6 @@ class Online extends MY_Controller {
 		$kode = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
-	
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -182,6 +183,9 @@ class Online extends MY_Controller {
 		$kode_form=$this->input->post('kode');
 		$jenis_form='360';
 		$r = $this->input->post('r');
+		$getinisial = substr($inisial,0,3);
+		$getinisrekan	= substr($rekan,0,3);
+		$skye1 = "$tanggal$getinisial$getinisrekan";
 
 		for($i = 0; $i < $jumlah_berkas;$i++)
 		{
@@ -194,11 +198,11 @@ class Online extends MY_Controller {
 							'id_pertanyaan' => $pertanyaan[$i],
 							'nilai'=>$this->input->post('jawaban'.$a),
 							'masukan'=>$masukan,
-							'kode_form'=>$kode_form,
+							'kode_form'=>$skye1,
 							'jenis_form'=>$jenis_form);
 
 		}
-		$query = $this->db->query("SELECT * FROM form_360 where kode_form='$kode_form'");
+		$query = $this->db->query("SELECT * FROM form_360 where kode_form='$skye1'");
 		$jumlah = $query->num_rows();
 		if ($jumlah>'0'){
 			echo '<script>alert("Form 360 Sudah Pernah Di Isi")</script>';
@@ -208,24 +212,30 @@ class Online extends MY_Controller {
 	
 		$insert = count($data);
 
-            if($insert)
-            {
-            $this->db->insert_batch('form_360', $data);
+            if($insert){
+            	$this->db->insert_batch('form_360', $data);
             }
-			$query = $this->db->query("select mark from karyawan where inisial='$inisial'");
-			foreach ($query->result() as $row){	$mark=  $row->mark;}
+
+			$query = $this->db->query("select mark from karyawan where inisial='$getinisial'");
+			// return;
+			foreach ($query->result() as $row)
+			{	
+				$mark=  $row->mark;
+			}
 			$mark_now = $mark + 1;
 			$data = array(
-				'mark' => $mark_now,);
+				'mark' => $mark_now,
+			);
+	
 			$where = array(
-				'inisial' => $inisial
+				'inisial' => $getinisial
 			);
 			$this->master_model->Updatekaryawan($where,$data,'karyawan');
 
 			echo '<script>alert("Thank you for your submission.")</script>';
 			echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
-			exit;
-			return redirect('admin/auth/login');
+			echo '<script>window.close();</script>';
+			// return redirect('admin/auth/login');
 		
 	}
 	public function proses_self(){
@@ -283,7 +293,7 @@ class Online extends MY_Controller {
 							'nilai'=>$nilai_ind[$a],
 							'summary'=>$summary,
 							'action'=>$action,
-							'kode_form'=>'individual',
+							'kode_form'=>$kode_form,
 							'jenis_form'=>'individual');
 
 

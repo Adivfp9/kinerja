@@ -4,7 +4,6 @@ $url = $this->uri->segment(4);
 $kode = base64_decode($kode);
 //print $kode;exit;
 $kode = explode('+', $kode);
-
 $id_karyawan = $kode[1];
 $inisial =  $kode[2];
 //$rekan_kerja = $kode[2];
@@ -15,8 +14,8 @@ $email2 = $kode[9];
 $jabatan = $kode[10];
 $id_jabatan = $kode[15];
 $tanggal_appraisal = $kode[14];
-$kode_form = "$tanggal_appraisal$nama_karyawan$atasan";
-//$kode_form = $kode[9];
+$kode_form = "$tanggal_appraisal$inisial$atasan";
+$kode_form = $kode[8];
 
 //$tanggal_appraisal = $kode[10];
 

@@ -713,7 +713,7 @@ if(!empty($get_pertanyaan_self_attitude)){
       var weight_attitude_prev = 0;
       var weight_individu_prev = 0;
     }
-    console.log(weight_know_prev);
+
     var tot_weight_prev = parseFloat(weight_know_prev)+parseFloat(weight_skills_prev)+parseFloat(weight_attitude_prev)+parseFloat(weight_individu_prev);
     var tot_weight_prev_dec = tot_weight_prev.toFixed(2);
     $("#v_tot_weight_prev").html(tot_weight_prev_dec);
@@ -768,10 +768,15 @@ if(!empty($get_pertanyaan_self_attitude)){
       var weight_know_acc2 = 0;
       var weight_know_prev2 = 0;
     }
-    var prog_know = ((parseFloat(weight_know_acc2)-parseFloat(weight_know_prev2))/parseFloat(weight_know_prev2))*100;
+     if(weight_know_prev2<=0){
+      var prog_know_dec =0;
+      $("#v_prog_know").html(prog_know_dec);
+     }else{
+      var prog_know = ((parseFloat(weight_know_acc2)-parseFloat(weight_know_prev2))/parseFloat(weight_know_prev2))*100;
 
-    var prog_know_dec =prog_know.toFixed(2);
-    $("#v_prog_know").html(prog_know_dec);
+      var prog_know_dec =prog_know.toFixed(2);
+      $("#v_prog_know").html(prog_know_dec);
+     }
 
     // * Skill */
     var weight_skill_acc2 = $("#weight_skills_act").val();
@@ -782,12 +787,17 @@ if(!empty($get_pertanyaan_self_attitude)){
       var weight_skill_prev2 = 0;
     }
 
-    var prog_skill = ((parseFloat(weight_skill_acc2)-parseFloat(weight_skill_prev2))/parseFloat(weight_skill_prev2))*100;
+    if (weight_skill_prev2<= 0){
+      var prog_skill_dec = 0;
+      $("#v_prog_skill").html(prog_skill_dec);
+    }else{
+      var prog_skill = ((parseFloat(weight_skill_acc2)-parseFloat(weight_skill_prev2))/parseFloat(weight_skill_prev2))*100;
 
-    var prog_skill_dec =prog_skill.toFixed(2);
-    $("#v_prog_skill").html(prog_skill_dec);
+      var prog_skill_dec =prog_skill.toFixed(2);
+      $("#v_prog_skill").html(prog_skill_dec);
+    }
 
-
+    
     // * Attitude */
     var weight_attitude_acc2 = $("#weight_attitude_act").val();
     var weight_attitude_prev2 = $("#w_attitude_prev").val();
@@ -796,12 +806,15 @@ if(!empty($get_pertanyaan_self_attitude)){
       var weight_attitude_acc2 = 0;
       var weight_attitude_prev2 = 0;
     }
+    if (weight_attitude_prev2<=0){
+      var prog_attitude_dec = 0;
+      $("#v_prog_attitude").html(prog_attitude_dec);
+    }else{
+      var prog_attitude = ((parseFloat(weight_attitude_acc2)-parseFloat(weight_attitude_prev2))/parseFloat(weight_attitude_prev2))*100;
 
-    var prog_attitude = ((parseFloat(weight_attitude_acc2)-parseFloat(weight_attitude_prev2))/parseFloat(weight_attitude_prev2))*100;
-
-    var prog_attitude_dec =prog_attitude.toFixed(2);
-    $("#v_prog_attitude").html(prog_attitude_dec);
-
+      var prog_attitude_dec =prog_attitude.toFixed(2);
+      $("#v_prog_attitude").html(prog_attitude_dec);
+    }
 
     // * Individual */
     var weight_indi_acc2 = $("#weight_individu_act").val();
@@ -811,16 +824,16 @@ if(!empty($get_pertanyaan_self_attitude)){
       var weight_indi_acc2 = 0;
       var weight_indi_prev2 = 0;
     }
-    console.log(weight_indi_acc2);
-    console.log(weight_indi_prev2);
-
-    var prog_individual = ((parseFloat(weight_indi_acc2)-parseFloat(weight_indi_prev2))/parseFloat(weight_indi_prev2))*100;
-    console.log(prog_individual);
-
-    var prog_ind_dec =prog_individual.toFixed(2);
-    $("#v_prog_ind").html(prog_ind_dec);
-
-
+    
+    if (weight_indi_prev2<=0){
+      var prog_ind_dec = 0;
+      $("#v_prog_ind").html(prog_ind_dec);
+    }else{
+      var prog_individual = ((parseFloat(weight_indi_acc2)-parseFloat(weight_indi_prev2))/parseFloat(weight_indi_prev2))*100;
+      
+      var prog_ind_dec =prog_individual.toFixed(2);
+      $("#v_prog_ind").html(prog_ind_dec);
+    }
   }
 
   function hitungrata_att() {

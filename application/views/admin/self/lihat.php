@@ -151,17 +151,17 @@
               
 <br><br>
 
-              <table class="table table-responsive table-striped table-bordered" >
+              <table class="table table-bordered table-striped text-center text-middle" >
                 <!-- <table width="55%" border="1" class="table table-hover"> -->
             <thead>
-                <tr>
+                <tr class="bg-info">
                   <th rowspan="2" valign="middle">SUMMARY Score</th>
                   <th rowspan="2" valign="top">Weight</th>
                   <th colspan="2">Previous Performance</th>
                   <th colspan="2">Actual Performance</th>
                   <th rowspan="2" valign="middle" width="15px">Progress Performance</th>
                 </tr>
-                <tr>
+                <tr class="bg-info">
                   <th>Score</th>
                   <th>Weight</th>
                   <th>Score</th>
@@ -171,6 +171,7 @@
             <tbody>
               <!--* Previous Performance *-->
             <?php
+              if(sizeof($get_nilai)>0){
                 foreach($get_nilai as $n){
                   $s_know = $n->s_knowledge;
                   $w_know = $n->w_knowledge;
@@ -182,11 +183,27 @@
                   $w_att = $n->w_attitude;
 
                   $s_ind = $n->s_individual;
-                  $w_ind = $n->s_individual;
+                  $w_ind = $n->w_individual;
 
                   $total_prev_score = round($s_know+$s_skil+$s_att+$s_ind,2);
                   $total_prev_wight = round($w_know+$w_skil+$w_att+$w_ind,2);
                 }
+              }else{
+                  $s_know = 0;
+                  $w_know = 0;
+                  
+                  $s_skil = 0;
+                  $w_skil = 0;
+                  
+                  $s_att = 0;
+                  $w_att = 0;
+
+                  $s_ind = 0;
+                  $w_ind = 0;
+
+                  $total_prev_score = round($s_know+$s_skil+$s_att+$s_ind,2);
+                  $total_prev_wight = round($w_know+$w_skil+$w_att+$w_ind,2);
+              }
             ?>
             
             <!--* Actual Performance *-->
@@ -197,9 +214,14 @@
                $rata_know = round($rata_knowx,2);
                $final_knowx = (25/100)*$rata_knowx;
                $final_know = round($final_knowx,2);
-
-               $prog_know = round((($final_know-$w_know)/$w_know)*100,2);
-                }?>
+              
+               if ($w_know>0){
+                $prog_know = round((($final_know-$w_know)/$w_know)*100,2);
+               }else{
+                $prog_know = 0;
+               }
+            }
+            ?>
               
               <?php foreach($hitung_self_skills as $row5) { 
                $nilai_skills = $row5['nilai'];
@@ -209,8 +231,13 @@
                $final_skills = (25/100)*$rata_skillsx;
                $final_skills = round($final_knowx,2);
 
-               $prog_skill = round((($final_skills-$w_skil)/$w_skil)*100,2);
-                }?>
+               if ($w_skil>0){
+                 $prog_skill = round((($final_skills-$w_skil)/$w_skil)*100,2);
+               }else{
+                 $prog_skill = 0;
+               }
+              
+              }?>
 
           <?php foreach($hitung_self_attitude as $row6) { 
                $nilai_att = $row6['nilai'];
@@ -219,19 +246,22 @@
                $rata_att = round($rata_attx,2);
                $final_att = round((45/100)*$rata_attx,2);
                $final_attitude = round($final_att,2);
-
-               $prog_att = round((($final_attitude-$w_att)/$w_att)*100,2);
+                if ($w_att>0){
+                 $prog_att = round((($final_attitude-$w_att)/$w_att)*100,2);
+                }else{
+                  $prog_att = 0;
+                }
                 }?>
 
 
-        <!-- <?php foreach($hitung_self_other as $row7) { 
+            <?php foreach($hitung_self_other as $row7) { 
                $nilai_att = $row7['nilai'];
                $jumlah = $row7['jumlah'];
                $rata_otherx = $nilai_att / $jumlah ;
                $rata_other = round($rata_otherx,2);
                $final_otherx = (5/100)*$rata_other;
                $final_other = round($final_otherx,2);
-               if ($nilai_att > 0){
+               if ($w_ind > 0){
                 $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
                }else{ 
                 $prog_other = 0.00;
@@ -242,9 +272,12 @@
               <?php
               $total_actual_score = $rata_know+$rata_skills+$rata_att+$rata_other;
               $total = $final_attitude + $final_skills + $final_know +$final_other ;
-
-              $inTotal = round((($total-$total_prev_wight)/$total_prev_wight)*100,2);
-              ?> -->
+              if ($total_prev_wight>0){
+                $inTotal = round((($total-$total_prev_wight)/$total_prev_wight)*100,2);
+              }else{
+                $inTotal = 0;
+              }
+              ?>
     
      <tr>
 

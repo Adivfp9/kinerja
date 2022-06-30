@@ -52,14 +52,16 @@
                 $id=$row['id_karyawan'];
                 $rekan_kerja = $row['rekan_kerja'];
                 $nama_karyawan = $row['nama_karyawan'];
+                $inisial  = $row['inisial'];
                 $nama_jabatan = $row['nama_jabatan'];
                 $id_jabatan = $row['id_jabatan'];
                 $atasan = $row['atasan'];
                 $tanggal_appraisal = $row['tgl_appraisal'];
                 $nama_departemen = $row['nama_departemen'];
                 $email = $row['email'];
-                $skyes = "$tanggal_appraisal$nama_karyawan$atasan";
-                $kode ="+$id+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$id_jabatan+$skyes+$tgl_appraisal";
+                $skyes = "$tanggal_appraisal$inisial$atasan";
+                $kode ="+$id+$inisial+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$id_jabatan+$skyes+$tgl_appraisal";
+                
                 $kode= base64_encode($kode);
                 ?> 
                 <td>

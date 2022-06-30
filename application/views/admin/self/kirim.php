@@ -87,15 +87,16 @@
                 $tanggal_appraisal = $row['tgl_appraisal'];
                 $id=$row['id_karyawan'];
                 $rekan_kerja = $row['rekan_kerja'];
+                $inisial = $row['inisial'];
                 $nama_karyawan = $row['nama_karyawan'];
                 $nama_jabatan = $row['nama_jabatan'];
                 $atasan = $row['atasan'];
                 $nama_departemen = $row['nama_departemen'];
                 $email = $row['email'];
                 $id_departemen = $row['id_jabatan'];
-                $skyes = "$tanggal_appraisal$nama_karyawan$atasan";
+                $skyes = "$tanggal_appraisal$inisial$atasan";
                 
-                $kode ="+$id+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$skyes+$id_departemen";
+                $kode ="+$id+$inisial+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$skyes+$id_departemen";
                        $kode= base64_encode($kode);
           
                 ?> 

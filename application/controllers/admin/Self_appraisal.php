@@ -21,6 +21,7 @@ class Self_appraisal extends MY_Controller {
 		$kode = base64_decode($kode);
 		
 		$kode = explode('+', $kode);
+		
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -47,7 +48,7 @@ class Self_appraisal extends MY_Controller {
 				
 		}
 
-		$kondisi4="other";
+		$kondisi4="individual";
 		$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
 		//$data['get_karyawan_self_nilai'] = $this->transaksi_model->get_karyawan_self_nilai($id_karyawan);
 		$data['get_karyawan_self_know'] = $this->transaksi_model->get_karyawan_self_know($kondisi1,$kode);
@@ -90,9 +91,8 @@ class Self_appraisal extends MY_Controller {
 		$kode = $this->uri->segment(4);
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
-	
-	
 		$kode = explode('+', $kode);
+
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -302,6 +302,7 @@ class Self_appraisal extends MY_Controller {
 
 		
 		$kode = explode('+', $kode);
+		
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -313,7 +314,12 @@ class Self_appraisal extends MY_Controller {
 		$kode = $kode[9];
 		$tanggal_appraisal = $kode[10];
 
-
+		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+		}
+		
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
 		foreach ($query->result() as $row)
@@ -324,19 +330,28 @@ class Self_appraisal extends MY_Controller {
 				
 		}
 
-
+		$kondisi4="individual";
 		$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
 		$data['get_karyawan_self_know'] = $this->transaksi_model->get_karyawan_self_know($kondisi1,$kode);
 		$data['get_karyawan_self_skills'] = $this->transaksi_model->get_karyawan_self_skills($kondisi2,$kode);
 		$data['get_karyawan_self_att'] = $this->transaksi_model->get_karyawan_self_att($kondisi3,$kode);
-		$data['hitung_self_know'] = $this->transaksi_model->hitung_self_know($kondisi1,$kode);	
+		$data['get_karyawan_self_other'] = $this->transaksi_model->get_karyawan_self_other($kondisi4,$kode);
+
+		$data['hitung_self_know'] = $this->transaksi_model->hitung_self_know($kondisi1,$kode);
 		$data['hitung_self_skills'] = $this->transaksi_model->hitung_self_skills($kondisi2,$kode);	
 		$data['hitung_self_attitude'] = $this->transaksi_model->hitung_self_attitude($kondisi3,$kode);	
 
+		
+		
+		$data['hitung_self_know'] = $this->transaksi_model->hitung_self_know($kondisi1,$kode);	
+		$data['hitung_self_skills'] = $this->transaksi_model->hitung_self_skills($kondisi2,$kode);	
+		$data['hitung_self_attitude'] = $this->transaksi_model->hitung_self_attitude($kondisi3,$kode);
+		$data['hitung_self_other'] = $this->transaksi_model->hitung_self_other($kondisi4,$kode);
 
-		//print $jabatan;exit;
-		//$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
-		//$data['get_karyawan_self_nilai'] = $this->transaksi_model->get_karyawan_self_nilai($id_karyawan);
+		$where = array('nik' => $nik);
+
+		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
+
 		
 		$this->load->view('admin/self/pdf_self', $data);
 	}

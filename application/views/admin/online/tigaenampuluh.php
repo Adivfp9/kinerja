@@ -5,6 +5,7 @@ $kode = base64_decode($kode);
 $kode = explode('+', $kode);
 $id_karyawan = $kode[1];
 $rekan_kerja = $kode[2];
+
 $nama_karyawan = $kode[3];
 $atasan = $kode[4];
 $nama_departemen = $kode[5];
@@ -43,10 +44,10 @@ $tanggal_input = date("Y/m/d");
                 <?php $this->load->view('admin/includes/_messages.php') ?>
                 <?php echo form_open(base_url('admin/online/proses'), array('class' => 'form-horizontal', 'id' => 'formCalc')); 
                 foreach ($get_karyawan_360 as $row_360) {
-                  $nama_karyawan= $row_360['nama_karyawan'];
+                  $nama_karyawan= $row_360['inisial'] .' - '.$row_360['nama_karyawan'];
                 }
                 foreach ($get_rekan_360 as $rekan_360) {
-                  $nama_rekan= $rekan_360['nama_karyawan'];
+                  $nama_rekan= $rekan_360['inisial'] .' - '.$rekan_360['nama_karyawan'];
                 }
                 ?>
                 <div class="form-group">
