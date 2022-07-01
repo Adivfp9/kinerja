@@ -241,7 +241,7 @@ $html .='
                $final_attitude = round($final_att,2);
                 }?>
 
-<?php foreach($hitung_self_other as $row7) { 
+		<?php foreach($hitung_self_other as $row7) { 
                $nilai_att = $row7['nilai'];
                $jumlah = $row7['jumlah'];
                $rata_otherx = $nilai_att / $jumlah ;

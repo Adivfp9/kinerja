@@ -191,6 +191,24 @@ $html .='
 
 <?php
 $html .='
+<tr style="background-color: #f2f2f2;"><td colspan=2>INDIVIDUAL DELIVERABLES</td></tr>';
+	?>
+<?php
+foreach($get_karyawan_self_other as $dnilai)
+	{
+		$no++; ?>
+
+<?php
+$html .='
+  <tr>
+    <td>'.$dnilai['id_pertanyaan'].'</td>
+    <td>'.$dnilai['nilai'].'</td>
+ </tr>
+'; 
+  }  ?>
+
+<?php
+$html .='
 </table>';
 	?>
 
@@ -200,59 +218,92 @@ $html .='
 	?>
 
 <?php foreach($hitung_self_know as $row4) { 
-               $nilai_know = $row4['nilai'];
-               $jumlah = $row4['jumlah'];
-               $rata_know = $nilai_know / $jumlah ;
-               $final_knowx = (25/100)*$rata_know;
-               $final_know = round($final_knowx,2);
+              $nilai_know = $row4['nilai'];
+			  $jumlah = $row4['jumlah'];
+			  $rata_knowx = $nilai_know / $jumlah ;
+			  $rata_know = round($rata_knowx,2);
+			  $final_knowx = (25/100)*$rata_knowx;
+			  $final_know = round($final_knowx,2);
                 }?>
               
               <?php foreach($hitung_self_skills as $row5) { 
                $nilai_skills = $row5['nilai'];
                $jumlah = $row5['jumlah'];
-               $rata_skills = $nilai_skills / $jumlah ;
-               $final_skills = (25/100)*$rata_skills;
+               $rata_skillsx = $nilai_skills / $jumlah ;
+			   $rata_skills = round($rata_skillsx,2);
+               $final_skills = (25/100)*$rata_skillsx;
                $final_skills = round($final_knowx,2);
                 }?>
 
           <?php foreach($hitung_self_attitude as $row6) { 
-               $nilai_att = $row6['nilai'];
+			   $nilai_att = $row6['nilai'];
                $jumlah = $row6['jumlah'];
-               $rata_att = $nilai_att / $jumlah ;
+               $rata_attx = $nilai_att / $jumlah ;
+			   $rata_att = round($rata_attx,2);
                $final_att = (45/100)*$rata_att;
                $final_attitude = round($final_att,2);
+                }?>
+			<?php foreach($hitung_self_other as $row7) { 
+               $nilai_att = $row7['nilai'];
+               $jumlah = $row7['jumlah'];
+               $rata_otherx = $nilai_att / $jumlah ;
+               $rata_other = round($rata_otherx,2);
+               $final_otherx = (5/100)*$rata_other;
+               $final_other = round($final_otherx,2);
+               if ($nilai_att > 0){
+                $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
+               }else{ 
+                $prog_other = 0.00;
+               }
+
                 }?>
 
               <?php
               
-              $total = $final_attitude + $final_skills + $final_know;
+              $total = $final_attitude + $final_skills + $final_know+$final_other;
               ?>
 
 
 
 <?php
-		
+	foreach($get_nilai as $n){
+		  $s_know = $n->s_knowledge;
+		  $w_know = $n->w_knowledge;
+		  
+		  $s_skil = $n->s_skills;
+		  $w_skil = $n->w_skills;
+		  
+		  $s_att = $n->s_attitude;
+		  $w_att = $n->w_attitude;
+
+		  $s_ind = $n->s_individual;
+		  $w_ind = $n->w_individual;
+
+		  $total_prev_score = round($s_know+$s_skil+$s_att+$s_ind,2);
+		  $total_prev_wight = round($w_know+$w_skil+$w_att+$w_ind,2);
+		}
+
 $html .='
 
 <br><br>
 <table id=pertanyaan>
 <tr style="background-color: #f2f2f2;">
 <td>Summary Score</td>
-<td>Weight</td>
-<td>Average SCORE</td>
-<td>Final SCORE</td>
+<td>Previous Score</td>
+<td>Average Score</td>
+<td>Final Score</td>
 </tr>
 
 <tr>
 <td>KNOWLEDGE</td>
-<td>25%</td>
+<td>'.$s_know.'</td>
 <td>'.$rata_know.'</td>
 <td>'.$final_know.'</td>
 </tr>
 
 <tr>
 <td>SKILLS</td>
-<td>25%</td>
+<td>'.$s_skil.'</td>
 <td>'.$rata_skills.'</td>
 <td>'.$final_skills.'</td>
 </tr>
@@ -260,9 +311,17 @@ $html .='
 
 <tr>
 <td>ATTITUDE</td>
-<td>45%</td>
+<td>'.$s_att.'</td>
 <td>'.$rata_att.'</td>
 <td>'.$final_attitude.'</td>
+</tr>
+<tr>
+
+<tr>
+<td>INDIVIDUAL DELIVERABLES</td>
+<td>'.$s_ind.'</td>
+<td>'.$rata_other.'</td>
+<td>'.$final_other.'</td>
 </tr>
 <tr>
 <td colspan=3></td>

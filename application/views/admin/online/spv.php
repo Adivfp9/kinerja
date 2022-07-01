@@ -56,7 +56,7 @@ $tanggal_input = date("Y/m/d");
 
 
                   <div class="form-group">
-                    <label for="nama" class="col-md-12 control-label">Nama Karyawan</label>
+                    <label for="nama" class="col-md-12 control-label">Employee Name</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="nama_karyawan" class="form-control" id="nama_karyawan" placeholder="" value="<?= $nama_karyawan; ?>">
                     <input type="hidden" readonly name="id_karyawan" class="form-control" id="id_karyawan" placeholder="" value="<?= $id_karyawan; ?>">
@@ -68,7 +68,7 @@ $tanggal_input = date("Y/m/d");
                   </div>
 
                   <div class="form-group">
-                    <label for="posisi" class="col-md-12 control-label">Posisi</label>
+                    <label for="posisi" class="col-md-12 control-label">Position</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="posisi" class="form-control" id="posisi" placeholder="" value="<?= $jabatan; ?>">
                     </div>
@@ -82,14 +82,14 @@ $tanggal_input = date("Y/m/d");
                   </div>
 
                   <div class="form-group">
-                    <label for="tanggal" class="col-md-12 control-label">Tanggal</label>
+                    <label for="tanggal" class="col-md-12 control-label">Date</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="rekan" class="col-md-12 control-label">Atasan</label>
+                    <label for="rekan" class="col-md-12 control-label">Supervisor</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="atasan" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?>">
                     </div>
@@ -102,7 +102,7 @@ $tanggal_input = date("Y/m/d");
                     <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
                 <thead>
-                <tr><td colspan="4">*Grade value min = 1 , max = 5, using . for decimal grade</th></tr>
+                <tr><td colspan="4">*Grade value min = 1 , max = 4, using . for decimal grade</th></tr>
                 <tr>
                 <th>No</th>
                 <th>Indicator</th>
@@ -125,7 +125,7 @@ $tanggal_input = date("Y/m/d");
               <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id_pertanyaan']; ?>">
                 <td><?= $row['pertanyaan']; ?></td>
                 <td><center><?= $row['nilai']; ?></center></td>
-                <td width="100px"><input type="number"  name="jawaban<?php echo $no; ?>" class="form-control" value=" " max="5" required step="0.01"></td>                             
+                <td width="100px"><input type="number" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_know();" value="" max="4" required step="0.01"></td>                             
               </tr>
   <?php } ?>
                 <!--end set of knowledge -->
@@ -144,7 +144,7 @@ $tanggal_input = date("Y/m/d");
               <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id']; ?>">
                 <td><?= $row['pertanyaan']; ?></td>
                 <td><center><?= $row['nilai']; ?></center></td>
-                <td width="70px"><input type="number"  name="jawaban<?php echo $no; ?>" class="form-control" value=" " max="5" required step="0.01" > </td>                             
+                <td width="70px"><input type="number" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_skills();" value="" max="4" required step="0.01" > </td>                             
               </tr>
               <?php } ?>
                 <!--end set of skills -->
@@ -164,7 +164,29 @@ $tanggal_input = date("Y/m/d");
               <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id']; ?>">
                 <td><?= $row['pertanyaan']; ?></td>
                 <td><center><?= $row['nilai']; ?></center></td>
-                <td width="70px"><input type="number"  name="jawaban<?php echo $no; ?>" class="form-control" value=" " max="5" required step="0.01"></td>                             
+                <td width="70px"><input type="number" id="jawaban<?php echo $no; ?>"  name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_attitude();" value="" max="4" required step="0.01"></td>                             
+              </tr>
+
+       
+              <?php } ?>
+
+              <!-- Indivisual Delive -->
+              <!--set of ATTITUDE -->
+              <tr><td colspan="4"><b> INDIVIDUAL DELIVERABLES<b></th></tr>
+                <?php 
+                            
+                            foreach($get_karyawan_self_other as $row) { 
+                            $no++;
+                            ?>
+                            <tr>
+                            <tr>
+              <td width="50"><?php echo $no; ?></td>
+              <input type="hidden"  name="jenis_form<?php echo $no; ?>" class="form-control" value="individual" >
+              
+              <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id_pertanyaan']; ?>">
+                <td><?= $row['id_pertanyaan']; ?></td>
+                <td><center><?= $row['nilai']; ?></center></td>
+                <td width="70px"><input type="number" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" value="" max="5" required step="0.01"></td>                             
               </tr>
 
        
@@ -275,6 +297,7 @@ $tanggal_input = date("Y/m/d");
                      </td>
                       <td width="8%">
                       <?php echo $w_knowledge;?>
+                      <input type="hidden" id="w_know_prev" value="<?= $w_knowledge; ?> ">
                      </td>
                       <td>
                         <span id="v_score_know_act"></span>
@@ -284,7 +307,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_know_act"></span>
                         <input type="hidden" id="weight_know_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                        <span id="v_prog_know"></span> %
+                        <input type="hidden" id="prog_know_dec" value="0">
+                      </td>
                     </tr>
 
                     <tr>
@@ -295,6 +321,7 @@ $tanggal_input = date("Y/m/d");
                       </td>
                       <td width="8%">
                       <?php echo $w_skills;?>
+                      <input type="hidden" id="w_skill_prev" value="<?= $w_skills; ?> ">
                      </td>
                       <td>
                         <span id="v_score_skills_act"></span>
@@ -304,7 +331,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_skills_act"></span>
                         <input type="hidden" id="weight_skills_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                        <span id="v_prog_skill"></span> %
+                        <input type="hidden" id="prog_skill_dec" value="0">
+                      </td>
 
                     </tr>
 
@@ -315,7 +345,8 @@ $tanggal_input = date("Y/m/d");
                       <?php echo $s_attitude;?>
                       </td>
                       <td width="8%">
-                      <?php echo $w_attitude;?>
+                        <?php echo $w_attitude;?>
+                        <input type="hidden" id="w_attitude_prev" value="<?= $w_attitude; ?> ">
                         
                      </td>
                       <td>
@@ -326,7 +357,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_attitude_act"></span>
                         <input type="hidden" id="weight_attitude_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                        <span id="v_prog_attitude"></span> %
+                        <input type="hidden" id="prog_attitude_dec" value="0">
+                      </td>
 
                     </tr>
 
@@ -338,6 +372,7 @@ $tanggal_input = date("Y/m/d");
                       </td>
                       <td width="8%">
                       <?php echo $w_individual;?>
+                      <input type="hidden" id="w_indi_prev" value="<?= $w_individual; ?> ">
                      </td>
                       <td>
                         <span id="v_score_individu_act"></span>
@@ -514,3 +549,411 @@ $tanggal_input = date("Y/m/d");
   $("#forms").addClass('active');
   $("#advanced").addClass('active');
 </script> 
+
+<!-- Page script -->
+<?php if(!empty($get_pertanyaan_spv_know)){
+  $tot_know = count($get_pertanyaan_spv_know);
+} else {
+  $tot_know = 0;
+}
+
+if(!empty($get_pertanyaan_spv_skills)){
+  $tot_skills = count($get_pertanyaan_spv_skills);
+} else {
+  $tot_skills = 0;
+}
+
+if(!empty($get_pertanyaan_spv_attitude)){
+  $tot_attitude = count($get_pertanyaan_spv_attitude);
+} else {
+  $tot_attitude = 0;
+}
+?>
+
+<script>
+  $(document).ready(function(){
+    // for(B=1; B<=1; B++){
+    //   BarisBaru();
+    // }
+
+    $('#BarisBaru').click(function(){
+      BarisBaru();
+    });
+
+    // $("#TabelTransaksi tbody").find('input[type=text],textarea,select').filter(':visible:first').focus();
+  });
+
+  function BarisBaru()
+  {
+    var Nomor = $('#TabelTransaksi tbody tr').length + 1;
+    var Baris = "<tr>";
+
+  // Kolom tombol remove
+    Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-times' style='color:red;'></i></button></td>";
+  // kolom input text deliverable
+    Baris += "<td>";
+      Baris += "<input type='text' class='form-control' required name='add_deliv[";
+      Baris += Nomor;
+      Baris += "]'";
+    Baris += "</td>";
+
+    Baris += "<td width='100px'><input type='number' min='1' max='4' class='form-control'     id='nilai_deliv' value='' name='nilai_deliv[";
+    Baris += Nomor;
+    Baris += "]'";
+    Baris += " required step='0.01'></td>";
+    Baris += "</tr>";
+
+    $('#TabelTransaksi tbody').append(Baris);
+
+    $('#TabelTransaksi tbody tr').each(function(){
+      // $(this).find('td:nth-child(3) input').focus();
+    });
+
+    HitungDeliverables();
+  }
+
+  // Key down
+  $(document).on('keydown', '#nilai_deliv', function(e){
+    var charCode = e.which || e.keyCode;
+    if(charCode == 9){
+      var Indexnya = $(this).parent().parent().index() + 1;
+      var TotalIndex = $('#TabelTransaksi tbody tr').length;
+      // if(Indexnya == TotalIndex){
+      //   BarisBaru();
+      //   return false;
+      // }
+    }
+    HitungDeliverables();
+  });
+  // Key Up
+  $(document).on('keyup', '#nilai_deliv', function(e){
+    var charCode = e.which || e.keyCode;
+    if(charCode == 9){
+      var Indexnya = $(this).parent().parent().index() + 1;
+      var TotalIndex = $('#TabelTransaksi tbody tr').length;
+      // if(Indexnya == TotalIndex){
+      //   BarisBaru();
+      //   return false;
+      // }
+    }
+    HitungDeliverables();
+  });
+
+  $(document).on('click', '#HapusBaris', function(e){
+    e.preventDefault();
+    $(this).parent().parent().remove();
+
+    HitungDeliverables();
+  });
+
+  function HitungDeliverables()
+  {
+    var TotDeliv = $('#TabelTransaksi tbody tr').length;
+    var sum = 0;
+    $('#TabelTransaksi tbody tr').each(function(){
+      if($(this).find('td:nth-child(3) input').val() > 0)
+      {
+        var answer = $(this).find('td:nth-child(3) input').val();
+        // Total = parseInt(Total) + parseInt(SubTotal);
+        sum = parseFloat(sum)+parseFloat(answer);
+      }
+    });
+
+    var scored = parseFloat(sum / parseInt(TotDeliv)).toFixed(2);
+    var weight = parseFloat(scored * (5 / 100)).toFixed(2);
+
+    $("#score_individu_act").val(scored);
+    $("#weight_individu_act").val(weight);
+    $("#v_score_individu_act").html(scored);
+    $("#v_weight_individu_act").html(weight);
+
+    calculate_scored_act();
+    calc_progress();
+  }
+
+  function count_know() {
+    var tot_know = <?php echo $tot_know;?>;
+
+    var sum = 0;
+    for (var i = 1; i <= parseInt(tot_know); i++) {
+      var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
+      sum += parseFloat(answer);
+    }
+
+    var scored = parseFloat(sum / parseInt(tot_know)).toFixed(2);
+    var weight = parseFloat(scored * (25 / 100)).toFixed(2);
+
+    $("#score_know_act").val(scored);
+    $("#weight_know_act").val(weight);
+    $("#v_score_know_act").html(scored);
+    $("#v_weight_know_act").html(weight);
+    // calculate_weight_prev();
+    calculate_weight_acc();
+    calculate_scored_act();
+    calc_progress();
+
+  }
+
+  function count_skills() {
+    var tot_know = <?php echo $tot_know;?>;
+    var tot_skills = <?php echo $tot_skills;?>;
+
+    var sum = 0;
+    for (var i = parseInt(tot_know) + 1; i <= parseInt(tot_know) + parseInt(tot_know); i++) {
+      var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
+      sum += parseFloat(answer);
+    }
+
+    var scored = parseFloat(sum / parseInt(tot_skills)).toFixed(2);
+    var weight = parseFloat(scored * (25 / 100)).toFixed(2);
+
+    $("#score_skills_act").val(scored);
+    $("#weight_skills_act").val(weight);
+    $("#v_score_skills_act").html(scored);
+    $("#v_weight_skills_act").html(weight);
+
+    // calculate_weight_prev();
+    calculate_weight_acc();
+    calculate_scored_act();
+    calc_progress();
+
+  }
+
+  function count_attitude() {
+    var tot_skills = <?php echo $tot_skills;?>;
+    var tot_attitude = <?php echo $tot_attitude;?>;
+
+    var sum = 0;
+    for (var i = parseInt(tot_skills) + 1; i <= parseInt(tot_skills) + parseInt(tot_skills); i++) {
+      var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
+      sum += parseFloat(answer);
+    }
+
+    var scored = parseFloat(sum / parseInt(tot_attitude)).toFixed(2);
+    var weight = parseFloat(scored * (55 / 100)).toFixed(2);
+
+    //console.log(sum);
+
+    $("#score_attitude_act").val(scored);
+    $("#weight_attitude_act").val(weight);
+    $("#v_score_attitude_act").html(scored);
+    $("#v_weight_attitude_act").html(weight);
+    // calculate_weight_prev();
+    calculate_scored_act();
+    calculate_weight_acc();
+    calc_progress();
+  }
+
+  function count_deliverables(){
+    var Totaldeliv = 0;
+      $('#TbPertanyaan tbody tr').each(function(){
+      if($(this).find('td:nth-child(6) input').val() > 0)
+      {
+        var SubTotal = $(this).find('td:nth-child(6) input').val();
+        Total = parseInt(Total) + parseInt(SubTotal);
+      }
+    });
+    // calculate_weight_prev();
+    calculate_scored_act();
+    calculate_weight_acc();
+    calc_progress();
+  }
+
+
+   $(document).ready(function(){
+      $("#score_know_prev, #score_skills_prev, #score_attitude_prev, #score_individu_prev").on("keyup change",function(){
+        calculate_scored_prev();
+      });
+
+      $("#weight_know_prev, #weight_skills_prev, #weight_attitude_prev, #weight_individu_prev").on("keyup change",function(){
+        calculate_weight_prev();
+      }); 
+
+      $("#score_know_act, #score_skills_act, #score_attitude_act, #score_individu_act").on("keyup change",function(){
+        calculate_scored_act();
+      });
+
+      $("#weight_know_act, #weight_skills_act, #weight_attitude_act, #weight_individu_act").on("keyup change",function(){
+        calculate_weight_acc();
+      });
+  });
+
+
+  function calculate_scored_prev(){
+    var scored_know_prev = $("#score_know_prev").val();
+    var scored_skills_prev = $("#score_skills_prev").val();
+    var scored_attitude_prev = $("#score_attitude_prev").val();
+    var scored_individu_prev = $("#score_individu_prev").val();
+
+    if(scored_know_prev == "" || scored_skills_prev == "" || scored_attitude_prev == "" || scored_individu_prev == "") {
+      var scored_know_prev = 0;
+      var scored_skills_prev = 0;
+      var scored_attitude_prev = 0;
+      var scored_individu_prev = 0;
+    }
+
+    var tot_scored_prev = parseFloat(scored_know_prev)+parseFloat(scored_skills_prev)+parseFloat(scored_attitude_prev)+parseFloat(scored_individu_prev);
+    var tot_scored_prev_dec = tot_scored_prev.toFixed(2);
+    $("#v_tot_scored_prev").html(tot_scored_prev_dec);
+  }
+
+  function calculate_weight_prev(){
+    var weight_know_prev = $("#weight_know_prev").val();
+    var weight_skills_prev = $("#weight_skills_prev").val();
+    var weight_attitude_prev = $("#weight_attitude_prev").val();
+    var weight_individu_prev = $("#weight_individu_prev").val();
+
+    if(weight_know_prev == "" || weight_skills_prev == "" || weight_attitude_prev == "" || weight_individu_prev == "") {
+      var weight_know_prev = 0;
+      var weight_skills_prev = 0;
+      var weight_attitude_prev = 0;
+      var weight_individu_prev = 0;
+    }
+
+    var tot_weight_prev = parseFloat(weight_know_prev)+parseFloat(weight_skills_prev)+parseFloat(weight_attitude_prev)+parseFloat(weight_individu_prev);
+    var tot_weight_prev_dec = tot_weight_prev.toFixed(2);
+    $("#v_tot_weight_prev").html(tot_weight_prev_dec);
+  }
+
+
+  function calculate_scored_act(){
+    var scored_know_act = $("#score_know_act").val();
+    var scored_skills_act = $("#score_skills_act").val();
+    var scored_attitude_act = $("#score_attitude_act").val();
+    var scored_individu_act = $("#score_individu_act").val();
+
+    if(scored_know_act == "" || scored_skills_act == "" || scored_attitude_act == "" || scored_individu_act == "") {
+      var scored_know_act = 0;
+      var scored_skills_act = 0;
+      var scored_attitude_act = 0;
+      var scored_individu_act = 0;
+    }
+    var tot_scored_act = parseFloat(scored_know_act)+parseFloat(scored_skills_act)+parseFloat(scored_attitude_act)+parseFloat(scored_individu_act);
+    var tot_scored_act_dec = tot_scored_act.toFixed(2);
+
+    $("#v_tot_scored_act").html(tot_scored_act_dec);
+  }
+
+  function calculate_weight_acc(){
+    var weight_know_acc = $("#weight_know_act").val();
+    var weight_skills_acc = $("#weight_skills_act").val();
+    var weight_attitude_acc = $("#weight_attitude_act").val();
+    var weight_individu_acc = $("#weight_individu_act").val();
+
+    if(weight_know_acc== "" || weight_skills_acc == "" || weight_attitude_acc == "" || weight_individu_acc == "") {
+      var weight_know_acc = 0;
+      var weight_skills_acc = 0;
+      var weight_attitude_acc = 0;
+      var weight_individu_acc = 0;
+    }
+
+    var tot_weight_acc = parseFloat(weight_know_acc)+parseFloat(weight_skills_acc)+parseFloat(weight_attitude_acc)+parseFloat(weight_individu_acc);
+    var tot_weight_acc_dec = tot_weight_acc.toFixed(2);
+    $("#v_tot_weight_acc").html(tot_weight_acc_dec);
+  }
+
+  function calc_progress(){
+    //**  rumus ((actualweight-prevweight)/prevweight)  */
+
+    // * Knowledge */
+    var weight_know_acc2 = $("#weight_know_act").val();
+    var weight_know_prev2 = $("#w_know_prev").val();
+
+    if(weight_know_acc2== "" || weight_know_prev2 == "")
+    {
+      var weight_know_acc2 = 0;
+      var weight_know_prev2 = 0;
+    }
+     if(weight_know_prev2<=0){
+      var prog_know_dec =0;
+      $("#v_prog_know").html(prog_know_dec);
+     }else{
+      var prog_know = ((parseFloat(weight_know_acc2)-parseFloat(weight_know_prev2))/parseFloat(weight_know_prev2))*100;
+
+      var prog_know_dec =prog_know.toFixed(2);
+      $("#v_prog_know").html(prog_know_dec);
+     }
+
+    // * Skill */
+    var weight_skill_acc2 = $("#weight_skills_act").val();
+    var weight_skill_prev2 = $("#w_skill_prev").val();
+    if(weight_skill_acc2== "" || weight_skill_prev2 == "")
+    {
+      var weight_skill_acc2 = 0;
+      var weight_skill_prev2 = 0;
+    }
+
+    if (weight_skill_prev2<= 0){
+      var prog_skill_dec = 0;
+      $("#v_prog_skill").html(prog_skill_dec);
+    }else{
+      var prog_skill = ((parseFloat(weight_skill_acc2)-parseFloat(weight_skill_prev2))/parseFloat(weight_skill_prev2))*100;
+
+      var prog_skill_dec =prog_skill.toFixed(2);
+      $("#v_prog_skill").html(prog_skill_dec);
+    }
+
+    
+    // * Attitude */
+    var weight_attitude_acc2 = $("#weight_attitude_act").val();
+    var weight_attitude_prev2 = $("#w_attitude_prev").val();
+    if(weight_attitude_acc2== "" || weight_attitude_prev2 == "")
+    {
+      var weight_attitude_acc2 = 0;
+      var weight_attitude_prev2 = 0;
+    }
+    if (weight_attitude_prev2<=0){
+      var prog_attitude_dec = 0;
+      $("#v_prog_attitude").html(prog_attitude_dec);
+    }else{
+      var prog_attitude = ((parseFloat(weight_attitude_acc2)-parseFloat(weight_attitude_prev2))/parseFloat(weight_attitude_prev2))*100;
+
+      var prog_attitude_dec =prog_attitude.toFixed(2);
+      $("#v_prog_attitude").html(prog_attitude_dec);
+    }
+
+    // * Individual */
+    var weight_indi_acc2 = $("#weight_individu_act").val();
+    var weight_indi_prev2 = $("#w_indi_prev").val();
+    if(weight_indi_acc2== "" || weight_indi_prev2 == "")
+    {
+      var weight_indi_acc2 = 0;
+      var weight_indi_prev2 = 0;
+    }
+    
+    if (weight_indi_prev2<=0){
+      var prog_ind_dec = 0;
+      $("#v_prog_ind").html(prog_ind_dec);
+    }else{
+      var prog_individual = ((parseFloat(weight_indi_acc2)-parseFloat(weight_indi_prev2))/parseFloat(weight_indi_prev2))*100;
+      
+      var prog_ind_dec =prog_individual.toFixed(2);
+      $("#v_prog_ind").html(prog_ind_dec);
+    }
+  }
+
+  function hitungrata_att() {
+    var tot_per = document.getElementById('total_per').value;
+    var tot_att = document.getElementById('total_att').value;
+
+    var sum = 0;
+
+    for (var i = parseInt(tot_per) + 1; i <= parseInt(tot_per) + parseInt(tot_att); i++) {
+      var elems = document.getElementById("jawaban" + i).value == '' ? 0 : document.getElementById("jawaban" + i).value;
+      sum += parseFloat(elems);
+    }
+    var rata_att = parseFloat(sum / parseInt(tot_att)).toFixed(2);
+    document.getElementById("rata_att").innerHTML = rata_att;
+    document.getElementById("final_att").innerHTML = parseFloat(rata_att * (55 / 100)).toFixed(2);
+
+    var final_p = document.getElementById("final_perf").innerHTML == '' ? 0 : document.getElementById("final_perf").innerHTML;
+
+    var final_a = document.getElementById("final_att").innerHTML == '' ? 0 : document.getElementById("final_att").innerHTML;
+
+
+    document.getElementById("total_score").innerHTML = parseFloat(final_p) + parseFloat(final_a)
+
+
+  }
+
+</script>

@@ -101,7 +101,8 @@
                 $inisial = $row['inisial'];
                 $tgl_appraisal = $row['tgl_appraisal'];
                 $kode ="+$id+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$inisial+$rekan_kerja2+$rekan_kerja3+$tgl_appraisal";
-                       $kode= base64_encode($kode);
+                
+                $kode= base64_encode($kode);
           
                 ?> 
 

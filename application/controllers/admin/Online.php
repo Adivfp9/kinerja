@@ -110,26 +110,28 @@ class Online extends MY_Controller {
 		//print $kode;exit;
 
 		$kode = explode('+', $kode);
+		// var_dump($kode);
+		// return;
 		//print $kode[7];exit;
 		$tanggal_appraisal = $kode[14];
 		$nama_karyawan = $kode[6];
 		$atasan = $kode[7];
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
-		
-
 		$nama_departemen = $kode[5];
 		$email = $kode[6];
 		$jabatan = $kode[7];
 		$kode_form = $kode[8];
 		$id_jabatan = $kode[15];
-		$kode = "$tanggal_appraisal$nama_karyawan$atasan";
+		$inisialkry = $kode[2];
+		$kode = "$tanggal_appraisal$inisialkry$atasan";
 		//print $kode;exit;
 
 		
 	
 		
-		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
+		$query = $this->db->query("select * from master_form where id_jabatan=$id_jabatan");
+
 		foreach ($query->result() as $row)
 		{
 				$kondisi1=  $row->kondisi1;
@@ -145,16 +147,18 @@ class Online extends MY_Controller {
 			$data['action']= $row5->action;		
 		}
 		
+		$kondisi4='individual';
 		$data['get_pertanyaan_360_rekan'] = $this->transaksi_model->get_pertanyaan_360_rekan($rekan_kerja);
 		$data['get_pertanyaan_360'] = $this->transaksi_model->get_pertanyaan_360($kondisi);
 		
 		$data['get_pertanyaan_spv_know'] = $this->transaksi_model->get_pertanyaan_spv_know($kondisi1,$kode);
 		$data['get_pertanyaan_spv_skills'] = $this->transaksi_model->get_pertanyaan_spv_skills($kondisi2,$kode);
 		$data['get_pertanyaan_spv_attitude'] = $this->transaksi_model->get_pertanyaan_spv_attitude($kondisi3,$kode);
+		$data['get_karyawan_self_other'] = $this->transaksi_model->get_karyawan_self_other($kondisi4,$kode);
 
 
 
-				$query = $this->db->query("select * from karyawan where id='$id_karyawan'");
+		$query = $this->db->query("select * from karyawan where id='$id_karyawan'");
 
 		foreach ($query->result() as $row23)
 		{
@@ -182,10 +186,11 @@ class Online extends MY_Controller {
 		$pertanyaan = $this->input->post('pertanyaan');
 		$kode_form=$this->input->post('kode');
 		$jenis_form='360';
+		$tgl_appraisal=	$this->input->post('tgl_appraisal');
 		$r = $this->input->post('r');
 		$getinisial = substr($inisial,0,3);
 		$getinisrekan	= substr($rekan,0,3);
-		$skye1 = "$tanggal$getinisial$getinisrekan";
+		$skye1 = "$tgl_appraisal$getinisial$getinisrekan";
 
 		for($i = 0; $i < $jumlah_berkas;$i++)
 		{
@@ -198,7 +203,7 @@ class Online extends MY_Controller {
 							'id_pertanyaan' => $pertanyaan[$i],
 							'nilai'=>$this->input->post('jawaban'.$a),
 							'masukan'=>$masukan,
-							'kode_form'=>$skye1,
+							'kode_form'=>$kode_form,
 							'jenis_form'=>$jenis_form);
 
 		}

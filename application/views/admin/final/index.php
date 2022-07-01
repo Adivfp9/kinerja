@@ -40,9 +40,9 @@
                 </thead>
                 <tbody>
                 <?php 
-                            $no = 0;
-                            foreach($get_karyawan as $row) { 
-                            $no++;
+                    $no = 0;
+                    foreach($get_karyawan as $row) { 
+                    $no++;
                 ?>
                 <tr>
                 
@@ -70,16 +70,11 @@
                 $skye1 = "$tanggal_appraisal$inisial$rekan_kerja";
                 $skye2 = "$tanggal_appraisal$inisial$rekan_kerja2";
                 $skye3 = "$tanggal_appraisal$inisial$rekan_kerja3";
-                $skyeself = "$tanggal_appraisal$inisial$atasan";
-                
-                $kodeself ="+$id+$inisialself+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$skyeself+$id_departemen+$id_jabatan";
-                $kodeself = base64_encode($kodeself);
-
                 $kode ="+$id+$inisial+$rekan_kerja+$rekan_kerja2+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$skye1+$skye2+$skye3+$tanggal_appraisal+$id_jabatan";
                 $kode= base64_encode($kode);
                 
                 ?> 
-                 <td><a href="/kinerja/admin/final_appraisal/finalself/<?= $kodeself; ?>"><i class="nav-icon fa fa-download"> Download File</i></a></td>
+                 <td><a href="/kinerja/admin/final_appraisal/finalself/<?= $kode; ?>"><i class="nav-icon fa fa-download"> Download File</i></a></td>
               
              
                 <td><a href="/kinerja/admin/final_appraisal/final360pdf/<?= $kode; ?>"><i class="nav-icon fa fa-download"> Download File</i></a></td>

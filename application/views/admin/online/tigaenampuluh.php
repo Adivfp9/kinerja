@@ -3,9 +3,11 @@ $kode = $this->uri->segment(4);
 $url = $this->uri->segment(4);
 $kode = base64_decode($kode);
 $kode = explode('+', $kode);
+// var_dump($kode);
+// return ;
 $id_karyawan = $kode[1];
 $rekan_kerja = $kode[2];
-
+// $tgl_appraisal = $kode[11];
 $nama_karyawan = $kode[3];
 $atasan = $kode[4];
 $nama_departemen = $kode[5];
@@ -14,6 +16,7 @@ $jabatan = $kode[7];
 $inisial = $kode[8];
 $kode = $kode[9];
 $tanggal_input = date("Y/m/d");
+
 ?>
 
 <!-- daterange picker -->
@@ -82,6 +85,7 @@ $tanggal_input = date("Y/m/d");
                   <label for="tanggal" class="col-md-12 control-label">Date</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
+                    <!-- <input type="hidden" name="tgl_appraisal" value="<?= $tgl_appraisal; ?>"> -->
                   </div>
                 </div>
 

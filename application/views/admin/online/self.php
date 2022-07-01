@@ -116,7 +116,7 @@ $tanggal_input = date("Y/m/d");
                                 <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id']; ?>">
                                 <td><?= $row['pertanyaan']; ?></td>
                                 <td width="100px">
-                                  <input type="number" min="1" max="4" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_know();" value="" required step="0.01">
+                                  <input type="number" min="1" max="4" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_know();" value="" max="4" required step="0.01">
                                 </td>
                               </tr>
                             <?php } ?>

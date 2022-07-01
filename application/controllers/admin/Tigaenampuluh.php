@@ -93,10 +93,11 @@ class Tigaenampuluh extends MY_Controller {
 			$email = $row['email'];
 			$nama_rekan	= $row['nama_karyawan'];
 		}
-			/* ini emailnya */
-			$linkurl = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$url.'/';
-			$kode1 ="+$id_karyawan+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye1";
+			$kode1 ="+$id_karyawan+$rekan_kerja+$nama_karyawan+$atasan+$nama_departemen+$email+$jabatan+$inisial+$skye1";
 			$urlx1= base64_encode($kode1);
+			/* ini emailnya */
+			$linkurl = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$urlx1.'/';
+			
 
 			
 				
@@ -150,6 +151,7 @@ foreach($get_email_rekan2 as $row){
 }
 		/* ini emailnya */
 		$kode2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$jabatan+$inisial+$skye2";
+		
 		$urlx2= base64_encode($kode2);
 		$linkurl2 = 'http://182.16.171.166/kinerja/admin/online/tigaenampuluh/'.$urlx2.'/';
 		//$urlx2 ="+$id_karyawan+$rekan_kerja2+$nama_karyawan+$atasan+$nama_departemen+$email2+$inisial";
