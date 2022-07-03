@@ -387,6 +387,14 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			return $this->db->get()->result_array();
 		}
 
+		public function get_karyawan_spv_ind($kondisi4,$kode){
+			$this->db->select('spv_appraisal.*');
+			$this->db->from('spv_appraisal');
+			$this->db->where('spv_appraisal.kode_form',$kode);
+			$this->db->where('spv_appraisal.jenis_form',$kondisi4);
+			return $this->db->get()->result_array();
+		}
+
 		
 
 	
@@ -438,6 +446,13 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('spv_appraisal');
 			$this->db->where('kode_form',$kode);
 			$this->db->where('jenis_form',$kondisi3);
+			return $this->db->get()->result_array();
+		}
+		public function hitung_spv_ind($kondisi4,$kode){
+			$this->db->select('count(nilai) as jumlah,sum(nilai) as nilai');
+			$this->db->from('spv_appraisal');
+			$this->db->where('kode_form',$kode);
+			$this->db->where('jenis_form',$kondisi4);
 			return $this->db->get()->result_array();
 		}
 

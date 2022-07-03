@@ -21,7 +21,8 @@ class Self_appraisal extends MY_Controller {
 		$kode = base64_decode($kode);
 		
 		$kode = explode('+', $kode);
-		
+		// var_dump($kode);
+		// return;
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -63,7 +64,8 @@ class Self_appraisal extends MY_Controller {
 		$where = array('nik' => $nik);
 
 		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
-		
+		// var_dump($data);
+		// return;
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/self/lihat', $data);
 		$this->load->view('admin/includes/_footer');

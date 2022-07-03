@@ -186,7 +186,7 @@ $tanggal_input = date("Y/m/d");
               <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id_pertanyaan']; ?>">
                 <td><?= $row['id_pertanyaan']; ?></td>
                 <td><center><?= $row['nilai']; ?></center></td>
-                <td width="70px"><input type="number" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" value="" max="5" required step="0.01"></td>                             
+                <td width="70px"><input type="number" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_deliverables()" value="" max="4" required step="0.01"></td>                             
               </tr>
 
        
@@ -382,7 +382,10 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_weight_individu_act"></span>
                         <input type="hidden" id="weight_individu_act" value="0">
                       </td>
-                      <td></td>
+                      <td>
+                      <span id="v_prog_ind"></span> %
+                        <input type="hidden" id="prog_ind_dec" value="0">
+                      </td>
 
                     </tr>
 
@@ -568,6 +571,12 @@ if(!empty($get_pertanyaan_spv_attitude)){
 } else {
   $tot_attitude = 0;
 }
+
+if(!empty($get_karyawan_self_other)){
+  $tot_individu = count($get_karyawan_self_other);
+} else {
+  $tot_individu = 0;
+}
 ?>
 
 <script>
@@ -671,6 +680,8 @@ if(!empty($get_pertanyaan_spv_attitude)){
     calc_progress();
   }
 
+
+
   function count_know() {
     var tot_know = <?php echo $tot_know;?>;
 
@@ -745,15 +756,30 @@ if(!empty($get_pertanyaan_spv_attitude)){
   }
 
   function count_deliverables(){
-    var Totaldeliv = 0;
-      $('#TbPertanyaan tbody tr').each(function(){
-      if($(this).find('td:nth-child(6) input').val() > 0)
-      {
-        var SubTotal = $(this).find('td:nth-child(6) input').val();
-        Total = parseInt(Total) + parseInt(SubTotal);
-      }
-    });
-    // calculate_weight_prev();
+    var tot_know = <?php echo $tot_know;?>;
+    var tot_skills = <?php echo $tot_skills;?>;
+    var tot_attitude = <?php echo $tot_attitude;?>;
+    var tot_individu = <?php echo $tot_individu; ?>;
+    var sum = 0;
+    for (var i = parseInt(tot_know+tot_skills+tot_attitude) + 1; i <= parseInt(tot_know+tot_skills+tot_attitude) + parseInt(tot_individu); i++)
+    {
+      console.log(i);
+      
+      var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
+
+      sum += parseFloat(answer);
+      console.log(answer);
+
+    }
+
+    var scored = parseFloat(sum / parseInt(tot_individu)).toFixed(2);
+    var weight = parseFloat(scored * (5 / 100)).toFixed(2);
+
+    $("#score_individu_act").val(scored);
+    $("#weight_individu_act").val(weight);
+    $("#v_score_individu_act").html(scored);
+    $("#v_weight_individu_act").html(weight);
+    
     calculate_scored_act();
     calculate_weight_acc();
     calc_progress();

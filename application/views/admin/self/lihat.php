@@ -151,7 +151,8 @@
               
 <br><br>
 
-              <table class="table table-bordered table-striped text-center text-middle" >
+              <!-- <table class="table table-responsive table-striped table-bordered" > -->
+              <table class="table table-bordered table-striped text-center text-middle">
                 <!-- <table width="55%" border="1" class="table table-hover"> -->
             <thead>
                 <tr class="bg-info">
@@ -280,14 +281,13 @@
               ?>
     
      <tr>
-
-     <td>KNOWLEDGE</td>
-     <td>25 %</td>
-      <td><?= number_format($s_know,2); ?></td>
-      <td><?= number_format($w_know,2); ?></td>
-      <td><?= number_format($rata_know,2); ?></td>
-      <td><?= number_format($final_know,2); ?></td>
-      <td><?= number_format($prog_know,2); ?> %</td>
+      <td>KNOWLEDGE</td>
+      <td>25 %</td>
+        <td><?= number_format($s_know,2); ?></td>
+        <td><?= number_format($w_know,2); ?></td>
+        <td><?= number_format($rata_know,2); ?></td>
+        <td><?= number_format($final_know,2); ?></td>
+        <td><?= number_format($prog_know,2); ?> %</td>
      </tr>
      <tr>
      <td>SKILLS</td>
@@ -331,8 +331,46 @@
       </tbody>
       </tfoot>
      </table>
-            </div>
-            
+            <br>
+     <table class="table table-bordered table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th width='40%'>TOTAL SCORE</th>
+                      <th>DEFINITION </th>
+                      <th>Salary Adjusment Range</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td>1 to 1,49</td>
+                      <td>Poor</td>
+                      <td>0</td>
+                    </tr>
+
+                    <tr>
+                      <td>1,5 to 2,25</td>
+                      <td>Adequate </td>
+                      <td>0</td>
+                    </tr>
+
+                    <tr>
+                      <td>2,26 to 3,49</td>
+                      <td>Good</td>
+                      <td>5-10%</td>
+                    </tr>
+
+                    <tr>
+                      <td>3,5 to 4</td>
+                      <td>Great </td>
+                      <td>10-X%</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+                <br><br>
+        </div>            
         <!-- /.col -->
       </div>
       <!-- /.row -->

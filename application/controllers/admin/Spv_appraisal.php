@@ -28,8 +28,12 @@ class Spv_appraisal extends MY_Controller {
 		$kode = $this->uri->segment(4);
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
+		
 		//print $kode;exit;
 		$kode = explode('+', $kode);
+		// var_dump($kode);
+		// return ;
+		
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -40,8 +44,16 @@ class Spv_appraisal extends MY_Controller {
 		$id_jabatan = $kode[8];
 		$kode = $kode[9];
 		//print $kode;exit;
-		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
+		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+		}
+		
+		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
+		// var_dump(($query->result()));
+		// return ;
 		foreach ($query->result() as $row)
 		{
 				$kondisi1=  $row->kondisi1;
@@ -51,13 +63,27 @@ class Spv_appraisal extends MY_Controller {
 		}
 		$data['get_karyawan_spv'] = $this->transaksi_model->get_karyawan_spv($id_karyawan);
 		//$data['get_karyawan_spv_nilai'] = $this->transaksi_model->get_karyawan_spv_nilai($id_karyawan);
+		
 		$data['get_karyawan_spv_know'] = $this->transaksi_model->get_karyawan_spv_know($kondisi1,$kode);
+
 		$data['get_karyawan_spv_skills'] = $this->transaksi_model->get_karyawan_spv_skills($kondisi2,$kode);
 		$data['get_karyawan_spv_att'] = $this->transaksi_model->get_karyawan_spv_att($kondisi3,$kode);
+
+		$kondisi4 ='individual';
+		$data['get_karyawan_spv_ind'] = $this->transaksi_model->get_karyawan_spv_ind($kondisi4,$kode);
+		// var_dump($data);
+		// return;
+
 		$data['hitung_spv_know'] = $this->transaksi_model->hitung_spv_know($kondisi1,$kode);	
 		$data['hitung_spv_skills'] = $this->transaksi_model->hitung_spv_skills($kondisi2,$kode);	
-		$data['hitung_spv_attitude'] = $this->transaksi_model->hitung_spv_attitude($kondisi3,$kode);	
-	
+		$data['hitung_spv_attitude'] = $this->transaksi_model->hitung_spv_attitude($kondisi3,$kode);
+		$data['hitung_spv_individual'] = $this->transaksi_model->hitung_spv_ind($kondisi4,$kode);	
+		$where = array('nik' => $nik);
+		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
+		
+		
+		// var_dump(($data));
+		// return ;
 		
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/spv/lihat', $data);
