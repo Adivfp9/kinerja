@@ -393,6 +393,8 @@ $this->load->library('email');
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
+		var_dump($kode);
+		return;
 		$inisial = $kode[1];
 		$jabatan = $kode[2];
 		$tanggal = $kode[3];

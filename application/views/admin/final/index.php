@@ -56,12 +56,14 @@
                 
                 $inisial = $row['inisial'];
                 
+                
                 $id=$row['id_karyawan'];
                 $id_jabatan=$row['id_jabatan'];
                 $rekan_kerja = $row['rekan_kerja'];
                 $rekan_kerja2 = $row['rekan_kerja2'];
                 $rekan_kerja3 = $row['rekan_kerja3'];
-                $nama_karyawan = $row['nama_karyawan'];
+                $nama_karyawan = $inisial.' - '.$row['nama_karyawan'];
+
                 $nama_jabatan = $row['nama_jabatan'];
                 $tanggal_appraisal = $row['tgl_appraisal'];
                 $atasan = $row['atasan'];
@@ -70,11 +72,16 @@
                 $skye1 = "$tanggal_appraisal$inisial$rekan_kerja";
                 $skye2 = "$tanggal_appraisal$inisial$rekan_kerja2";
                 $skye3 = "$tanggal_appraisal$inisial$rekan_kerja3";
-                $kode ="+$id+$inisial+$rekan_kerja+$rekan_kerja2+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$skye1+$skye2+$skye3+$tanggal_appraisal+$id_jabatan";
+                $kode ="+$id+$inisial+$rekan_kerja+$rekan_kerja2+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email+$id_jabatan+$skye1+$skye2+$skye3+$tanggal_appraisal+$id_jabatan";
                 $kode= base64_encode($kode);
                 
+                $skyes = "$tanggal_appraisal$inisial$atasan";
+                $kode_self ="+$id+$inisial+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$id_jabatan+$skyes+$tanggal_appraisal";
+                $kode_self= base64_encode($kode_self);
+                
+                
                 ?> 
-                 <td><a href="/kinerja/admin/final_appraisal/finalself/<?= $kode; ?>"><i class="nav-icon fa fa-download"> Download File</i></a></td>
+                 <td><a href="/kinerja/admin/final_appraisal/finalself/<?= $kode_self; ?>"><i class="nav-icon fa fa-download"> Download File</i></a></td>
               
              
                 <td><a href="/kinerja/admin/final_appraisal/final360pdf/<?= $kode; ?>"><i class="nav-icon fa fa-download"> Download File</i></a></td>

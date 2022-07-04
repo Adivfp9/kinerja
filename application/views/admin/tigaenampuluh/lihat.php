@@ -70,7 +70,7 @@
                 </tr>
             
                 <tr>
-                <td>Tanggal Feedback : <?= $tanggal; ?></td>
+                <td>Submission Date : <?= $tanggal; ?></td>
                 </tr>
 
                

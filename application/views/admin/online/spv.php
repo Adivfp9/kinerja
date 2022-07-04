@@ -198,7 +198,7 @@ $tanggal_input = date("Y/m/d");
                     <label for="summary" class="col-md-12 control-label">Summary </label>
                     <p style="color:blue;">&nbsp;&nbsp;&nbsp;Summary From Employee : <?php echo $summary;?></p>
                     <div class="col-md-12">
-                      <textarea class="form-control" id="summary" name="summary" rows="3"></textarea>
+                      <textarea class="form-control" id="summary" required name="summary" rows="3"></textarea>
                     </div>
                   </div>
 
@@ -206,7 +206,7 @@ $tanggal_input = date("Y/m/d");
                     <label for="action" class="col-md-12 control-label">Next Action </label>
                     <p style="color:blue;">&nbsp;&nbsp;&nbsp;Next Action From Employee : <?php echo $action;?></p>
                     <div class="col-md-12">
-                      <textarea class="form-control" id="action" name="action" rows="3"></textarea>
+                      <textarea class="form-control" id="action" required name="action" rows="3"></textarea>
                     </div>
                   </div>
 

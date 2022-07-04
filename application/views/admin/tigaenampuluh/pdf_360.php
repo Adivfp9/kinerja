@@ -9,6 +9,7 @@
 		$rekan = $kode[4];
 		$nama_departemen = $kode[5];
 		$kode_form = $kode[6];
+		$tgl_appraisal = substr($kode_form,0,10);
 ?>
 
 <?php
@@ -74,15 +75,15 @@ $html = '
 					 <h1 align="center">'.$inisial.' - 360 Degree Feedback</h1>
 					 <table id=customers>
 					 <tr>
-					   <th id=th1>Initial </th>
+					   <th id=th1>Employee Name </th>
 					    <th>: '.$inisial.'</th>
 					   </tr>
 					 <tr>
-					 <th id=th1>Job position  </th>
+					 <th id=th1>Job Position  </th>
 					  <th>: '.$jabatan.'</th>
 					 </tr>
 				   <tr>
-				   <th id=th1>Organization   </th>
+				   <th id=th1>Departement   </th>
 				    <th>: '.$nama_departemen.'</th>
 					</tr>
 					<tr>
@@ -90,8 +91,12 @@ $html = '
 				  <th>: '.$rekan.'</th>
 					 </tr>
 					 <tr>
-					<th id=th1>Date  </th>
-				   	<th>: '.$tanggal.'</th>
+						<th id=th1>Submission Date  </th>
+						<th>: '.$tanggal.'</th>
+					 </tr>
+					 <tr>
+						<th id=th1>Appraisal Date  </th>
+						<th>: '.$tgl_appraisal.'</th>
 					 </tr>
 					</table>'; ?>
 
@@ -125,7 +130,7 @@ $html .='
   }  ?>
 <?php
 $html .='
-<tr style="background-color: #f2f2f2;"><td colspan=2>Atittude (55%)</td></tr>';
+<tr style="background-color: #f2f2f2;"><td colspan=2>Attitude (55%)</td></tr>';
 	?>
 <?php
 foreach($get_karyawan_360_nilai_att as $rnilai)

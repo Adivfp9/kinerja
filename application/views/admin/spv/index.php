@@ -56,6 +56,7 @@
                 $id_jabatan = $row['id_jabatan'];
                 $atasan = $row['atasan'];
                 $tanggal_appraisal = $row['tgl_appraisal'];
+
                 $nama_departemen = $row['nama_departemen'];
                 $email = $row['email'];
                 $skyes = "$tgl_appraisal$nama_karyawan$atasan";

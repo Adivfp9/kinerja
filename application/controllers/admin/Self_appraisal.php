@@ -11,6 +11,7 @@ class Self_appraisal extends MY_Controller {
 	public function index(){
 		$data['title'] = 'Table karyawan';
 		$data['get_karyawan'] = $this->transaksi_model->get_karyawan_ss_self();
+		
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/self/index', $data);
 		$this->load->view('admin/includes/_footer');
@@ -64,6 +65,14 @@ class Self_appraisal extends MY_Controller {
 		$where = array('nik' => $nik);
 
 		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
+
+		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
+		foreach ($getSpv->result() as $rowSpv)
+		{
+			$nama_spv = $rowSpv->nama_karyawan;
+		}
+		$data['get_spv']= $nama_spv;
+
 		// var_dump($data);
 		// return;
 		$this->load->view('admin/includes/_header');
@@ -353,6 +362,13 @@ class Self_appraisal extends MY_Controller {
 		$where = array('nik' => $nik);
 
 		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
+
+		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
+		foreach ($getSpv->result() as $rowSpv)
+		{
+			$nama_spv = $rowSpv->nama_karyawan;
+		}
+		$data['get_spv']= $nama_spv;
 
 		
 		$this->load->view('admin/self/pdf_self', $data);

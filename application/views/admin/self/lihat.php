@@ -66,14 +66,18 @@
                 <td>Job Position: <?= $row['nama_jabatan']; ?></td>
                 </tr>
                 <tr>
-                <td>Organization : <?= $row['nama_departemen']; ?></td>
+                <td>Departement : <?= $row['nama_departemen']; ?></td>
                 </tr>
                 <tr>
-                <td>Supervisor : <?= $atasan; ?></td>
+                <td>Supervisor : <?= $atasan; ?> - <?= $get_spv; ?></td>
                 </tr>
               
                 <tr>
-                <td>Date : <?= $row['tgl_appraisal']; ?></td>
+                <td>Submission Date : <?= $row['tgl_appraisal']; ?></td>
+                </tr>
+
+                <tr>
+                <td>Appraisal Date : <?= substr($row['kode_form'],0,10); ?></td>
                 </tr>
                 
 

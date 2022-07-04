@@ -90,16 +90,20 @@ $html = '
 					  <th>: '.$jabatan.'</th>
 					 </tr>
 				   <tr>
-				   <th id=th1>Organization   </th>
+				   <th id=th1>Departement  </th>
 				    <th>: '.$nama_departemen.'</th>
 					</tr>
 					<tr>
 					<th id=th1>Supervisor </th>
-				  <th>: '.$atasan.'</th>
+				  <th>: '.$atasan.' - '.$get_spv.'</th>
 					 </tr>
 					 <tr>
-					<th id=th1>Tanggal  </th>
+					<th id=th1>Submission Date  </th>
 				   	<th>: '.$tanggal_appraisal.'</th>
+					 </tr>
+           <tr>
+           <th id=th1>Appraisal Date  </th>
+				   	<th>: '.substr($kode_form,0,10).'</th>
 					 </tr>
 					</table>'; ?>
 
@@ -114,7 +118,7 @@ $html .='
   <tr>
     <th>Indicator</th>
     <th>Grade</th></tr>
-	<tr style="background-color: #f2f2f2;"><td colspan=2>KNOWLEDGE</td></tr>';
+	<tr style="background-color: #f2f2f2;"><td colspan=2><b>KNOWLEDGE</b></td></tr>';
 	?>
 
 
@@ -143,7 +147,7 @@ $html .='
 
 <?php
 $html .='
-<tr style="background-color: #f2f2f2;"><td colspan=2>SKILLS</td></tr>';
+<tr style="background-color: #f2f2f2;"><td colspan=2><b>SKILLS</b></td></tr>';
 	?>
 <?php
 foreach($get_karyawan_self_skills as $rnilai)
@@ -170,7 +174,7 @@ $html .='
 
 <?php
 $html .='
-<tr style="background-color: #f2f2f2;"><td colspan=2>ATTITUDE</td></tr>';
+<tr style="background-color: #f2f2f2;"><td colspan=2><b>ATTITUDE</b></td></tr>';
 	?>
 <?php
 foreach($get_karyawan_self_att as $rnilai)
@@ -188,7 +192,7 @@ $html .='
 
 <?php
 $html .='
-<tr style="background-color: #f2f2f2;"><td colspan=2>INDIVIDUAL DELIVERABLES</td></tr>';
+<tr style="background-color: #f2f2f2;"><td colspan=2><b>INDIVIDUAL DELIVERABLES</b></td></tr>';
 	?>
 <?php
 foreach($get_karyawan_self_other as $dnilai)
@@ -414,7 +418,7 @@ $html .='
      </tr>
 
      <tr>
-      <td>Individual Deliverables</td>
+      <td>INDIVIDUAL DELIVERABLES</td>
       <td>5 %</td>
       <td>'.number_format($s_ind,2).'</td>
       <td>'.number_format($w_ind,2).'</td>
@@ -425,12 +429,12 @@ $html .='
      </tr>
 
      <tr style="font-weight: bold;">
-      <td align="center">Subtotal</td>
-      <td>100 %</td>
-      <td>'.number_format($total_prev_score,2).'</td>
-      <td>'.number_format($total_prev_wight,2).'</td>
-      <td>'.number_format($total_actual_score,2).'</td>
-      <td>'.number_format($total,2).'</td>
+      <td align="center" style="font-weight: bold;">Subtotal</td>
+      <td style="font-weight: bold;">100 %</td>
+      <td style="font-weight: bold;">'.number_format($total_prev_score,2).'</td>
+      <td style="font-weight: bold;">'.number_format($total_prev_wight,2).'</td>
+      <td style="font-weight: bold;">'.number_format($total_actual_score,2).'</td>
+      <td style="font-weight: bold;">'.number_format($total,2).'</td>
      </tr>
 ';?>
 
@@ -441,14 +445,6 @@ $html .='
 $html .='
 </table>';
 	?>
-
-
-
-
-
-
-
-
 
 <?php
 

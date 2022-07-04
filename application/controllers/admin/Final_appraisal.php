@@ -170,9 +170,6 @@ class Final_appraisal extends MY_Controller {
 // return ;
 		$id_karyawan =$kode[1];
 		$inisial = $kode[2];
-		// $kode_form = str_replace("-","/",$kode[11]);
-		// $kode_form2 = str_replace("-","/",$kode[12]);
-		// $kode_form3 = str_replace("-","/",$kode[13]);
 		$kode_form = $kode[11];
 		$kode_form2 = $kode[12];
 		$kode_form3 = $kode[13];
@@ -187,9 +184,6 @@ class Final_appraisal extends MY_Controller {
 		{
 			$nik = $row2->nik;
 		}
-		// var_dump($kode);
-		// return ;
-		//print $kode;exit;
 		
 		$data['get_masukan_360'] = $this->transaksi_model->get_masukan_360($kode_form);
 		$data['get_karyawan_360_nilai_per'] = $this->transaksi_model->get_karyawan_360_nilai_per($kode_form);
@@ -254,6 +248,13 @@ class Final_appraisal extends MY_Controller {
 			$email = $row['email'];
 		}
 
+		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
+		foreach ($getSpv->result() as $rowSpv)
+		{
+			$nama_spv = $rowSpv->nama_karyawan;
+		}
+		$data['get_spv']= $nama_spv;
+
 		$filenameself = './uploads/self/selfForm'.$tanggal_appraisal.$inisial.'.pdf';
 		//print $filenameself;exit;
 		$filename360 = './uploads/360/360Form'.$tanggal_appraisal.$inisial.'.pdf';
@@ -267,7 +268,7 @@ class Final_appraisal extends MY_Controller {
 
 			$message ="
 			<html><body>
-			<p>Dear $atasan,</p>
+			<p>Dear $atasan - $nama_spv,</p>
 			<p>Berikut terlampir Hasil Performance Review Dari $nama_karyawan,</p>
 			<p>Mohon untuk melakukan penilaian kepada karyawan yang bersangkutan dengan mengisi : form supervisi appraisal ada link berikut (<a href='http://182.16.171.166/kinerja/admin/online/spv/$url/'>Isi Supervisi Appraisal form</a>)
 			</p>
@@ -307,10 +308,16 @@ class Final_appraisal extends MY_Controller {
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
+		var_dump($kode);
+		return;
+		
+		
 		$inisial = $kode[2];
 		$kode_form = $kode[11];
 		$kode_form2 = $kode[12];
 		$kode_form3 = $kode[13];
+
+		// rekan 1
 		
 		$data['get_masukan_360'] = $this->transaksi_model->get_masukan_360($kode_form);
 		$data['get_karyawan_360_nilai_per'] = $this->transaksi_model->get_karyawan_360_nilai_per($kode_form);
@@ -339,34 +346,33 @@ class Final_appraisal extends MY_Controller {
 
 	public function finalself(){
 		$this->load->helper('pdf_helper');
+
 		$kode = $this->uri->segment(4);
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
-		//print $kode;exit;
+
 		
 		$kode = explode('+', $kode);
-		// var_dump($kode);
-		// return ;
+		
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
 		$atasan = $kode[4];
 		$nama_departemen = $kode[5];
 		$email2 = $kode[6];
-		$nama_jabatan = $kode[7];
-		$id_jabatan = $kode[10];
-		$kode = $kode[8];
+		$jabatan = $kode[7];
+		$id_jabatan = $kode[8];
+		$kode = $kode[9];
+		$tanggal_appraisal = $kode[10];
+
+		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+		}
 		
-		// $inisial = $kode[2];
-		// $kode_form = $kode[11];
-		// $kode_form2 = $kode[12];
-		// $kode_form3 = $kode[13];
-		// $id_jabatan = $kode[15];
-		// $tanggal_appraisal = $kode[14];
-		// $nama_karyawan = $kode[6];
-		// $atasan = $kode[7];
-		// $kode = "$tanggal_appraisal$nama_karyawan$atasan";
-		$query = $this->db->query("select * from master_form where id_jabatan=$id_jabatan");
+		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
+
 		foreach ($query->result() as $row)
 		{
 				$kondisi1=  $row->kondisi1;
@@ -374,20 +380,35 @@ class Final_appraisal extends MY_Controller {
 				$kondisi3= $row->kondisi3;
 				
 		}
+
 		$kondisi4="individual";
+		$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
 		$data['get_karyawan_self_know'] = $this->transaksi_model->get_karyawan_self_know($kondisi1,$kode);
-
 		$data['get_karyawan_self_skills'] = $this->transaksi_model->get_karyawan_self_skills($kondisi2,$kode);
-		
 		$data['get_karyawan_self_att'] = $this->transaksi_model->get_karyawan_self_att($kondisi3,$kode);
-
 		$data['get_karyawan_self_other'] = $this->transaksi_model->get_karyawan_self_other($kondisi4,$kode);
 
+		$data['hitung_self_know'] = $this->transaksi_model->hitung_self_know($kondisi1,$kode);
+		$data['hitung_self_skills'] = $this->transaksi_model->hitung_self_skills($kondisi2,$kode);	
+		$data['hitung_self_attitude'] = $this->transaksi_model->hitung_self_attitude($kondisi3,$kode);	
+
+		
+		
 		$data['hitung_self_know'] = $this->transaksi_model->hitung_self_know($kondisi1,$kode);	
 		$data['hitung_self_skills'] = $this->transaksi_model->hitung_self_skills($kondisi2,$kode);	
 		$data['hitung_self_attitude'] = $this->transaksi_model->hitung_self_attitude($kondisi3,$kode);
-		$data['hitung_self_other'] = $this->transaksi_model->hitung_self_other($kondisi4,$kode);	
+		$data['hitung_self_other'] = $this->transaksi_model->hitung_self_other($kondisi4,$kode);
 
+		$where = array('nik' => $nik);
+
+		$data['get_nilai'] = $this->master_model->edit_nilai($where,'nilai')->result();
+
+		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
+		foreach ($getSpv->result() as $rowSpv)
+		{
+			$nama_spv = $rowSpv->nama_karyawan;
+		}
+		$data['get_spv']= $nama_spv;
 
 		$this->load->view('admin/final/final_self', $data);
 

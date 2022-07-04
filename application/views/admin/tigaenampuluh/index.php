@@ -60,6 +60,7 @@
                 $team = $row['team'];
                 $kode_form = $row['kode_form'];
                 $kode ="+$inisial+$posisi+$tgl_appraisal+$rekan+$team+$kode_form";
+
                 $kode= base64_encode($kode);
                 ?> 
                 <td>

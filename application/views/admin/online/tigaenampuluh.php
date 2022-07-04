@@ -3,8 +3,6 @@ $kode = $this->uri->segment(4);
 $url = $this->uri->segment(4);
 $kode = base64_decode($kode);
 $kode = explode('+', $kode);
-// var_dump($kode);
-// return ;
 $id_karyawan = $kode[1];
 $rekan_kerja = $kode[2];
 // $tgl_appraisal = $kode[11];
@@ -65,7 +63,7 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
-                  <label for="posisi" class="col-md-12 control-label">Position</label>
+                  <label for="posisi" class="col-md-12 control-label">Job Position</label>
                   <div class="col-md-12">
                     <input type="hidden" readonly name="id_karyawan_penilai" class="form-control" id="id_karyawan_penilai" placeholder="" value="<?= $rowx['id']; ?>xx">
                     <input type="hidden" readonly name="kode" class="form-control" id="kode" placeholder="" value="<?= $kode; ?>">
@@ -82,10 +80,9 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
-                  <label for="tanggal" class="col-md-12 control-label">Date</label>
+                  <label for="tanggal" class="col-md-12 control-label">Submission Date</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
-                    <!-- <input type="hidden" name="tgl_appraisal" value="<?= $tgl_appraisal; ?>"> -->
                   </div>
                 </div>
 

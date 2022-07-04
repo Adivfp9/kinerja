@@ -5,7 +5,6 @@
 
 		//print $kode;exit;
 		$kode = explode('+', $kode);
-
 		$id_karyawan = $kode[1];
 		$inisial =  $kode[2];
 		$rekan1 =  $kode[3];
@@ -117,7 +116,7 @@ $html .='
 <br><br>
 <table id=pertanyaan>
   <tr>
-    <th>Question</th>
+    <th>Indicator</th>
     <th>Grade</th></tr>
 	<tr style="background-color: #f2f2f2;"><td colspan=2>Performance (45%)</td></tr>';
 	?>
@@ -138,7 +137,7 @@ $html .='
   }  ?>
 <?php
 $html .='
-<tr style="background-color: #f2f2f2;"><td colspan=2>Atittude (55%)</td></tr>';
+<tr style="background-color: #f2f2f2;"><td colspan=2>Attitude (55%)</td></tr>';
 	?>
 <?php
 foreach($get_karyawan_360_nilai_att as $rnilai)
