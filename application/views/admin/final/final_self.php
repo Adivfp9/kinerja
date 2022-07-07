@@ -4,7 +4,8 @@ $url = $this->uri->segment(4);
 $kode = base64_decode($kode);
 
 $kode = explode('+', $kode);
-
+// var_dump($kode);
+// return;
 $id_karyawan = $kode[1];
 $rekan_kerja = $kode[2];
 $nama_karyawan = $kode[3];

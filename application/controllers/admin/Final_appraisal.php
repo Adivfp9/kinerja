@@ -13,6 +13,8 @@ class Final_appraisal extends MY_Controller {
 	public function index(){
 		$data['title'] = 'Table karyawan';
 		$data['get_karyawan'] = $this->master_model->get_final_spv();
+		// var_dump($data);
+		// return;
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/final/index', $data);
 		$this->load->view('admin/includes/_footer');
@@ -247,6 +249,8 @@ class Final_appraisal extends MY_Controller {
 		foreach($get_email_atasan_int as $row){
 			$email = $row['email'];
 		}
+		// var_dump($email);
+		// return ;
 
 		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
 		foreach ($getSpv->result() as $rowSpv)
@@ -353,6 +357,9 @@ class Final_appraisal extends MY_Controller {
 
 		
 		$kode = explode('+', $kode);
+		// var_dump($kode);
+		// return;
+
 		
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];

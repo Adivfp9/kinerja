@@ -77,6 +77,8 @@
                 
                 $skyes = "$tanggal_appraisal$inisial$atasan";
                 $kode_self ="+$id+$inisial+$nama_karyawan+$atasan+$nama_departemen+$email+$nama_jabatan+$id_jabatan+$skyes+$tanggal_appraisal";
+                // var_dump($kode_self);
+                // return ;
                 $kode_self= base64_encode($kode_self);
                 
                 

@@ -394,7 +394,10 @@ $tanggal_input = date("Y-m-d");
                       <span id="v_prog_ind"></span> %
                         <input type="hidden" id="prog_ind_dec" value="0">
                       </td>
-                      <td style="font-weight: bold;"> %</td>
+                      <td style="font-weight: bold;">
+                        <span id="v_inTotal"></span> %
+                        <input type="hidden" id="inTotal_dec" value="0">
+                      </td>
 
 
                     </tr>
@@ -417,8 +420,6 @@ $tanggal_input = date("Y-m-d");
                         <span id="v_tot_weight_acc"></span>
                         <input type="hidden" id="tot_weight_acc_dec" value="">
                       </th>
-                      <td></td>
-
                     </tr>
                   </tbody>
                 </table>
@@ -718,7 +719,7 @@ if(!empty($get_karyawan_self_other)){
     calculate_weight_acc();
     calculate_scored_act();
     calc_progress();
-
+    calc_intotal();
   }
 
   function count_skills() {
@@ -726,7 +727,9 @@ if(!empty($get_karyawan_self_other)){
     var tot_skills = <?php echo $tot_skills;?>;
 
     var sum = 0;
-    for (var i = parseInt(tot_know) + 1; i <= parseInt(tot_know) + parseInt(tot_know); i++) {
+    for (var i = parseInt(tot_know) + 1; i <= parseInt(tot_know) + parseInt(tot_skills); i++) {
+      // console.log(i);
+
       var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
       sum += parseFloat(answer);
     }
@@ -743,21 +746,22 @@ if(!empty($get_karyawan_self_other)){
     calculate_weight_acc();
     calculate_scored_act();
     calc_progress();
-
+    calc_intotal();
   }
 
   function count_attitude() {
+    var tot_know = <?php echo $tot_know;?>;
     var tot_skills = <?php echo $tot_skills;?>;
     var tot_attitude = <?php echo $tot_attitude;?>;
 
     var sum = 0;
-    for (var i = parseInt(tot_skills) + 1; i <= parseInt(tot_skills) + parseInt(tot_skills); i++) {
+    for (var i = parseInt(tot_know)+parseInt(tot_skills) + 1; i <= parseInt(tot_know)+parseInt(tot_skills) + parseInt(tot_attitude); i++) {
       var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
       sum += parseFloat(answer);
     }
 
     var scored = parseFloat(sum / parseInt(tot_attitude)).toFixed(2);
-    var weight = parseFloat(scored * (55 / 100)).toFixed(2);
+    var weight = parseFloat(scored * (45 / 100)).toFixed(2);
 
     //console.log(sum);
 
@@ -769,6 +773,7 @@ if(!empty($get_karyawan_self_other)){
     calculate_scored_act();
     calculate_weight_acc();
     calc_progress();
+    calc_intotal();
   }
 
   function count_deliverables(){
@@ -779,12 +784,10 @@ if(!empty($get_karyawan_self_other)){
     var sum = 0;
     for (var i = parseInt(tot_know+tot_skills+tot_attitude) + 1; i <= parseInt(tot_know+tot_skills+tot_attitude) + parseInt(tot_individu); i++)
     {
-      console.log(i);
       
       var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
 
       sum += parseFloat(answer);
-      console.log(answer);
 
     }
 
@@ -799,6 +802,8 @@ if(!empty($get_karyawan_self_other)){
     calculate_scored_act();
     calculate_weight_acc();
     calc_progress();
+    calc_intotal();
+
   }
 
 
@@ -972,6 +977,30 @@ if(!empty($get_karyawan_self_other)){
       var prog_ind_dec =prog_individual.toFixed(2);
       $("#v_prog_ind").html(prog_ind_dec);
     }
+  }
+
+  function calc_intotal(){
+    var weight_know_acc2 = $("#weight_know_act").val();
+    var weight_skill_acc2 = $("#weight_skills_act").val();
+    var weight_attitude_acc2 = $("#weight_attitude_act").val();
+    var weight_indi_acc2 = $("#weight_individu_act").val();
+
+    var weight_know_prev2 = $("#w_know_prev").val();
+    var weight_skill_prev2 = $("#w_skill_prev").val();
+    var weight_indi_prev2 = $("#w_indi_prev").val();
+    var weight_attitude_prev2 = $("#w_attitude_prev").val();
+
+
+    var total_weight_act = parseFloat(weight_know_acc2)+parseFloat(weight_skill_acc2)+parseFloat(weight_attitude_acc2)+parseFloat(weight_indi_acc2);
+
+    var total_weight_prev2  = parseFloat(weight_know_prev2)+parseFloat(weight_skill_prev2)+parseFloat(weight_attitude_prev2)+parseFloat(weight_indi_prev2);
+
+    var inTotal = ((parseFloat(total_weight_act)-parseFloat(total_weight_prev2))/parseFloat(total_weight_prev2))*100;
+      
+      var inTotal_dec =inTotal.toFixed(2);
+      $("#v_inTotal").html(inTotal_dec);
+
+
   }
 
   function hitungrata_att() {

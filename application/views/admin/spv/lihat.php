@@ -8,8 +8,10 @@
 		$nama_karyawan = $kode[3];
 		$atasan = $kode[4];
 		$nama_departemen = $kode[5];
-		$email2 = $kode[6];?>
-
+		$email2 = $kode[6];
+    $tgl = $kode[10];
+    $tgl_appraisal = substr($kode[9],0,10);
+    ?>
 <link rel="stylesheet" href="<?= base_url()?>assets/plugins/datatables/dataTables.bootstrap4.css">
 
 
@@ -60,7 +62,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                <td>Employee : <?= $row['nama_karyawan']; ?></td>
+                <td>Employee Name: <?= $rekan_kerja; ?> - <?= $row['nama_karyawan']; ?></td>
                 </tr>
                 <tr>
                 <td>Job Position: <?= $row['nama_jabatan']; ?></td>
@@ -69,11 +71,15 @@
                 <td>Organization : <?= $row['nama_departemen']; ?></td>
                 </tr>
                 <tr>
-                <td>Supervisor : <?= $atasan; ?></td>
+                <td>Supervisor : <?= $atasan; ?> - <?= $get_spv; ?></td>
                 </tr>
               
                 <tr>
-                <td>Date : <?= $row['tgl_appraisal']; ?></td>
+                <td>Appraisal Date : <?= $tgl_appraisal; ?></td>
+                </tr>
+
+                <tr>
+                <td>Submission Date : <?= $tgl; ?></td>
                 </tr>
                 
 
@@ -85,11 +91,11 @@
 
             
                     
-                  </div>
-              <div class="card-header">
+                  <!-- </div> -->
+              <!-- <div class="card-header">
               <h5 class="card-title">Self Performance Review
             </h5>
-            </div>
+            </div> -->
 
 
             <div class="card-body">
@@ -125,7 +131,7 @@
             </tr>
              <?php } ?> 
             
-             <tr> <th colspan="2">Individual Deliverables</th></tr>
+             <tr> <th colspan="2">INDIVIDUAL DELIVERABLES</th></tr>
              <!-- <tr>
               <td></td>
               <td></td>
@@ -306,7 +312,7 @@
      </tr>
 
      <tr>
-      <td>Individual Deliverables</td>
+      <td>INDIVIDUAL DELIVERABLES</td>
       <td>5 %</td>
       <td><?= number_format($s_ind,2); ?></td>
       <td><?= number_format($w_ind,2); ?></td>
@@ -317,7 +323,7 @@
      </tr>
 
      <tr style="font-weight: bold;">
-      <td align="center">Subtotal</td>
+      <td align="center">S U B T O T A L</td>
       <td>100 %</td>
       <td><?= number_format($total_prev_score,2); ?></td>
       <td><?= number_format($total_prev_wight,2); ?></td>

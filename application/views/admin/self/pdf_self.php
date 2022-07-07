@@ -430,7 +430,7 @@ $html .='
      </tr>
 
      <tr style="font-weight: bold;">
-      <td align="center" style="font-weight: bold;">Subtotal</td>
+      <td align="center" style="font-weight: bold;">SUBTOTAL</td>
       <td style="font-weight: bold;">100 %</td>
       <td style="font-weight: bold;">'.number_format($total_prev_score,2).'</td>
       <td style="font-weight: bold;">'.number_format($total_prev_wight,2).'</td>

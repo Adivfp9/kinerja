@@ -186,6 +186,7 @@ class Online extends MY_Controller {
 	}
 
 	public function proses(){
+		$id_karyawan= $this->input->post('id_karyawan');
 		$pertanyaan = $this->input->post('pertanyaan');
 		$jumlah_berkas = count($pertanyaan);
 		$inisial = $this->input->post('nama_karyawan');
@@ -209,6 +210,7 @@ class Online extends MY_Controller {
 		{
 			 $a=$i+1;
 		     $data[]=array('inisial' => $inisial,
+			 				'id_karyawan' => $id_karyawan,
 							'posisi' => $posisi,
 							'team' => $team,
 							'tgl_appraisal' => $tanggal,
