@@ -9,6 +9,7 @@
 		$rekan = $kode[4];
 		$nama_departemen = $kode[5];
 		$kode_form = $kode[6];
+    $tgl_appraisal = substr($kode_form,0,10);
     ?>
 
 <link rel="stylesheet" href="<?= base_url()?>assets/plugins/datatables/dataTables.bootstrap4.css">
@@ -63,7 +64,7 @@
                 <td>Job position: <?= $jabatan; ?></td>
                 </tr>
                 <tr>
-                <td>Organization : <?= $nama_departemen; ?></td>
+                <td>Department : <?= $nama_departemen; ?></td>
                 </tr>
                 <tr>
                 <td>Colleague : <?= $rekan; ?></td>
@@ -71,6 +72,9 @@
             
                 <tr>
                 <td>Submission Date : <?= $tanggal; ?></td>
+                </tr>
+                <tr>
+                <td>Appraisal Date : <?= $tgl_appraisal; ?></td>
                 </tr>
 
                

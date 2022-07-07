@@ -72,7 +72,8 @@ $html = '
 
 				<?php
                      $html .='   
-					 <h1 align="center">'.$inisial.' - 360 Degree Feedback</h1>
+					 <h1 align="center">'.$inisial.'</h1>
+					 <h2 align="center">360 Degree Feedback</h2>
 					 <table id=customers>
 					 <tr>
 					   <th id=th1>Employee Name </th>

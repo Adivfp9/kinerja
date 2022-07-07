@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                <td>Employee : <?= $row['nama_karyawan']; ?></td>
+                <td>Employee Name : <?= $rekan_kerja; ?> - <?= $row['nama_karyawan']; ?></td>
                 </tr>
                 <tr>
                 <td>Job Position: <?= $row['nama_jabatan']; ?></td>
@@ -69,7 +69,7 @@
                 <td>Departement : <?= $row['nama_departemen']; ?></td>
                 </tr>
                 <tr>
-                <td>Supervisor : <?= $atasan; ?> - <?= $get_spv; ?></td>
+                <td>Supervisor : <?= substr($atasan,0,3); ?> - <?= $get_spv; ?></td>
                 </tr>
               
                 <tr>
@@ -325,7 +325,7 @@
      </tr>
 
      <tr style="font-weight: bold;">
-      <td align="center">Subtotal</td>
+      <td align="center">S U B T O T A L</td>
       <td>100 %</td>
       <td><?= number_format($total_prev_score,2); ?></td>
       <td><?= number_format($total_prev_wight,2); ?></td>

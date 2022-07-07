@@ -308,8 +308,8 @@ class Final_appraisal extends MY_Controller {
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
-		var_dump($kode);
-		return;
+		// var_dump($kode);
+		// return;
 		
 		
 		$inisial = $kode[2];

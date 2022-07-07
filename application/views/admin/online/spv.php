@@ -4,10 +4,11 @@ $url = $this->uri->segment(4);
 $kode = base64_decode($kode);
 //print $kode;exit;
 $kode = explode('+', $kode);
-
+// var_dump($kode);
+// return;
 //print $kode[6];exit;
 $nama_karyawan = $kode[6];
-$jabatan = $kode[10];
+$jabatan = $kode[15];
 $nama_departemen = $kode[8];
 $atasan = $kode[7];
 
@@ -19,10 +20,10 @@ $email2 = $kode[6];
 $tanggal_appraisal = $kode[14];
 $nama_karyawan = $kode[6];
 $atasan = $kode[7];
-$kode = "$tanggal_appraisal$nama_karyawan$atasan";
+$kode = "$tanggal_appraisal$rekan_kerja$atasan";
 
 $kode_form = $kode;
-$tanggal_input = date("Y/m/d");
+$tanggal_input = date("Y-m-d");
 ?>
 
 
@@ -68,21 +69,28 @@ $tanggal_input = date("Y/m/d");
                   </div>
 
                   <div class="form-group">
-                    <label for="posisi" class="col-md-12 control-label">Position</label>
+                    <label for="posisi" class="col-md-12 control-label">Job Position</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="posisi" class="form-control" id="posisi" placeholder="" value="<?= $jabatan; ?>">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="brand" class="col-md-12 control-label">Brand / Team</label>
+                    <label for="brand" class="col-md-12 control-label">Departement</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="brand" class="form-control" id="brand" placeholder="" value="<?= $nama_departemen; ?>">
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label for="tanggal" class="col-md-12 control-label">Date</label>
+                    <label for="tanggal" class="col-md-12 control-label">Appraisal Date</label>
+                    <div class="col-md-12">
+                    <input type="text" readonly name="tgl_appraisal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_appraisal; ?>">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="tanggal" class="col-md-12 control-label">Submission Date</label>
                     <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
                     </div>
@@ -91,7 +99,7 @@ $tanggal_input = date("Y/m/d");
                   <div class="form-group">
                     <label for="rekan" class="col-md-12 control-label">Supervisor</label>
                     <div class="col-md-12">
-                    <input type="text" readonly name="atasan" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?>">
+                    <input type="text" readonly name="atasan" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?> - <?= $get_spv; ?>">
                     </div>
                   </div>
              <input type="hidden" name="itung" class="form-control" id="itung" placeholder="">
@@ -361,7 +369,7 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_prog_attitude"></span> %
                         <input type="hidden" id="prog_attitude_dec" value="0">
                       </td>
-
+                      <td style="font-weight: bold;">In Total</td>
                     </tr>
 
                     <tr>
@@ -386,6 +394,8 @@ $tanggal_input = date("Y/m/d");
                       <span id="v_prog_ind"></span> %
                         <input type="hidden" id="prog_ind_dec" value="0">
                       </td>
+                      <td style="font-weight: bold;"> %</td>
+
 
                     </tr>
 
@@ -399,8 +409,14 @@ $tanggal_input = date("Y/m/d");
                       <th>
                       <?php echo $w_total;?>
                       </th>
-                      <td></td>
-                      <td></td>
+                      <th>
+                        <span id="v_tot_scored_act"></span>
+                        <input type="hidden" id="tot_scored_act_dec" value="0">
+                      </th>
+                      <th>
+                        <span id="v_tot_weight_acc"></span>
+                        <input type="hidden" id="tot_weight_acc_dec" value="">
+                      </th>
                       <td></td>
 
                     </tr>

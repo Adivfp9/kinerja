@@ -18,7 +18,8 @@ class Online extends MY_Controller {
 		$kode = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
-		
+		// var_dump($kode);
+		// return ;
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -56,6 +57,8 @@ class Online extends MY_Controller {
 		$kode = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
+		// var_dump($kode);
+		// return ;
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
@@ -66,16 +69,20 @@ class Online extends MY_Controller {
 		$kode_form = $kode[8];
 		$id_jabatan = $kode[9];
 
-		$data['get_spv_self'] = $this->master_model->get_karyawan_byinisial($atasan);
-	// var_dump($data['get_spv_self']);
+		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
+		foreach ($getSpv->result() as $rowSpv)
+		{
+			$nama_spv = $rowSpv->nama_karyawan;
+		}
+		$data['get_spv']= $nama_spv;
+
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
 		foreach ($query->result() as $row)
 		{
 			$kondisi1=  $row->kondisi1;
 			$kondisi2= $row->kondisi2;
-			$kondisi3= $row->kondisi3;
-				
+			$kondisi3= $row->kondisi3;	
 		}
 
 		$query = $this->db->query("select * from karyawan where id='$id_karyawan'");
@@ -93,14 +100,12 @@ class Online extends MY_Controller {
 		$data['get_pertanyaan_self_know'] = $this->transaksi_model->get_pertanyaan_self_know($kondisi1);
 		$data['get_pertanyaan_self_skills'] = $this->transaksi_model->get_pertanyaan_self_skills($kondisi2);
 		$data['get_pertanyaan_self_attitude'] = $this->transaksi_model->get_pertanyaan_self_attitude($kondisi3);
-	
+
 		$this->load->view('admin/includes/_header', $data);
 		$this->load->view('admin/online/self', $data);
 		$this->load->view('admin/includes/_footer');
 	}
 	public function spv(){
-
-		
 		$kondisi ="self ";
 		$where = array('kategori_pertanyaan' => $kondisi);
 		$data['get_pertanyaan_360'] = $this->master_model->get_pertanyaan_360($where,'pertanyaan')->result_array();
@@ -123,7 +128,7 @@ class Online extends MY_Controller {
 		$email = $kode[6];
 		$jabatan = $kode[7];
 		$kode_form = $kode[8];
-		$id_jabatan = $kode[15];
+		$id_jabatan = $kode[10];
 		$inisialkry = $kode[2];
 		$kode = "$tanggal_appraisal$inisialkry$atasan";
 		//print $kode;exit;
@@ -164,8 +169,14 @@ class Online extends MY_Controller {
 		foreach ($query->result() as $row23)
 		{
 			$nik=  $row23->nik;
-			
 		}
+
+		$getSpv = $this->db->query("select nama_karyawan from karyawan where inisial='$atasan'");
+		foreach ($getSpv->result() as $rowSpv)
+		{
+			$nama_spv = $rowSpv->nama_karyawan;
+		}
+		$data['get_spv']= $nama_spv;
 
 	
 		$data['get_score'] = $this->transaksi_model->get_score($nik);
@@ -173,6 +184,7 @@ class Online extends MY_Controller {
 		$this->load->view('admin/online/spv', $data);
 		$this->load->view('admin/includes/_footer');
 	}
+
 	public function proses(){
 		$pertanyaan = $this->input->post('pertanyaan');
 		$jumlah_berkas = count($pertanyaan);
@@ -239,7 +251,7 @@ class Online extends MY_Controller {
 			$this->master_model->Updatekaryawan($where,$data,'karyawan');
 
 			echo '<script>alert("Thank you for your submission.")</script>';
-			echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
+			// echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
 			echo '<script>window.close();</script>';
 			// return redirect('admin/auth/login');
 		
@@ -342,8 +354,9 @@ class Online extends MY_Controller {
 			$this->master_model->Updatekaryawan($where,$data,'karyawan');
 
 			echo '<script>alert("Thank you for your submission")</script>';
-			echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
-			exit;
+			echo '<script>window.close();</script>';
+			// echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
+			// exit;
             // return redirect('admin/auth/login');
 		
 	}
@@ -406,9 +419,10 @@ class Online extends MY_Controller {
 			}
 		
 			echo '<script>alert("Data Appraisal Berhasil Di Isi")</script>';
-			echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
-			exit;
-			return redirect('admin/auth/login');
+			echo '<script>window.close();</script>';
+			// echo '<script>window.location.href = "/kinerja/admin/auth/login";</script>';
+			// exit;
+			// return redirect('admin/auth/login');
 		
 		}
 	public function proses_spv3(){

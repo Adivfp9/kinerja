@@ -132,7 +132,7 @@ class Tigaenampuluh extends MY_Controller {
 			
 		try{
 			$this->email->send();
-			var_dump("Done");
+			// var_dump("Done");
 			echo 'Message has been sent.';
 		}catch(Exception $e){
 			echo $e->getMessage();
@@ -393,8 +393,7 @@ $this->load->library('email');
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
-		var_dump($kode);
-		return;
+
 		$inisial = $kode[1];
 		$jabatan = $kode[2];
 		$tanggal = $kode[3];

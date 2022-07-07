@@ -79,11 +79,12 @@ $html = '
 
 				<?php
                      $html .='   
-					 <h1 align="center">'.$nama_karyawan.' - Self Performance Review</h1>
+					 <h1 align="center">'.$rekan_kerja.' - '.$nama_karyawan.'</h1>
+           <h2 align="center">Self Performance Review</h2>
 					 <table id=customers>
 					 <tr>
 					   <th id=th1>Employee</th>
-					    <th>: '.$nama_karyawan.'</th>
+					    <th>: '.$rekan_kerja.' - '.$nama_karyawan.'</th>
 					   </tr>
 					 <tr>
 					 <th id=th1>Job Position</th>

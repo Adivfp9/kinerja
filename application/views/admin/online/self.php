@@ -11,7 +11,9 @@ $nama_departemen = $kode[5];
 $email2 = $kode[6];
 $jabatan = $kode[7];
 $kode_form = $kode[8];
-$tanggal_input = date("Y/m/d");
+$tanggal_input = date("Y-m-d");
+$tgl_appraisal = substr($kode_form,0,10);
+
 ?>
 
 <!-- daterange picker -->
@@ -42,9 +44,9 @@ $tanggal_input = date("Y/m/d");
                 <?php $this->load->view('admin/includes/_messages.php') ?>
                 <?php echo form_open(base_url('admin/online/proses_self'), 'class="form-horizontal"');  ?>
                 <div class="form-group">
-                  <label for="nama" class="col-md-12 control-label">Nama Karyawan</label>
+                  <label for="nama" class="col-md-12 control-label">Employee Name</label>
                   <div class="col-md-12">
-                    <input type="text" readonly name="nama_karyawan" class="form-control" id="nama_karyawan" placeholder="" value="<?= $nama_karyawan; ?>">
+                    <input type="text" readonly name="nama_karyawan" class="form-control" id="nama_karyawan" placeholder="" value="<?= $rekan_kerja; ?> - <?= $nama_karyawan; ?>">
                     <input type="hidden" readonly name="id_karyawan" class="form-control" id="id_karyawan" placeholder="" value="<?= $id_karyawan; ?>">
                     <input type="hidden" readonly name="kode_form" class="form-control" id="kode_form" placeholder="" value="<?= $kode_form; ?>">
 
@@ -55,31 +57,38 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
-                  <label for="posisi" class="col-md-12 control-label">Posisi</label>
+                  <label for="posisi" class="col-md-12 control-label">Job Position</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="posisi" class="form-control" id="posisi" placeholder="" value="<?= $jabatan; ?>">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="brand" class="col-md-12 control-label">Brand / Team</label>
+                  <label for="brand" class="col-md-12 control-label">Departement</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="brand" class="form-control" id="brand" placeholder="" value="<?= $nama_departemen; ?>">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="tanggal" class="col-md-12 control-label">Date</label>
+                  <label for="tanggal" class="col-md-12 control-label">Appraisal Date</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
                   </div>
                 </div>
-                
+
+                <div class="form-group">
+                  <label for="tanggal" class="col-md-12 control-label">Submission Date</label>
+                  <div class="col-md-12">
+                    <input type="text" readonly name="tgl_appraisal" class="form-control" id="tanggal" placeholder="" value="<?= $tgl_appraisal; ?>">
+                  </div>
+                </div>
               
                 <div class="form-group">
                   <label for="rekan" class="col-md-12 control-label">Supervisor</label>
                   <div class="col-md-12">
-                    <input type="text" readonly name="atasan" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?>">
+                    <input type="text" readonly name="atasan2" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?> - <?= $get_spv; ?>">
+                    <input type="hidden" readonly name="atasan" class="form-control" id="atasan" placeholder="" value="<?= $atasan; ?>">
                   </div>
                 </div>
                 <input type="hidden" name="itung" class="form-control" id="itung" placeholder="">
@@ -171,7 +180,7 @@ $tanggal_input = date("Y/m/d");
                             <thead>
                               <tr>
                                 <th width="50"><button id='BarisBaru' class='btn btn-primary pull-left'><i class='fa fa-plus fa-fw'></i> </th>
-                                <th colspan="2"><b> Individual Deliverables<b>
+                                <th colspan="2"><b> INDIVIDUAL DELIVERABLES<b>
                                 </th>
                               </tr>
                             </thead>
@@ -189,7 +198,7 @@ $tanggal_input = date("Y/m/d");
                   <div class="form-group">
                     <label for="action" class="col-md-12 control-label">Next Action </label>
                     <div class="col-md-12">
-                      <textarea class="form-control" required id="action" name="action" rows="5"></textarea>
+                      <textarea class="form-control" onkeyup="calc_intotal()"required id="action" name="action" rows="5"></textarea>
                     </div>
                   </div>
                         <!--end Individual Deliverables -->
@@ -257,9 +266,7 @@ $tanggal_input = date("Y/m/d");
 
                 }
                 else {$s_knowledge = 0; $w_knowledge = 0; $s_skills = 0; $w_skills = 0;$s_attitude = 0; $w_attitude = 0; $s_individual = 0; $w_individual = 0; $s_total = 0; $w_total = 0;}
-             
-              ?>
-
+ ?>
                      
                     <tr>
                       <th>1. K N O W L E D G E</th>
@@ -267,12 +274,12 @@ $tanggal_input = date("Y/m/d");
                      
                       <th>25%</th>
                       <td width="8%">
-                      <?php echo $s_knowledge;?>
-                     </td>
+                        <?php echo $s_knowledge;?>
+                      </td>
                       <td width="8%">
-                      <?php echo $w_knowledge;?>
-                      <input type="hidden" id="w_know_prev" value="<?= $w_knowledge; ?> ">
-                     </td>
+                        <?php echo $w_knowledge;?>
+                        <input type="hidden" id="w_know_prev" value="<?= $w_knowledge; ?> ">
+                      </td>
                       <td>
                         <span id="v_score_know_act"></span>
                         <input type="hidden" id="score_know_act" value="0">
@@ -314,7 +321,7 @@ $tanggal_input = date("Y/m/d");
 
                     <tr>
                       <th>3. A T T I T U D E</th>
-                      <th>55%</th>
+                      <th>45%</th>
                       <td width="8%">
                       <?php echo $s_attitude;?>
                       </td>
@@ -334,7 +341,7 @@ $tanggal_input = date("Y/m/d");
                         <span id="v_prog_attitude"></span> %
                         <input type="hidden" id="prog_attitude_dec" value="0">
                       </td>
-
+                      <td style="font-weight: bold;">In Total</td>
                     </tr>
 
                     <tr>
@@ -356,8 +363,12 @@ $tanggal_input = date("Y/m/d");
                         <input type="hidden" id="weight_individu_act" value="0">
                       </td>
                       <td>
-                      <span id="v_prog_ind"></span> %
+                        <span id="v_prog_ind"></span> %
                         <input type="hidden" id="prog_ind_dec" value="0">
+                      </td>
+                      <td>
+                        <span id="v_inTotal"></span> %
+                        <input type="hidden" id="inTotal_dec" value="0">
                       </td>
 
                     </tr>
@@ -367,11 +378,11 @@ $tanggal_input = date("Y/m/d");
                       <th>100%</th>
                       <th>
                         <span id="v_tot_scored_prev"></span>
-                        <?php echo $s_total;?>
+                        <?php echo number_format($s_total,2);?>
                       </th>
                       <th>
                         <span id="v_tot_weight_prev"></span>
-                        <?php echo $w_total;?>
+                        <?php echo number_format($w_total,2);?>
                       </th>
                       <th>
                         <span id="v_tot_scored_act"></span>
@@ -379,9 +390,8 @@ $tanggal_input = date("Y/m/d");
                       </th>
                       <th>
                         <span id="v_tot_weight_acc"></span>
-                        <input type="hidden" id="tot_weight_acc_dec" value="0">
+                        <input type="hidden" id="tot_weight_acc_dec" value="">
                       </th>
-                      <td></td>
                     </tr>
                   </tbody>
                 </table>
@@ -547,6 +557,9 @@ if(!empty($get_pertanyaan_self_attitude)){
     $(this).parent().parent().remove();
 
     HitungDeliverables();
+    calculate_scored_act();
+    calc_progress();
+    calc_intotal();
   });
 
   function HitungDeliverables()
@@ -571,7 +584,9 @@ if(!empty($get_pertanyaan_self_attitude)){
     $("#v_weight_individu_act").html(weight);
 
     calculate_scored_act();
+    calculate_weight_acc();
     calc_progress();
+    calc_intotal();
   }
 
   function count_know() {
@@ -595,7 +610,7 @@ if(!empty($get_pertanyaan_self_attitude)){
     calculate_weight_acc();
     calculate_scored_act();
     calc_progress();
-
+    calc_intotal();
   }
 
   function count_skills() {
@@ -603,11 +618,12 @@ if(!empty($get_pertanyaan_self_attitude)){
     var tot_skills = <?php echo $tot_skills;?>;
 
     var sum = 0;
-    for (var i = parseInt(tot_know) + 1; i <= parseInt(tot_know) + parseInt(tot_know); i++) {
+    for (var i = parseInt(tot_know) + 1; i <= parseInt(tot_know) + parseInt(tot_skills); i++) {
+      // console.log(i);
+
       var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
       sum += parseFloat(answer);
     }
-
     var scored = parseFloat(sum / parseInt(tot_skills)).toFixed(2);
     var weight = parseFloat(scored * (25 / 100)).toFixed(2);
 
@@ -620,21 +636,22 @@ if(!empty($get_pertanyaan_self_attitude)){
     calculate_weight_acc();
     calculate_scored_act();
     calc_progress();
-
+    calc_intotal();
   }
 
   function count_attitude() {
+    var tot_know = <?php echo $tot_know;?>;
     var tot_skills = <?php echo $tot_skills;?>;
     var tot_attitude = <?php echo $tot_attitude;?>;
 
     var sum = 0;
-    for (var i = parseInt(tot_skills) + 1; i <= parseInt(tot_skills) + parseInt(tot_skills); i++) {
+    for (var i = parseInt(tot_know)+parseInt(tot_skills) + 1; i <= parseInt(tot_know)+parseInt(tot_skills) + parseInt(tot_attitude); i++) {
       var answer = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
       sum += parseFloat(answer);
     }
 
     var scored = parseFloat(sum / parseInt(tot_attitude)).toFixed(2);
-    var weight = parseFloat(scored * (55 / 100)).toFixed(2);
+    var weight = parseFloat(scored * (45 / 100)).toFixed(2);
 
     //console.log(sum);
 
@@ -646,6 +663,8 @@ if(!empty($get_pertanyaan_self_attitude)){
     calculate_scored_act();
     calculate_weight_acc();
     calc_progress();
+    calc_intotal();
+
   }
 
   function count_deliverables(){
@@ -661,6 +680,8 @@ if(!empty($get_pertanyaan_self_attitude)){
     calculate_scored_act();
     calculate_weight_acc();
     calc_progress();
+    calc_intotal();
+
   }
 
 
@@ -796,7 +817,6 @@ if(!empty($get_pertanyaan_self_attitude)){
       var prog_skill_dec =prog_skill.toFixed(2);
       $("#v_prog_skill").html(prog_skill_dec);
     }
-
     
     // * Attitude */
     var weight_attitude_acc2 = $("#weight_attitude_act").val();
@@ -834,6 +854,31 @@ if(!empty($get_pertanyaan_self_attitude)){
       var prog_ind_dec =prog_individual.toFixed(2);
       $("#v_prog_ind").html(prog_ind_dec);
     }
+
+  }
+
+  function calc_intotal(){
+    var weight_know_acc2 = $("#weight_know_act").val();
+    var weight_skill_acc2 = $("#weight_skills_act").val();
+    var weight_attitude_acc2 = $("#weight_attitude_act").val();
+    var weight_indi_acc2 = $("#weight_individu_act").val();
+
+    var weight_know_prev2 = $("#w_know_prev").val();
+    var weight_skill_prev2 = $("#w_skill_prev").val();
+    var weight_indi_prev2 = $("#w_indi_prev").val();
+    var weight_attitude_prev2 = $("#w_attitude_prev").val();
+
+
+    var total_weight_act = parseFloat(weight_know_acc2)+parseFloat(weight_skill_acc2)+parseFloat(weight_attitude_acc2)+parseFloat(weight_indi_acc2);
+
+    var total_weight_prev2  = parseFloat(weight_know_prev2)+parseFloat(weight_skill_prev2)+parseFloat(weight_attitude_prev2)+parseFloat(weight_indi_prev2);
+
+    var inTotal = ((parseFloat(total_weight_act)-parseFloat(total_weight_prev2))/parseFloat(total_weight_prev2))*100;
+      
+      var inTotal_dec =inTotal.toFixed(2);
+      $("#v_inTotal").html(inTotal_dec);
+
+
   }
 
   function hitungrata_att() {

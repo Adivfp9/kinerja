@@ -11,7 +11,8 @@ class Self_appraisal extends MY_Controller {
 	public function index(){
 		$data['title'] = 'Table karyawan';
 		$data['get_karyawan'] = $this->transaksi_model->get_karyawan_ss_self();
-		
+		// var_dump($data);
+		// return;
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/self/index', $data);
 		$this->load->view('admin/includes/_footer');
@@ -27,7 +28,7 @@ class Self_appraisal extends MY_Controller {
 		$id_karyawan = $kode[1];
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
-		$atasan = $kode[4];
+		$atasan = substr($kode[4],0,3);
 		$nama_departemen = $kode[5];
 		$email2 = $kode[6];
 		$nama_jabatan = $kode[7];
@@ -120,7 +121,7 @@ class Self_appraisal extends MY_Controller {
 			$from	= "hrd@pincgroup.id";
 			$ellen	= "ellen@pincgroup.id";
 			$sara	= "sara@pincgroup.id";
-			$linkurl = base_url('admin/online/self/'.$url.'/');
+			$linkurl ='http://182.16.171.166/kinerja/admin/online/self/'.$url.'/';
 
 			$to	= $email;
 			$subject = "Self Appraisal - $nama_karyawan";

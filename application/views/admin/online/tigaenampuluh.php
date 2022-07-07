@@ -13,7 +13,8 @@ $email2 = $kode[6];
 $jabatan = $kode[7];
 $inisial = $kode[8];
 $kode = $kode[9];
-$tanggal_input = date("Y/m/d");
+$tanggal_input = date("Y-m-d");
+$tgl_appraisal = substr($kode,0,10);
 
 ?>
 
@@ -33,7 +34,7 @@ $tanggal_input = date("Y/m/d");
       <div class="card-header">
         <div class="d-inline-block">
           <h3 class="card-title">
-            360' Feedback form </h3>
+            360 Feedback form </h3>
         </div>
 
       </div>
@@ -80,11 +81,18 @@ $tanggal_input = date("Y/m/d");
                 </div>
 
                 <div class="form-group">
+                  <label for="tgl_appraisal" class="col-md-12 control-label">Appraisal Date</label>
+                  <div class="col-md-12">
+                    <input type="text" readonly name="tgl_appraisal" class="form-control" id="tanggal" placeholder="" value="<?= $tgl_appraisal; ?>">
+                  </div>
+                </div>
+
+                <div class="form-group">
                   <label for="tanggal" class="col-md-12 control-label">Submission Date</label>
                   <div class="col-md-12">
                     <input type="text" readonly name="tanggal" class="form-control" id="tanggal" placeholder="" value="<?= $tanggal_input; ?>">
                   </div>
-                </div>
+                </div>                
 
                 <div class="form-group">
                   <label for="rekan" class="col-md-12 control-label">Colleague Name</label>

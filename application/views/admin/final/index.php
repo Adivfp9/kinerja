@@ -72,7 +72,7 @@
                 $skye1 = "$tanggal_appraisal$inisial$rekan_kerja";
                 $skye2 = "$tanggal_appraisal$inisial$rekan_kerja2";
                 $skye3 = "$tanggal_appraisal$inisial$rekan_kerja3";
-                $kode ="+$id+$inisial+$rekan_kerja+$rekan_kerja2+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email+$id_jabatan+$skye1+$skye2+$skye3+$tanggal_appraisal+$id_jabatan";
+                $kode ="+$id+$inisial+$rekan_kerja+$rekan_kerja2+$rekan_kerja3+$nama_karyawan+$atasan+$nama_departemen+$email+$id_jabatan+$skye1+$skye2+$skye3+$tanggal_appraisal+$nama_jabatan";
                 $kode= base64_encode($kode);
                 
                 $skyes = "$tanggal_appraisal$inisial$atasan";
