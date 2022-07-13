@@ -59,7 +59,8 @@
                 $rekan = $row['rekan'];
                 $team = $row['team'];
                 $kode_form = $row['kode_form'];
-                $kode ="+$inisial+$posisi+$tgl_appraisal+$rekan+$team+$kode_form";
+                $id_karyawan = $row['id_karyawan'];
+                $kode ="+$inisial+$posisi+$tgl_appraisal+$rekan+$team+$kode_form+$id_karyawan";
 
                 $kode= base64_encode($kode);
                 ?> 

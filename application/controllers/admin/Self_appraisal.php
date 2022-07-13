@@ -35,11 +35,13 @@ class Self_appraisal extends MY_Controller {
 		$id_jabatan = $kode[8];
 		$kode = $kode[9];
 
-		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
 		foreach ($kry->result() as $row2)
 		{
 			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
 		}
+		$data['get_company']= $perusahaan;
 		
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
@@ -53,7 +55,7 @@ class Self_appraisal extends MY_Controller {
 
 		$kondisi4="individual";
 		$data['get_karyawan_self'] = $this->transaksi_model->get_karyawan_self($id_karyawan);
-		//$data['get_karyawan_self_nilai'] = $this->transaksi_model->get_karyawan_self_nilai($id_karyawan);
+
 		$data['get_karyawan_self_know'] = $this->transaksi_model->get_karyawan_self_know($kondisi1,$kode);
 		$data['get_karyawan_self_skills'] = $this->transaksi_model->get_karyawan_self_skills($kondisi2,$kode);
 		$data['get_karyawan_self_att'] = $this->transaksi_model->get_karyawan_self_att($kondisi3,$kode);
@@ -326,11 +328,13 @@ class Self_appraisal extends MY_Controller {
 		$kode = $kode[9];
 		$tanggal_appraisal = $kode[10];
 
-		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
 		foreach ($kry->result() as $row2)
 		{
 			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
 		}
+		$data['get_company']= $perusahaan;
 		
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 

@@ -13,8 +13,7 @@ class Final_appraisal extends MY_Controller {
 	public function index(){
 		$data['title'] = 'Table karyawan';
 		$data['get_karyawan'] = $this->master_model->get_final_spv();
-		// var_dump($data);
-		// return;
+
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/final/index', $data);
 		$this->load->view('admin/includes/_footer');
@@ -315,8 +314,11 @@ class Final_appraisal extends MY_Controller {
 		// var_dump($kode);
 		// return;
 		
-		
+		$id_karyawan = $kode[1];
 		$inisial = $kode[2];
+		$rekan1 = $kode[3];
+		$rekan2 = $kode[4];
+		$rekan3 = $kode[5];
 		$kode_form = $kode[11];
 		$kode_form2 = $kode[12];
 		$kode_form3 = $kode[13];
@@ -326,24 +328,77 @@ class Final_appraisal extends MY_Controller {
 		$data['get_masukan_360'] = $this->transaksi_model->get_masukan_360($kode_form);
 		$data['get_karyawan_360_nilai_per'] = $this->transaksi_model->get_karyawan_360_nilai_per($kode_form);
 		$data['get_karyawan_360_nilai_att'] = $this->transaksi_model->get_karyawan_360_nilai_att($kode_form);
-		$data['hitung_360_per'] = $this->transaksi_model->hitung_360_per($inisial,$kode_form);
-		$data['hitung_360_att'] = $this->transaksi_model->hitung_360_att($inisial,$kode_form);
+		$data['hitung_360_per'] = $this->transaksi_model->hitung_360_per($id_karyawan,$kode_form);
+		$data['hitung_360_att'] = $this->transaksi_model->hitung_360_att($id_karyawan,$kode_form);
+
+		$qry1=$this->db->query("select nama_karyawan from karyawan where inisial='$rekan1'");
+		foreach ($qry1->result() as $row_r1)
+		{
+			$nama_rekan1 = $row_r1->nama_karyawan;
+		}
+		$data['get_rekan1']= $nama_rekan1;
+
+		$qry_tg1=$this->db->query("select tgl_appraisal from form_360 where kode_form='$kode_form' and id_karyawan='$id_karyawan'");
+		foreach ($qry_tg1->result() as $row_t1)
+		{
+			$tgl_input1 = $row_t1->tgl_appraisal;
+		}
+		$data['tgl_appr1']= $tgl_input1;
 
 		// rekan 2
 
 		$data['get_masukan_3602'] = $this->transaksi_model->get_masukan_3602($kode_form2);
 		$data['get_karyawan_360_nilai_per2'] = $this->transaksi_model->get_karyawan_360_nilai_per2($kode_form2);
 		$data['get_karyawan_360_nilai_att2'] = $this->transaksi_model->get_karyawan_360_nilai_att2($kode_form2);
-		$data['hitung_360_per2'] = $this->transaksi_model->hitung_360_per2($inisial,$kode_form2);
-		$data['hitung_360_att2'] = $this->transaksi_model->hitung_360_att2($inisial,$kode_form2);
+		$data['hitung_360_per2'] = $this->transaksi_model->hitung_360_per2($id_karyawan,$kode_form2);
+		$data['hitung_360_att2'] = $this->transaksi_model->hitung_360_att2($id_karyawan,$kode_form2);
+
+		$qry2=$this->db->query("select nama_karyawan from karyawan where inisial='$rekan2'");
+		foreach ($qry2->result() as $row_r2)
+		{
+			$nama_rekan2 = $row_r2->nama_karyawan;
+		}
+		$data['get_rekan2']= $nama_rekan2;
+
+		$qry_tg2=$this->db->query("select tgl_appraisal from form_360 where kode_form='$kode_form' and id_karyawan='$id_karyawan'");
+		foreach ($qry_tg2->result() as $row_t2)
+		{
+			$tgl_input2 = $row_t2->tgl_appraisal;
+		}
+		$data['tgl_appr2']= $tgl_input2;
 
 		//rekan 3
 
-		$data['get_masukan_3603'] = $this->transaksi_model->get_masukan_3602($kode_form3);
+		$data['get_masukan_3603'] = $this->transaksi_model->get_masukan_3603($kode_form3);
 		$data['get_karyawan_360_nilai_per3'] = $this->transaksi_model->get_karyawan_360_nilai_per3($kode_form3);
 		$data['get_karyawan_360_nilai_att3'] = $this->transaksi_model->get_karyawan_360_nilai_att3($kode_form3);
-		$data['hitung_360_per3'] = $this->transaksi_model->hitung_360_per2($inisial,$kode_form3);
-		$data['hitung_360_att3'] = $this->transaksi_model->hitung_360_att2($inisial,$kode_form3);
+		$data['hitung_360_per3'] = $this->transaksi_model->hitung_360_per2($id_karyawan,$kode_form3);
+		$data['hitung_360_att3'] = $this->transaksi_model->hitung_360_att2($id_karyawan,$kode_form3);
+
+		$qry3=$this->db->query("select nama_karyawan from karyawan where inisial='$rekan3'");
+		foreach ($qry3->result() as $row_r3)
+		{
+			$nama_rekan3 = $row_r3->nama_karyawan;
+		}
+		$data['get_rekan3']= $nama_rekan3;
+
+		$qry_tg3=$this->db->query("select tgl_appraisal from form_360 where kode_form='$kode_form' and id_karyawan='$id_karyawan'");
+		foreach ($qry_tg3->result() as $row_t3)
+		{
+			$tgl_input3 = $row_t3->tgl_appraisal;
+		}
+		$data['tgl_appr3']= $tgl_input3;
+
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan, j.nama_jabatan from karyawan k, perusahaan c, jabatan j  where k.id_perusahaan=c.id and k.id_jabatan=j.id and k.id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
+			$jabatan = $row2->nama_jabatan;
+		}
+		$data['get_company']= $perusahaan;
+		$data['get_jabatan']= $jabatan;
+
 		$this->load->view('admin/final/final360pdf', $data);
 
 	}
@@ -372,11 +427,13 @@ class Final_appraisal extends MY_Controller {
 		$kode = $kode[9];
 		$tanggal_appraisal = $kode[10];
 
-		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
 		foreach ($kry->result() as $row2)
 		{
 			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
 		}
+		$data['get_company']= $perusahaan;
 		
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 

@@ -70,7 +70,7 @@
             </form>
           <!-- <a href="#modalexport" class="view btn btn-sm btn-primary pull-right" ><i class="nav-icon fa fa-pencil-square-o"></i> Export Data </a> -->
          
-          </div>
+          <!-- </div> -->
             <div class="card-body">
             <table id="example1" class="table table-bordered table-striped" style="width:100%">
                 <thead>

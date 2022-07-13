@@ -23,7 +23,7 @@ $html = '
 				<?php
                      $html .='   
                 <tr>
-                  <th colspan="3"><h2 align="left">Infromasi Karyawan</h2></th>
+                  <th colspan="3"><h2 align="left">Informasi Karyawan</h2></th>
                   </tr>
                 </thead>
                 <tbody>

@@ -57,18 +57,18 @@
                             $no++;
                             ?>
                 <tr>
-                  <th>Employees Infromation</th>
+                  <th>Employees Information</th>
                   </tr>
                 </thead>
                 <tbody>
                 <tr>
+                    <td>Company Name : <?= $get_company; ?></td>
+                  </tr>
+                <tr>
                 <td>Employee Name: <?= $rekan_kerja; ?> - <?= $row['nama_karyawan']; ?></td>
                 </tr>
                 <tr>
-                <td>Job Position: <?= $row['nama_jabatan']; ?></td>
-                </tr>
-                <tr>
-                <td>Organization : <?= $row['nama_departemen']; ?></td>
+                <td>Departement : <?= $row['nama_departemen']; ?> - <?= $row['nama_jabatan']; ?></td>
                 </tr>
                 <tr>
                 <td>Supervisor : <?= $atasan; ?> - <?= $get_spv; ?></td>
@@ -142,7 +142,21 @@
                   <td><?= $row['nilai']; ?></td>
                </tr>
              <?php } ?> 
-            
+             <tr><th colspan="2"></th></tr>
+             <?php 
+                $no = 0;
+                foreach($get_karyawan_spv as $row) { 
+              ?>
+             <tr><th colspan="2">Summary </th></tr>
+             <tr>
+                <td colspan="2"><?= $row['summary']; ?></td>
+              </tr>
+              <tr><th colspan="2">Next Action </th></tr>
+             <tr>
+                <td colspan="2"><?= $row['action']; ?></td>
+              </tr>
+              <?php
+                } ?>
  
               
           </tbody>
@@ -333,6 +347,45 @@
       </tbody>
       </tfoot>
      </table>
+     <br>
+     <table class="table table-bordered table-striped text-center">
+                  <thead>
+                    <tr>
+                      <th width='40%'>TOTAL SCORE</th>
+                      <th>DEFINITION </th>
+                      <!-- <th>Salary Adjusment Range</th> -->
+
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <tr>
+                      <td>1 to 1,49</td>
+                      <td>Poor</td>
+                      <!-- <td>0</td> -->
+                    </tr>
+
+                    <tr>
+                      <td>1,5 to 2,25</td>
+                      <td>Adequate </td>
+                      <!-- <td>0</td> -->
+                    </tr>
+
+                    <tr>
+                      <td>2,26 to 3,49</td>
+                      <td>Good</td>
+                      <!-- <td>5-10%</td> -->
+                    </tr>
+
+                    <tr>
+                      <td>3,5 to 4</td>
+                      <td>Great </td>
+                      <!-- <td>10-X%</td> -->
+                    </tr>
+
+                  </tbody>
+                </table>
+                <br><br>
             </div>
             
         <!-- /.col -->

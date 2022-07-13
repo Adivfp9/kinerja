@@ -24,18 +24,30 @@ class Tigaenampuluh extends MY_Controller {
 		$url = $this->uri->segment(4);
 		$kode = base64_decode($kode);
 		$kode = explode('+', $kode);
+		// var_dump($kode);
+		// return;
 		$inisial = $kode[1];
 		$jabatan = $kode[2];
 		$tanggal = $kode[3];
 		$rekan = $kode[4];
 		$nama_departemen = $kode[5];
 		$kode_form = $kode[6];
+		$id_karyawan = $kode[7];
+
 		$data['get_masukan_360'] = $this->transaksi_model->get_masukan_360($kode_form);
 		$data['get_karyawan_360_nilai_per'] = $this->transaksi_model->get_karyawan_360_nilai_per($kode_form);
 		$data['get_karyawan_360_nilai_att'] = $this->transaksi_model->get_karyawan_360_nilai_att($kode_form);
-		$data['hitung_360_per'] = $this->transaksi_model->hitung_360_per($inisial,$kode_form);
-		$data['hitung_360_att'] = $this->transaksi_model->hitung_360_att($inisial,$kode_form);
+		$data['hitung_360_per'] = $this->transaksi_model->hitung_360_per($id_karyawan,$kode_form);
+		$data['hitung_360_att'] = $this->transaksi_model->hitung_360_att($id_karyawan,$kode_form);
 		
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
+		}
+		$data['get_company']= $perusahaan;
+
 		$this->load->view('admin/includes/_header');
 		$this->load->view('admin/tigaenampuluh/lihat', $data);
 		$this->load->view('admin/includes/_footer');
@@ -400,11 +412,22 @@ $this->load->library('email');
 		$rekan = $kode[4];
 		$nama_departemen = $kode[5];
 		$kode_form = $kode[6];
+		$id_karyawan = $kode[7];
 		$data['get_masukan_360'] = $this->transaksi_model->get_masukan_360($kode_form);
 		$data['get_karyawan_360_nilai_per'] = $this->transaksi_model->get_karyawan_360_nilai_per($kode_form);
 		$data['get_karyawan_360_nilai_att'] = $this->transaksi_model->get_karyawan_360_nilai_att($kode_form);
-		$data['hitung_360_per'] = $this->transaksi_model->hitung_360_per($inisial,$kode_form);
-		$data['hitung_360_att'] = $this->transaksi_model->hitung_360_att($inisial,$kode_form);
+		$data['hitung_360_per'] = $this->transaksi_model->hitung_360_per($id_karyawan,$kode_form);
+		$data['hitung_360_att'] = $this->transaksi_model->hitung_360_att($id_karyawan,$kode_form);
+
+
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
+		}
+		$data['get_company']= $perusahaan;
+
 		$this->load->view('admin/tigaenampuluh/pdf_360', $data);
 
 	}

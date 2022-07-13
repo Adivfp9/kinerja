@@ -169,7 +169,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form2);
-			$this->db->where('form_360.id_pertanyaan>','3');
+			$this->db->where('form_360.id_pertanyaan <','3');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_360_nilai_per3($kode_form3){
@@ -177,7 +177,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form3);
-			$this->db->where('form_360.id_pertanyaan<','5');
+			$this->db->where('form_360.id_pertanyaan<','3');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_360_nilai_att($kode_form){
@@ -193,7 +193,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form2);
-			$this->db->where('form_360.id_pertanyaan>','4');
+			$this->db->where('form_360.id_pertanyaan>','2');
 			return $this->db->get()->result_array();
 		}
 		public function get_karyawan_360_nilai_att3($kode_form3){
@@ -201,7 +201,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 			$this->db->from('form_360');
 			$this->db->join('pertanyaan', 'form_360.id_pertanyaan= pertanyaan.id', 'inner');
 			$this->db->where('form_360.kode_form',$kode_form3);
-			$this->db->where('form_360.id_pertanyaan>','4');
+			$this->db->where('form_360.id_pertanyaan>','2');
 			return $this->db->get()->result_array();
 		}
 		
@@ -226,7 +226,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_360_per($inisial,$kode_form){
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
-			$this->db->where('form_360.inisial',$inisial);
+			$this->db->where('form_360.id_karyawan',$inisial);
 			$this->db->where('form_360.id_pertanyaan<','3');
 			$this->db->where('form_360.kode_form',$kode_form);
 		
@@ -235,8 +235,8 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_360_per2($inisial,$kode_form2){
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
-			$this->db->where('form_360.inisial',$inisial);
-			$this->db->where('form_360.id_pertanyaan<','5');
+			$this->db->where('form_360.id_karyawan',$inisial);
+			$this->db->where('form_360.id_pertanyaan<','3');
 			$this->db->where('form_360.kode_form',$kode_form2);
 		
 			return $this->db->get()->result_array();
@@ -244,8 +244,8 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_360_per3($inisial,$kode_form3){
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
-			$this->db->where('form_360.inisial',$inisial);
-			$this->db->where('form_360.id_pertanyaan<','5');
+			$this->db->where('form_360.id_karyawan',$inisial);
+			$this->db->where('form_360.id_pertanyaan<','3');
 			$this->db->where('form_360.kode_form',$kode_form3);
 		
 			return $this->db->get()->result_array();
@@ -253,7 +253,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_360_att($inisial,$kode_form){
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
-			$this->db->where('form_360.inisial',$inisial);
+			$this->db->where('form_360.id_karyawan',$inisial);
 			$this->db->where('form_360.id_pertanyaan>','2');
 			$this->db->where('form_360.kode_form',$kode_form);
 		
@@ -262,8 +262,8 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_360_att2($inisial,$kode_form2){
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
-			$this->db->where('form_360.inisial',$inisial);
-			$this->db->where('form_360.id_pertanyaan>','4');
+			$this->db->where('form_360.id_karyawan',$inisial);
+			$this->db->where('form_360.id_pertanyaan>','2');
 			$this->db->where('form_360.kode_form',$kode_form2);
 		
 			return $this->db->get()->result_array();
@@ -271,8 +271,8 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		public function hitung_360_att3($inisial,$kode_form3){
 			$this->db->select_sum('nilai');
 			$this->db->from('form_360');
-			$this->db->where('form_360.inisial',$inisial);
-			$this->db->where('form_360.id_pertanyaan>','4');
+			$this->db->where('form_360.id_karyawan',$inisial);
+			$this->db->where('form_360.id_pertanyaan>','2');
 			$this->db->where('form_360.kode_form',$kode_form3);
 		
 			return $this->db->get()->result_array();
@@ -295,7 +295,7 @@ $this->db->order_by("karyawan.id_perusahaan", "asc");
 		}
 
 		public function hasil_360(){
-			$this->db->select('DISTINCT(kode_form),inisial,posisi,rekan,tgl_appraisal,posisi,kode_form,team');
+			$this->db->select('DISTINCT(kode_form),inisial,posisi,rekan,tgl_appraisal,posisi,kode_form,team, id_karyawan');
 			$this->db->from('form_360');
 			return $this->db->get()->result_array();
 		}

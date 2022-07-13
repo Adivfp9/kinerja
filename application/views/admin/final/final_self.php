@@ -80,29 +80,38 @@ $html = '
 
 				<?php
                      $html .='   
-					 <h1 align="center">'.$nama_karyawan.' - Self Performance Review</h1>
+            <h1 align="center">'.$nama_karyawan.'</h1>
+            <h2 align="center">Self Performance Review</h2>
 					 <table id=customers>
+           <tr>
+              <th id=th1>Company Name</th>
+              <th> : '.$get_company.'</th>
+            </tr>
 					 <tr>
 					   <th id=th1>Employee</th>
 					    <th>: '.$nama_karyawan.'</th>
 					   </tr>
-					 <tr>
-					 <th id=th1>Job Position</th>
-					  <th>: '.$jabatan.'</th>
-					 </tr>
-				   <tr>
-				   <th id=th1>Departement  </th>
-				    <th>: '.$nama_departemen.'</th>
-					</tr>
+             <tr>
+             <th id=th1>Departement  </th>
+              <th>: '.$nama_departemen.' - '.$jabatan.'</th>
+            </tr>
 					<tr>
 					<th id=th1>Supervisor </th>
 				  <th>: '.$atasan.' - '.$get_spv.'</th>
 					 </tr>
 					 <tr>
-					<th id=th1>Submission Date  </th>
-				   	<th>: '.$tanggal_appraisal.'</th>
-					 </tr>
-           <tr>
+					<th id=th1>Submission Date  </th>';
+          foreach($get_karyawan_self as $row)
+          {
+            $tgl_appr = $row['tgl_appraisal'];
+        
+            $html .='<th>: '.$tgl_appr.'</th>
+                   </tr>
+                   <tr>'; ?>
+                   <?php
+          } 
+          
+          $html .='<tr>
            <th id=th1>Appraisal Date  </th>
 				   	<th>: '.substr($kode_form,0,10).'</th>
 					 </tr>
@@ -206,9 +215,23 @@ $html .='
     <td>'.$dnilai['id_pertanyaan'].'</td>
     <td>'.$dnilai['nilai'].'</td>
  </tr>
-'; 
+ <tr><th colspan="2"></th></tr>'; 
   }  ?>
 
+<?php
+foreach($get_karyawan_self as $row)
+{
+  
+
+  $html .='<tr><th colspan="2">Summary </th></tr>
+  <tr>
+     <td colspan="2">'.$row['summary'].'</td>
+   </tr>
+   <tr><th colspan="2">Next Action </th></tr>
+             <tr>
+                <td colspan="2">'.$row['action'].'</td>
+              </tr>'; 
+} ?>
 <?php
 $html .='
 </table>';

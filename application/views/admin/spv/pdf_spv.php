@@ -207,6 +207,25 @@ $html .='
  </tr>
 '; 
   }  ?>
+<?php
+$html .='
+<tr style="background-color: #ffffff;"><td colspan=2><b></b></td></tr>';
+
+?>
+
+<?php 
+	foreach($get_karyawan_spv as $row) { 
+
+	$html .='<tr style="background-color: #f2f2f2;"><td colspan=2><b>SUMMARY</b></td></tr>
+             <tr>
+                <td colspan="2">'.$row['summary'].'</td>
+              </tr>
+              <tr style="background-color: #f2f2f2;"><td colspan=2><b>NEXT ACTION</b></td></tr>
+             <tr>
+                <td colspan="2">'.$row['action'].'</td>
+              </tr>';
+} ?>
+
 
 <?php
 $html .='

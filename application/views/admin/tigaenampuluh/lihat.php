@@ -53,18 +53,18 @@
                 <thead>
                
                 <tr>
-                  <th>Employees Infromation</th>
+                  <th>Employees Information</th>
                   </tr>
                 </thead>
                 <tbody>
+                  <tr>
+                    <td>Company Name : <?= $get_company; ?></td>
+                  </tr>
                 <tr>
-                <td>Employee Name : <?= $inisial; ?></td>
+                  <td>Employee Name : <?= $inisial; ?></td>
                 </tr>
                 <tr>
-                <td>Job position: <?= $jabatan; ?></td>
-                </tr>
-                <tr>
-                <td>Department : <?= $nama_departemen; ?></td>
+                <td>Department : <?= $nama_departemen; ?> - <?= $jabatan; ?></td>
                 </tr>
                 <tr>
                 <td>Colleague : <?= $rekan; ?></td>

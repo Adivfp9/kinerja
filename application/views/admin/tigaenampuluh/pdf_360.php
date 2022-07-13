@@ -76,16 +76,17 @@ $html = '
 					 <h2 align="center">360 Degree Feedback</h2>
 					 <table id=customers>
 					 <tr>
+					   <th id=th1>Company Name </th>
+					    <th>: '.$get_company.'</th>
+					   </tr>
+					 <tr>
+					 <tr>
 					   <th id=th1>Employee Name </th>
 					    <th>: '.$inisial.'</th>
 					   </tr>
-					 <tr>
-					 <th id=th1>Job Position  </th>
-					  <th>: '.$jabatan.'</th>
-					 </tr>
 				   <tr>
 				   <th id=th1>Departement   </th>
-				    <th>: '.$nama_departemen.'</th>
+				    <th>: '.$nama_departemen.' - '.$jabatan.'</th>
 					</tr>
 					<tr>
 					<th id=th1>Colleague  </th>
