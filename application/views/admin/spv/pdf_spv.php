@@ -83,16 +83,16 @@ $html = '
 					 <h2 align="center">Supervisor Review</h2>
 					 <table id=customers>
 					 <tr>
-					   <th id=th1>Employee</th>
-					    <th>: '.$rekan_kerja.' - '.$nama_karyawan.'</th>
+					   <th id=th1>Company Name</th>
+					    <th>: '.$get_company.'</th>
 					   </tr>
 					 <tr>
-					  <th id=th1>Job Position</th>
-					  <th>: '.$jabatan.'</th>
-					 </tr>
+					   <th id=th1>Employee Name</th>
+					    <th>: '.$rekan_kerja.' - '.$nama_karyawan.'</th>
+					   </tr>
 				  	<tr>
 				   		<th id=th1>Department   </th>
-				    	<th>: '.$nama_departemen.'</th>
+				    	<th>: '.$nama_departemen.' - '.$jabatan.'</th>
 					</tr>
 					<tr>
 						<th id=th1>Supervisor </th>
@@ -437,7 +437,7 @@ $html .='
 $mpdf = new mPDF('c');
 
  		$mpdf->SetProtection(array('print'));
- 		$mpdf->SetTitle("Suvervisor Review");
+ 		$mpdf->SetTitle("Supervisor Review");
 		$mpdf->SetAuthor("PINC");
 		$mpdf->watermark_font = 'PINC>';
 		$mpdf->watermarkTextAlpha = 0.1;
@@ -446,7 +446,7 @@ $mpdf = new mPDF('c');
 
 		$mpdf->WriteHTML($html);
 
-		$filename = 'Suvervisor Review';
+		$filename = 'Supervisor Review';
 		ob_clean();
 		$mpdf->Output($filename.'.pdf', 'D','F');			
 		

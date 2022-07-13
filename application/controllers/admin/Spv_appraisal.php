@@ -330,11 +330,14 @@ class Spv_appraisal extends MY_Controller {
 		$nama_jabatan = $kode[7];
 		$id_jabatan = $kode[8];
 		$kode = $kode[9];
-		$kry = $this->db->query("select nik from karyawan where id='$id_karyawan'");
+		
+		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
 		foreach ($kry->result() as $row2)
 		{
 			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
 		}
+		$data['get_company']= $perusahaan;
 		
 		$query = $this->db->query("select * from master_form where id_jabatan='$id_jabatan'");
 
