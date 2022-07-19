@@ -26,6 +26,8 @@ class Self_appraisal extends MY_Controller {
 		// var_dump($kode);
 		// return;
 		$id_karyawan = $kode[1];
+		// var_dump($id_karyawan);
+		// return;
 		$rekan_kerja = $kode[2];
 		$nama_karyawan = $kode[3];
 		$atasan = substr($kode[4],0,3);
@@ -140,9 +142,12 @@ class Self_appraisal extends MY_Controller {
 			<p>4. Pada bagian Individual Deliverable (jika ada), penilaian ini diisi dengan hal-hal yang bersifat luar biasa yang diberikan oleh karyawan yang bersangkutan dalam kinerja nya.Contoh : pada form penilaian Graphic Designer, terdapat kinerja yang diluar biasanya yaitu able to develop communications strategy</p>
 			<p>5. HRD akan mempertimbangkan 360' review/ feedback atasan, dan dari karyawan yang bersangkutansebagai referensi dan dokumen pendukung pengambilan keputusan pada proses Appraisal.</p>
 			<p>6. Dalam mengisi form appraisal, form tersebut wajib diisi secara lengkap.</p>
-			<p>7. Apabila terdapat kesulitan dalam pelaksanaan Employee Performance Appraisal ini, mohon untuk dapat menghubungi Dept. HR (Sara Putrikita/sara@pinc.group/ +62851 5788 1097 )</p>
+			<p>7. Apabila terdapat kesulitan dalam pelaksanaan Employee Performance Appraisal ini, mohon untuk dapat menghubungi Dept. HR.</p>
+			
 			
 			</body></html>";
+			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
+			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);

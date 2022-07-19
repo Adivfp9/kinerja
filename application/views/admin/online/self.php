@@ -872,11 +872,16 @@ if(!empty($get_pertanyaan_self_attitude)){
     var total_weight_act = parseFloat(weight_know_acc2)+parseFloat(weight_skill_acc2)+parseFloat(weight_attitude_acc2)+parseFloat(weight_indi_acc2);
 
     var total_weight_prev2  = parseFloat(weight_know_prev2)+parseFloat(weight_skill_prev2)+parseFloat(weight_attitude_prev2)+parseFloat(weight_indi_prev2);
-
-    var inTotal = ((parseFloat(total_weight_act)-parseFloat(total_weight_prev2))/parseFloat(total_weight_prev2))*100;
+    if (total_weight_prev2>0){
+      var inTotal = ((parseFloat(total_weight_act)-parseFloat(total_weight_prev2))/parseFloat(total_weight_prev2))*100;
       
       var inTotal_dec =inTotal.toFixed(2);
       $("#v_inTotal").html(inTotal_dec);
+    }else{
+      var inTotal_dec = 0;
+      $("#v_inTotal").html(inTotal_dec);
+    }
+    
 
 
   }

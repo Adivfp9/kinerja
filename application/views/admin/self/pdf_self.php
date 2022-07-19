@@ -83,24 +83,27 @@ $html = '
 					 <h1 align="center">'.$rekan_kerja.' - '.$nama_karyawan.'</h1>
            <h2 align="center">Self Performance Review</h2>
 					 <table id=customers>
-           <tr>
+            <tr>
               <th id=th1>Company Name</th>
               <th> : '.$get_company.'</th>
             </tr>
-					 <tr>
-					   <th id=th1>Employee Name</th>
+
+					  <tr>
+					    <th id=th1>Employee Name</th>
 					    <th>: '.$rekan_kerja.' - '.$nama_karyawan.'</th>
-					   </tr>
-					 <tr>
-				   <th id=th1>Departement  </th>
-				    <th>: '.$nama_departemen.' - '.$jabatan.'</th>
-					</tr>
-					<tr>
-					<th id=th1>Supervisor </th>
-				  <th>: '.$atasan.' - '.$get_spv.'</th>
-					 </tr>
-					 <tr>
-					<th id=th1>Submission Date  </th>';
+					  </tr>
+
+					  <tr>
+				      <th id=th1>Departement  </th>
+				      <th>: '.$nama_departemen.' - '.$jabatan.'</th>
+					  </tr>
+
+					  <tr>
+					    <th id=th1>Supervisor </th>
+				      <th>: '.$atasan.' - '.$get_spv.'</th>
+					  </tr>
+					  <tr>
+					     <th id=th1>Submission Date  </th>';
           
 foreach($get_karyawan_self as $row)
 	{

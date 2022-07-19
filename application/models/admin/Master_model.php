@@ -152,8 +152,7 @@ public function get_final_spv(){
     $this->db->select('*, karyawan.id as id_karyawan,karyawan.id_jabatan as id_jabatan');
     $this->db->from('karyawan');
 	$this->db->join('departemen', 'departemen.kode_departemen = karyawan.id_departemen', 'inner');
-	$this->db->join('jabatan', 'jabatan.kode_jabatan = karyawan.id_jabatan', 'inner');
-	$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner')->where('karyawan.mark', $key)->order_by("karyawan.nama_karyawan", "asc");
+	$this->db->join('jabatan', 'jabatan.kode_jabatan = karyawan.id_jabatan', 'inner')->where('karyawan.mark', $key)->order_by("karyawan.nama_karyawan", "asc");
     return $this->db->get()->result_array();
 }
 

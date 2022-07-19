@@ -84,28 +84,34 @@ $html = '
 
 				<?php
                      $html .='   
-					 <h1 align="center">'.$nama_karyawan.' - 360 Degree Feedback</h1>
+					 <h1 align="center">'.$nama_karyawan.'</h1>
+					 <h2 align="center">360 Degree Feedback</h2>
 					 <table id=customers>
 					 <tr>
-					   <th id=th1>Employee</th>
-					    <th>: '.$nama_karyawan.'</th>
+					   <th id=th1>Company Name </th>
+					    <th>: '.$get_company.'</th>
 					   </tr>
 					 <tr>
-					 <th id=th1>Job position  </th>
-					  <th>: '.$jabatan.'</th>
-					 </tr>
-				   <tr>
-				   <th id=th1>Organization   </th>
-				    <th>: '.$nama_departemen.'</th>
+					 <tr>
+					   <th id=th1>Employee Name</th>
+					    <th>: '.$nama_karyawan.'</th>
+					   </tr>
+					<tr>
+					   	<th id=th1>Departement   </th>
+						<th>: '.$nama_departemen.' - '.$get_jabatan.'</th>
 					</tr>
 					<tr>
-					<th id=th1>Colleague  </th>
-				  <th>: '.$rekan1.'</th>
-					 </tr>
-					 <tr>
-					<th id=th1>Date  </th>
-				   	<th>: '.$tanggal_appraisal.'</th>
-					 </tr>
+						<th id=th1>Colleague Name</th>
+				  		<th>: '.$rekan1.' - '.$get_rekan1.'</th>
+					</tr>
+					<tr>
+						<th id=th1>Submission Date  </th>
+				   		<th>: '.$tgl_appr1.'</th>
+					</tr>
+					<tr>
+						<th id=th1>Appraisal Date  </th>
+						<th>: '.$tanggal_appraisal.'</th>
+					</tr>
 					</table>'; ?>
 
 
@@ -138,7 +144,7 @@ $html .='
   }  ?>
 <?php
 $html .='
-<tr style="background-color: #f2f2f2;"><td colspan=2>Atittude (55%)</td></tr>';
+<tr style="background-color: #f2f2f2;"><td colspan=2>Attitude (55%)</td></tr>';
 	?>
 <?php
 foreach($get_karyawan_360_nilai_att as $rnilai)
@@ -263,28 +269,33 @@ $html .='
 <!--next page -->
 <?php
                      $html .='   
-					 <h1 align="center">'.$nama_karyawan.' - 360 Degree Feedback</h1>
+					 <h1 align="center">'.$nama_karyawan.'</h1>
+					 <h2 align="center">360 Degree Feedback</h2>
 					 <table id=customers>
+					 <tr>
+					   <th id=th1>Company Name </th>
+					    <th>: '.$get_company.'</th>
+					   </tr>
 					 <tr>
 					   <th id=th1>Employee</th>
 					    <th>: '.$nama_karyawan.'</th>
 					   </tr>
 					 <tr>
-					 <th id=th1>Job position  </th>
-					  <th>: '.$jabatan.'</th>
-					 </tr>
-				   <tr>
-				   <th id=th1>Organization   </th>
-				    <th>: '.$nama_departemen.'</th>
+						<th id=th1>Departement   </th>
+						<th>: '.$nama_departemen.' - '.$get_jabatan.'</th>
 					</tr>
 					<tr>
-					<th id=th1>Colleague  </th>
-				  <th>: '.$rekan2.'</th>
-					 </tr>
-					 <tr>
-					<th id=th1>Date  </th>
-				   	<th>: '.$tanggal_appraisal.'</th>
-					 </tr>
+						<th id=th1>Colleague Name</th>
+						<th>: '.$rekan2.' - '.$get_rekan2.'</th>
+					</tr>
+					<tr>
+						<th id=th1>Submission Date  </th>
+						<th>: '.$tgl_appr2.'</th>
+					</tr>
+					<tr>
+						<th id=th1>Appraisal Date  </th>
+						<th>: '.$tanggal_appraisal.'</th>
+					</tr>
 					</table>'; ?>
 
 
@@ -448,28 +459,34 @@ $html .='
 <!--next page 3-->
 <?php
                      $html .='   
-					 <h1 align="center">'.$nama_karyawan.' - 360 Degree Feedback</h1>
+					 <h1 align="center">'.$nama_karyawan.'</h1>
+					 <h2 align="center">360 Degree Feedback</h2>
 					 <table id=customers>
 					 <tr>
-					   <th id=th1>Employee</th>
-					    <th>: '.$nama_karyawan.'</th>
+					   <th id=th1>Company Name </th>
+					    <th>: '.$get_company.'</th>
 					   </tr>
 					 <tr>
-					 <th id=th1>Job position  </th>
-					  <th>: '.$jabatan.'</th>
-					 </tr>
+					 <tr>
+					   <th id=th1>Employee Name</th>
+					    <th>: '.$nama_karyawan.'</th>
+					   </tr>
 				   <tr>
-				   <th id=th1>Organization   </th>
-				    <th>: '.$nama_departemen.'</th>
+				   <th id=th1>Departement   </th>
+				    <th>: '.$nama_departemen.' - '.$get_jabatan.'</th>
 					</tr>
 					<tr>
-					<th id=th1>Colleague  </th>
-				  <th>: '.$rekan3.'</th>
-					 </tr>
-					 <tr>
-					<th id=th1>Date  </th>
-				   	<th>: '.$tanggal_appraisal.'</th>
-					 </tr>
+						<th id=th1>Colleague Name</th>
+				  		<th>: '.$rekan3.' - '.$get_rekan3.'</th>
+					</tr>
+					<tr>
+						<th id=th1>Submission Date  </th>
+				   		<th>: '.$tgl_appr3.'</th>
+					</tr>
+					<tr>
+						<th id=th1>Appraisal Date  </th>
+						<th>: '.$tanggal_appraisal.'</th>
+					</tr>
 					</table>'; ?>
 
 

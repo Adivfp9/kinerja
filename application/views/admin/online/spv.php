@@ -431,7 +431,7 @@ $tanggal_input = date("Y-m-d");
                     <tr>
                       <th width='40%'>TOTAL SCORE</th>
                       <th>DEFINITION </th>
-                      <th>Salary Adjusment Range</th>
+                      <!-- <th>Salary Adjusment Range</th> -->
 
                     </tr>
                   </thead>
@@ -440,25 +440,25 @@ $tanggal_input = date("Y-m-d");
                     <tr>
                       <td>1 to 1,49</td>
                       <td>Poor</td>
-                      <td>0</td>
+                      <!-- <td>0</td> -->
                     </tr>
 
                     <tr>
                       <td>1,5 to 2,25</td>
                       <td>Adequate </td>
-                      <td>0</td>
+                      <!-- <td>0</td> -->
                     </tr>
 
                     <tr>
                       <td>2,26 to 3,49</td>
                       <td>Good</td>
-                      <td>5-10%</td>
+                      <!-- <td>5-10%</td> -->
                     </tr>
 
                     <tr>
                       <td>3,5 to 4</td>
                       <td>Great </td>
-                      <td>10-X%</td>
+                      <!-- <td>10-X%</td> -->
                     </tr>
 
                   </tbody>
@@ -994,11 +994,15 @@ if(!empty($get_karyawan_self_other)){
     var total_weight_act = parseFloat(weight_know_acc2)+parseFloat(weight_skill_acc2)+parseFloat(weight_attitude_acc2)+parseFloat(weight_indi_acc2);
 
     var total_weight_prev2  = parseFloat(weight_know_prev2)+parseFloat(weight_skill_prev2)+parseFloat(weight_attitude_prev2)+parseFloat(weight_indi_prev2);
-
-    var inTotal = ((parseFloat(total_weight_act)-parseFloat(total_weight_prev2))/parseFloat(total_weight_prev2))*100;
+    if (total_weight_prev2>0){
+      var inTotal = ((parseFloat(total_weight_act)-parseFloat(total_weight_prev2))/parseFloat(total_weight_prev2))*100;
       
       var inTotal_dec =inTotal.toFixed(2);
       $("#v_inTotal").html(inTotal_dec);
+    }else{
+      var inTotal_dec = 0;
+      $("#v_inTotal").html(inTotal_dec);
+    }
 
 
   }
