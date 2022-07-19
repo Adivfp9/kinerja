@@ -185,9 +185,9 @@ foreach($get_email_rekan2 as $row){
 	<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 	<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
 	<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR.</p>
-	<p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
-	<p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
 	</body></html>";
+			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
+			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
 	$this->email->set_newline("\r\n");
 	$this->email->from($from);
 	$this->email->to($to);
@@ -236,9 +236,9 @@ $this->load->library('email');
 	<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 	<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
 	<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR.</p>
-	<p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
-	<p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
 	</body></html>";
+			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
+			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
 	$this->email->set_newline("\r\n");
 	$this->email->from($from);
 	$this->email->to($to);
