@@ -401,7 +401,7 @@ $tgl_appraisal = substr($kode_form,0,10);
                     <tr>
                       <th width='40%'>TOTAL SCORE</th>
                       <th>DEFINITION </th>
-                      <th>Salary Adjusment Range</th>
+                      <!-- <th>Salary Adjusment Range</th> -->
 
                     </tr>
                   </thead>
@@ -410,25 +410,25 @@ $tgl_appraisal = substr($kode_form,0,10);
                     <tr>
                       <td>1 to 1,49</td>
                       <td>Poor</td>
-                      <td>0</td>
+                      <!-- <td>0</td> -->
                     </tr>
 
                     <tr>
                       <td>1,5 to 2,25</td>
                       <td>Adequate </td>
-                      <td>0</td>
+                      <!-- <td>0</td> -->
                     </tr>
 
                     <tr>
                       <td>2,26 to 3,49</td>
                       <td>Good</td>
-                      <td>5-10%</td>
+                      <!-- <td>5-10%</td> -->
                     </tr>
 
                     <tr>
                       <td>3,5 to 4</td>
                       <td>Great </td>
-                      <td>10-X%</td>
+                      <!-- <td>10-X%</td> -->
                     </tr>
 
                   </tbody>

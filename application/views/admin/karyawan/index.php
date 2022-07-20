@@ -78,7 +78,7 @@
                 <th>No</th>
                   <th>Employee</th>
                   <th>Employee ID</th>
-				  <th>Company</th>
+				          <th>Company</th>
                   <th>Email</th>
                   <th>Religion</th>
                   <th>Gender</th>

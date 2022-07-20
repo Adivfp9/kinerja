@@ -97,6 +97,16 @@ class Tigaenampuluh extends MY_Controller {
 		$sara	= "sara@pincgroup.id";
 		//print $tanggal_appraisal;exit;
 
+		$kry = $this->db->query("select k.nik, c.* from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
+			$PicName	= $row2->pic_name;
+			$PicEmail	= $row2->pic_email;
+			$PicPhone	= $row2->pic_phone;
+		}
+
 		/* Email Ke Rekan Kerja 1 */
 		
 		$data['get_email_rekan'] = $this->transaksi_model->get_email_rekan($rekan_kerja);
@@ -132,6 +142,7 @@ class Tigaenampuluh extends MY_Controller {
 			<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 			<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
 			<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR.</p>
+			<p> $PicName | $PicEmail | $PicPhone </p>
 			</body></html>";
 			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
 			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
@@ -185,6 +196,7 @@ foreach($get_email_rekan2 as $row){
 	<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 	<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
 	<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR.</p>
+	<p> $PicName | $PicEmail | $PicPhone </p>
 	</body></html>";
 			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
 			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
@@ -236,6 +248,7 @@ $this->load->library('email');
 	<p>4. Penilaian skor dari 360 form feedback merupakan angka bulat dari Buruk(1),Kurang(2),Cukup(3),Baik(4) dan sangat baik(5).</p>
 	<p>5. Berikan masukan/ saran atas improvement lain yang diharapkan terkait dengan performance & attitude yang bersangkutan pada kolom yang telah disediakan, jika ada.</p>
 	<p>6. Apabila terdapat kesulitan dalam proses 360 Form Feedback ini, mohon untuk dapat menghubungi Dept. HR.</p>
+	<p> $PicName | $PicEmail | $PicPhone </p>
 	</body></html>";
 			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
 			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>

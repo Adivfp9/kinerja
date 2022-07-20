@@ -119,6 +119,15 @@ class Self_appraisal extends MY_Controller {
 		$kode_form = $kode[8];
 		$id_departemen = $kode[9];
 		
+		$kry = $this->db->query("select k.nik, c.* from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
+		foreach ($kry->result() as $row2)
+		{
+			$nik = $row2->nik;
+			$perusahaan = $row2->nama_perusahaan;
+			$PicName	= $row2->pic_name;
+			$PicEmail	= $row2->pic_email;
+			$PicPhone	= $row2->pic_phone;
+		}
 		/* ini emailnya */
 
 			$this->load->library('email');
@@ -143,8 +152,8 @@ class Self_appraisal extends MY_Controller {
 			<p>5. HRD akan mempertimbangkan 360' review/ feedback atasan, dan dari karyawan yang bersangkutansebagai referensi dan dokumen pendukung pengambilan keputusan pada proses Appraisal.</p>
 			<p>6. Dalam mengisi form appraisal, form tersebut wajib diisi secara lengkap.</p>
 			<p>7. Apabila terdapat kesulitan dalam pelaksanaan Employee Performance Appraisal ini, mohon untuk dapat menghubungi Dept. HR.</p>
-			
-			
+			<p> $PicName | $PicEmail | $PicPhone </p>
+
 			</body></html>";
 			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
 			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>

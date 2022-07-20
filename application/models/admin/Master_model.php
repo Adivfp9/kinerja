@@ -232,23 +232,41 @@ public function get_jumlah_karyawan(){
     }
 
     public function get_jumlah_final(){
-        $this->db->select ( 'COUNT(*) AS jumlah_final');
+        $this->db->select ( '*');
             $this->db->from ( 'final_appraisal' );
-            return $this->db->get()->result_array();
+            return $this->db->get()->num_rows();
         }
+        public function get_jumlah_360(){
+            $this->db->select('*');
+            $this->db->from('form_360');
+            $this->db->group_by('kode_form');
+            return $this->db->get()->result_array();
+            // $this->db->select ( 'COUNT(*) AS jumlah_spv');
+            //     $this->db->from ( 'spv_appraisal' );
+            //     $this->db->group_by('id_karyawan'); 
+            //     return $this->db->get()->result_array();
+            }
 
         public function get_jumlah_spv(){
-            $this->db->select ( 'COUNT(*) AS jumlah_spv');
-                $this->db->from ( 'spv_appraisal' );
-                $this->db->group_by('id_karyawan'); 
-                return $this->db->get()->result_array();
+            $this->db->select('COUNT(*) AS jumlah_spv');
+            $this->db->from('spv_appraisal');
+            $this->db->group_by('id_karyawan');
+            return $this->db->get()->num_rows();
+            // $this->db->select ( 'COUNT(*) AS jumlah_spv');
+            //     $this->db->from ( 'spv_appraisal' );
+            //     $this->db->group_by('id_karyawan'); 
+            //     return $this->db->get()->result_array();
             }
 
             public function get_jumlah_self(){
-                $this->db->select ( 'COUNT(*) AS jumlah_self');
-                    $this->db->from ( 'self_appraisal' );
-                    $this->db->group_by('id_karyawan'); 
-                    return $this->db->get()->result_array();
+                $this->db->select('COUNT(*) AS jumlah_self');
+                $this->db->from('self_appraisal');
+                $this->db->group_by('id_karyawan');
+                return $this->db->get()->num_rows();
+                // $this->db->select ( 'COUNT(*) AS jumlah_self');
+                //     $this->db->from ( 'self_appraisal' );
+                //     $this->db->group_by('id_karyawan'); 
+                //     return $this->db->get()->result_array();
                 }
 
 		

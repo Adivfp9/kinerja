@@ -33,10 +33,18 @@ class Dashboard extends My_Controller {
 		$data['get_jumlah_final'] = $this->master_model->get_jumlah_final();
 		$data['get_jumlah_spv'] = $this->master_model->get_jumlah_spv();
 		$data['get_jumlah_self'] = $this->master_model->get_jumlah_self();
+		$get360 = $this->db->query("SELECT * FROM form_360 group by kode_form");
+		$jumlah360 = $get360->num_rows() ;
+		$data['jumlah360'] = $jumlah360;
+		$data['get_company'] = $this->master_model->get_company();
 
-		$this->load->view('admin/includes/_header', $data);
 
-    	$this->load->view('admin/dashboard/general');
+		// var_dump($data);
+		// return ;	
+
+		$this->load->view('admin/includes/_header');
+
+    	$this->load->view('admin/dashboard/general', $data);
 
     	$this->load->view('admin/includes/_footer');
 

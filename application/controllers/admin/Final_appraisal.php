@@ -270,11 +270,14 @@ class Final_appraisal extends MY_Controller {
 
 
 		// self appraisal
-		$kry = $this->db->query("select k.nik, c.nama_perusahaan from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
+		$kry = $this->db->query("select k.nik, c.* from karyawan k, perusahaan c  where k.id_perusahaan=c.id and k.id='$id_karyawan'");
 		foreach ($kry->result() as $row2)
 		{
 			$nik = $row2->nik;
 			$perusahaan = $row2->nama_perusahaan;
+			$PicName	= $row2->pic_name;
+			$PicEmail	= $row2->pic_email;
+			$PicPhone	= $row2->pic_phone;
 		}
 		$data['get_company']= $perusahaan;
 
@@ -350,7 +353,7 @@ class Final_appraisal extends MY_Controller {
 			</p>
 			<p>Apabila terdapat kesulitan dalam pelaksanaan Employee Performance Appraisal ini, 
 			mohon untuk dapat menghubungi Dept. HR.</p>
-
+			<p> $PicName | $PicEmail | $PicPhone </p>
 			
 			</body></html>";
 			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
@@ -359,7 +362,7 @@ class Final_appraisal extends MY_Controller {
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);
-			$this->email->cc('gita@pinc.group,it@pincgroup.id,ellen@pinc.group,sara@pincgroup.id');
+			// $this->email->cc('gita@pincgroup.id,it@pincgroup.id,mala@pincgroup.id,gani@pincgroup.id');
 			$this->email->subject($subject);
 			$this->email->set_mailtype("html");
 			$this->email->message($message);
