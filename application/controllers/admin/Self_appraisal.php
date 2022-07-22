@@ -132,8 +132,8 @@ class Self_appraisal extends MY_Controller {
 
 			$this->load->library('email');
 			$from	= "hrd@pincgroup.id";
-			$ellen	= "ellen@pincgroup.id";
-			$sara	= "sara@pincgroup.id";
+			$gani	= "gani@pincgroup.id";
+			$mala	= "mala@pincgroup.id";
 			$linkurl ='http://182.16.171.166/kinerja/admin/online/self/'.$url.'/';
 
 			$to	= $email;
@@ -153,15 +153,14 @@ class Self_appraisal extends MY_Controller {
 			<p>6. Dalam mengisi form appraisal, form tersebut wajib diisi secara lengkap.</p>
 			<p>7. Apabila terdapat kesulitan dalam pelaksanaan Employee Performance Appraisal ini, mohon untuk dapat menghubungi Dept. HR.</p>
 			<p> $PicName | $PicEmail | $PicPhone </p>
-
 			</body></html>";
 			// <p> Dewi Kemalasari | mala@pincgroup.id | +62 877-7561-7587 </p>
 			// <p> Gani Setiadi    | gani@pincgroup.id | +62 878-2326-9818 </p>
 			$this->email->set_newline("\r\n");
 			$this->email->from($from);
 			$this->email->to($to);
-			$this->email->cc($sara);
-			$this->email->bcc($ellen);
+			$this->email->cc($gani);
+			$this->email->bcc($mala);
 			$this->email->subject($subject);
 			$this->email->set_mailtype("html");
 			$this->email->message($message);
@@ -173,7 +172,17 @@ class Self_appraisal extends MY_Controller {
                	echo '<br />';
 				echo $e->getMessage();
 			}
-			
+			$data_notif3[]=array('nama_karyawan' => $nama_karyawan,
+					'nik' => $nik,
+					'jenis' => 'Self Appraisal Form',
+					'nama' => $nama_karyawan,
+					'email' => $to,
+					'status' => 1);
+			$insert_notif3 = count($data_notif3);
+
+			if($insert_notif3){
+				$this->db->insert_batch('notice', $data_notif3);
+			}
 		echo '<script>
 		alert("Email Form Self Appraisal Berhasil Di Kirim"); 
 		</script>';

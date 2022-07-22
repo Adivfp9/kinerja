@@ -87,14 +87,18 @@
       <div class="row">
       <div class="col-lg-12">
       <div class="card">
-      <div class="card-header">
-              <h5 class="card-title"> </i>Upcoming Appraisal
-              </h5>
+        <div class="card-header">
+              <h3 class="card-title"> </i>Upcoming Appraisal
+                <div class="pull-right">
+                  <a href="/kinerja/admin/dashboard/send_hr" class="btn btn-success">Send to HR</a>
+                </div> 
+              </h3>
               
-                  </div>
+         </div>
         <div class="card-body">
-          Filter Company
-          <form method="get" action="<?php echo base_url('admin/karyawan/filter_company')?>">
+        
+          <!-- Filter Company -->
+          <!-- <form method="get" action="<?php echo base_url('admin/dashboard/filter_company_dashboard')?>">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="departemen" class="control-label">Company</label>
@@ -105,7 +109,21 @@
                   </select> 
                 </div>                
               </div>
-          </form>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <input type="submit" name="submit" value="Search" class="btn btn-primary">
+                    </div>  
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <input type="button" name="send" value="Send to HR" class="btn btn-success">
+                    </div> 
+                  </div>
+                </div>                              
+              </div>
+          </form> -->
             <table id="#" class="table table-bordered table-striped" style="width:100%">
                 <thead>
                 <tr>

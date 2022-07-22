@@ -375,6 +375,18 @@ class Final_appraisal extends MY_Controller {
 			}catch(Exception $e){
 			echo $e->getMessage();
 			}
+
+			$data_notif3[]=array('nama_karyawan' => substr($nama_karyawan,6),
+					'nik' => $nik,
+					'jenis' => 'Supervisor Appraisal Form',
+					'nama' => $nama_spv,
+					'email' => $to,
+					'status' => 1);
+			$insert_notif3 = count($data_notif3);
+
+			if($insert_notif3){
+				$this->db->insert_batch('notice', $data_notif3);
+			}
 			
 		echo '<script>
 		alert("Email Form Performance Review Berhasil Di Kirim"); 

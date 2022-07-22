@@ -162,6 +162,17 @@ class Tigaenampuluh extends MY_Controller {
 		}catch(Exception $e){
 			echo $e->getMessage();
 		}
+		$data_notif1[]=array('nama_karyawan' => $nama_karyawan,
+							'nik' => $nik,
+			 				'jenis' => '360 Feedback Form',
+							'nama' => $nama_rekan,
+							'email' => $email,
+							'status' => 1);
+		$insert_notif1 = count($data_notif1);
+
+		if($insert_notif1){
+			$this->db->insert_batch('notice', $data_notif1);
+		}
 	/* AKhir Email Ke Rekan Kerja 1 */		
 
 /* Email Ke Rekan Kerja 2 */
@@ -214,6 +225,17 @@ foreach($get_email_rekan2 as $row){
 	}catch(Exception $e){
 	echo $e->getMessage();
 	}
+	$data_notif2[]=array('nama_karyawan' => $nama_karyawan,
+						'nik' => $nik,
+						'jenis' => '360 Feedback Form',
+						'nama' => $nama_rekan2,
+						'email' => $email2,
+						'status' => 1);
+	$insert_notif2 = count($data_notif2);
+
+	if($insert_notif2){
+		$this->db->insert_batch('notice', $data_notif2);
+	}
 /* AKhir Email Ke Rekan Kerja 2 */		
 
 
@@ -261,10 +283,21 @@ $this->load->library('email');
 	$this->email->set_mailtype("html");
 	$this->email->message($message3);
 	try{
-	$this->email->send();
-	echo 'Message has been sent.';
+		$this->email->send();
+		echo 'Message has been sent.';
 	}catch(Exception $e){
-	echo $e->getMessage();
+		echo $e->getMessage();
+	}
+	$data_notif3[]=array('nama_karyawan' => $nama_karyawan,
+					'nik' => $nik,
+					'jenis' => '360 Feedback Form',
+					'nama' => $nama_rekan3,
+					'email' => $email3,
+					'status' => 1);
+	$insert_notif3 = count($data_notif3);
+
+	if($insert_notif3){
+		$this->db->insert_batch('notice', $data_notif3);
 	}
 /* AKhir Email Ke Rekan Kerja 3 */	
 

@@ -39,15 +39,15 @@ class Hrd extends MY_Controller {
 
 
 		$this->load->library('email');
-		$from	= "hrd@pinc.group";
-		$ellen	= "ellen@pincgroup.id";
+		$from	= "hrd@pincgroup.id";
+		// $ellen	= "ellen@pincgroup.id";
 		$to	= $email;
-		$subject = "Pengingat Pengisian Form $jenis";
+		$subject = "Pengingat Pengisian $jenis";
 		$message ="
 		<html><body>
 		<p>Dear $nama,</p>
 		<p>Mohon untuk melakukan pengisian Form $jenis terhadap $nama_karyawan<p>
-		<p>Apabila terdapat kesulitan dalam pengisian, mohon untuk dapat menghubungi Dept. HR (Sara Putrikita/ sara@pinc.group/ +62851 5788 1097 )</p>
+		<p>Apabila terdapat kesulitan dalam pengisian, mohon untuk dapat menghubungi Dept. HR </p>
 		</body></html>";
 		$this->email->set_newline("\r\n");
 		$this->email->from($from);

@@ -7,31 +7,57 @@
 			$this->db->where('inisial',$rekan_kerja);
 			return $this->db->get()->result_array();
 		}
-public function get_karyawan_depan(){
-    $tahun = date('Y');
-    $bulan_sekarang = date('m');
-	$bulan = $bulan_sekarang+1;
-	$tanggal = date('Y-m-d', strtotime('+1 month'));
-	$d=cal_days_in_month(CAL_GREGORIAN,$bulan_sekarang,$tahun);
+		public function get_karyawan_depan(){
+			$tahun = date('Y');
+			$bulan_sekarang = date('m');
+			$bulan = $bulan_sekarang+1;
+			$tanggal = date('Y-m-d', strtotime('+1 month'));
+			$d=cal_days_in_month(CAL_GREGORIAN,$bulan_sekarang,$tahun);
 
-	$tgl_str = substr($tanggal,0,8)."01";
-	$tgl_end = substr($tanggal,0,8).$d;
-	
-	
-    $this->db->select('*,karyawan.id as id_karyawan');
-    $this->db->from('karyawan');
-	$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
-	$this->db->join('perusahaan', 'perusahaan.id = karyawan.id_perusahaan', 'inner');
-	$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
-	$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner');
-	$this->db->where('karyawan.tgl_appraisal >=', $tgl_str)
-    ->where('karyawan.tgl_appraisal <=', $tgl_end)
-    // $this->db->like('karyawan.tgl_appraisal', "$tahun-0$bulan", 'after');
-	//$this->db->where('karyawan.tgl_appraisal','2021-12-01');
-// $this->db
-->order_by("karyawan.id_perusahaan", "asc");
-    return $this->db->get()->result_array();
-}
+			$tgl_str = substr($tanggal,0,8)."01";
+			$tgl_end = substr($tanggal,0,8).$d;
+			
+			
+			$this->db->select('*,karyawan.id as id_karyawan, perusahaan.pic_email as hr_email');
+			$this->db->from('karyawan');
+			$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
+			$this->db->join('perusahaan', 'perusahaan.id = karyawan.id_perusahaan', 'inner');
+			$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
+			$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner');
+			$this->db->where('karyawan.tgl_appraisal >=', $tgl_str)
+			->where('karyawan.tgl_appraisal <=', $tgl_end)
+
+			->order_by("karyawan.id_perusahaan","asc")
+			->order_by("karyawan.tgl_appraisal","asc");
+			return $this->db->get()->result_array();
+		}
+
+		public function get_karyawan_dashboard_sort($idperush){
+			$tahun = date('Y');
+			$bulan_sekarang = date('m');
+			$bulan = $bulan_sekarang+1;
+			$tanggal = date('Y-m-d', strtotime('+1 month'));
+			$d=cal_days_in_month(CAL_GREGORIAN,$bulan_sekarang,$tahun);
+
+			$tgl_str = substr($tanggal,0,8)."01";
+			$tgl_end = substr($tanggal,0,8).$d;
+			
+			
+			$this->db->select('*,karyawan.id as id_karyawan');
+			$this->db->from('karyawan');
+			$this->db->join('departemen', 'departemen.id = karyawan.id_departemen', 'inner');
+			$this->db->join('perusahaan', 'perusahaan.id = karyawan.id_perusahaan', 'inner');
+			$this->db->join('jabatan', 'jabatan.id = karyawan.id_jabatan', 'inner');
+			$this->db->join('golongan', 'golongan.kode_golongan = karyawan.id_golongan', 'inner');
+			$this->db->where('karyawan.tgl_appraisal >=', $tgl_str)
+			->where('karyawan.tgl_appraisal <=', $tgl_end)
+			->where('perusahaan.id_perusahaan',$idperush)
+
+			->order_by("karyawan.id_perusahaan","asc")
+			->order_by("karyawan.tgl_appraisal","asc");
+			return $this->db->get()->result_array();
+		}
+
 		public function get_email_atasan_int($atasan){
 			$this->db->select('*');
 			$this->db->from('karyawan');

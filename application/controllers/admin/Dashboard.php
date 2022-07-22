@@ -14,8 +14,8 @@ class Dashboard extends My_Controller {
 
 		$this->rbac->check_module_access();
 
-		if($this->uri->segment(3) != '')
-		$this->rbac->check_operation_access();
+		// if($this->uri->segment(3) != '')
+		// $this->rbac->check_operation_access();
 
 		$this->load->model('admin/dashboard_model', 'dashboard_model');
 		$this->load->model('admin/master_model', 'master_model');
@@ -38,15 +38,35 @@ class Dashboard extends My_Controller {
 		$data['jumlah360'] = $jumlah360;
 		$data['get_company'] = $this->master_model->get_company();
 
-
+		$this->load->view('admin/includes/_header');
+    	$this->load->view('admin/dashboard/general', $data);
+    	$this->load->view('admin/includes/_footer');
+	}
+	public function filter_company_dashboard(){
+		$data['title'] = 'Dashboard';
+		$idPerush = $this->input->get('company');
+		$data['get_karyawan'] = $this->transaksi_model->get_karyawan_dashboard_sort($idPerush);
+		$data['get_jumlah_karyawan'] = $this->master_model->get_jumlah_karyawan();
+		$data['get_jumlah_final'] = $this->master_model->get_jumlah_final();
+		$data['get_jumlah_spv'] = $this->master_model->get_jumlah_spv();
+		$data['get_jumlah_self'] = $this->master_model->get_jumlah_self();
+		$get360 = $this->db->query("SELECT * FROM form_360 group by kode_form");
+		$jumlah360 = $get360->num_rows() ;
+		$data['jumlah360'] = $jumlah360;
+		$data['get_company'] = $this->master_model->get_company();
 		// var_dump($data);
-		// return ;	
+		// return;
 
 		$this->load->view('admin/includes/_header');
-
     	$this->load->view('admin/dashboard/general', $data);
-
     	$this->load->view('admin/includes/_footer');
+	}
+
+	public function send_hr(){
+		$data['title'] = 'Upcoming Appraisal';
+		$data['get_karyawan'] = $this->transaksi_model->get_karyawan_depan();
+		var_dump($data);
+		return;
 
 	}
 	public function index_laporan(){

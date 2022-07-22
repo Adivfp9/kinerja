@@ -128,7 +128,8 @@
              <td><?= $row['nilai']; ?></td>
             </tr>
              <?php } ?> 
-
+             <?php
+              if(sizeof($get_karyawan_self_other)>0){ ?>
              <tr> <th colspan="2">Individual Deliverables</th></tr>
              <!-- <tr>
               <td></td>
@@ -139,7 +140,11 @@
                   <td><?= $row['id_pertanyaan']; ?></td>
                   <td><?= $row['nilai']; ?></td>
                </tr>
-             <?php } ?> 
+
+             <?php } 
+              }else{
+              
+              }?> 
              <tr><th colspan="2"></th></tr>
              <?php 
                 $no = 0;
@@ -270,20 +275,33 @@
                 }?>
 
 
-            <?php foreach($hitung_self_other as $row7) { 
-               $nilai_att = $row7['nilai'];
-               $jumlah = $row7['jumlah'];
-               $rata_otherx = $nilai_att / $jumlah ;
-               $rata_other = round($rata_otherx,2);
-               $final_otherx = (5/100)*$rata_other;
-               $final_other = round($final_otherx,2);
-               if ($w_ind > 0){
-                $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
-               }else{ 
-                $prog_other = 0.00;
-               }
-
-                }?>
+            <?php 
+              if(sizeof($get_karyawan_self_other)>0){
+                var_dump("sini");
+                foreach($hitung_self_other as $row7) { 
+                  $nilai_att = $row7['nilai'];
+                  $jumlah = $row7['jumlah'];
+                  $rata_otherx = $nilai_att / $jumlah ;
+                  $rata_other = round($rata_otherx,2);
+                  $final_otherx = (5/100)*$rata_other;
+                  $final_other = round($final_otherx,2);
+                  if ($w_ind > 0){
+                    $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
+                  }else{ 
+                    $prog_other = 0.00;
+                  }
+                }
+              }else{
+                  $nilai_att = 0;
+                  $jumlah = 0;
+                  $rata_other = 0;
+                  $final_other = 0;
+                  if ($w_ind > 0){
+                    $prog_other = round((($final_other-$w_ind)/$w_ind)*100,2);
+                  }else{ 
+                    $prog_other = 0.00;
+                  }
+              }?>
 
               <?php
               $total_actual_score = $rata_know+$rata_skills+$rata_att+$rata_other;
