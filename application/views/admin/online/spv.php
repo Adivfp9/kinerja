@@ -188,17 +188,27 @@ $tanggal_input = date("Y-m-d");
                             ?>
                             <tr>
                             <tr>
-              <td width="50"><?php echo $no; ?></td>
+              <td width="70"><?php echo $no; ?></td>
               <input type="hidden"  name="jenis_form<?php echo $no; ?>" class="form-control" value="individual" >
               
               <input type="hidden" name="pertanyaan[]" class="form-control" id="pertanyaan[]" value="<?= $row['id_pertanyaan']; ?>">
                 <td><?= $row['id_pertanyaan']; ?></td>
                 <td><center><?= $row['nilai']; ?></center></td>
                 <td width="70px"><input type="number" id="jawaban<?php echo $no; ?>" name="jawaban<?php echo $no; ?>" class="form-control" onkeyup="count_deliverables()" value="" max="4" required step="0.01"></td>                             
-              </tr>
-
-       
+              </tr>      
               <?php } ?>
+
+              <!--Individual Deliverables -->
+              <table id="TabelTransaksi" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th width="70"><button id='BarisBaru' class='btn btn-primary pull-left'><i class='fa fa-plus fa-fw'></i> </th>
+                    <th colspan="2">Additional Individual Deliverables
+                    </th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+                </table>
 
               <tr>
                <td colspan='4'> 
@@ -615,7 +625,7 @@ if(!empty($get_karyawan_self_other)){
     var Baris = "<tr>";
 
   // Kolom tombol remove
-    Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-times' style='color:red;'></i></button></td>";
+    Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-minus' style='color:red;'></i></button></td>";
   // kolom input text deliverable
     Baris += "<td>";
       Baris += "<input type='text' class='form-control' required name='add_deliv[";
@@ -674,8 +684,24 @@ if(!empty($get_karyawan_self_other)){
 
   function HitungDeliverables()
   {
-    var TotDeliv = $('#TabelTransaksi tbody tr').length;
-    var sum = 0;
+    var tot_know = <?php echo $tot_know;?>;
+    var tot_skills = <?php echo $tot_skills;?>;
+    var tot_attitude = <?php echo $tot_attitude;?>;
+    var tot_individu = <?php echo $tot_individu; ?>;
+    var sumSelf = 0;
+    for (var i = parseInt(tot_know+tot_skills+tot_attitude) + 1; i <= parseInt(tot_know+tot_skills+tot_attitude) + parseInt(tot_individu); i++)
+    {
+      
+      var answerSelf = $("#jawaban"+i).val() == '' ? 0 : $("#jawaban"+i).val();
+
+      sumSelf += parseFloat(answerSelf);
+
+    }
+    // console.log(sumSelf);
+
+
+    var TotDeliv = $('#TabelTransaksi tbody tr').length+parseInt(tot_individu);
+    var sum = sumSelf;
     $('#TabelTransaksi tbody tr').each(function(){
       if($(this).find('td:nth-child(3) input').val() > 0)
       {
@@ -694,7 +720,9 @@ if(!empty($get_karyawan_self_other)){
     $("#v_weight_individu_act").html(weight);
 
     calculate_scored_act();
+    calculate_weight_acc();
     calc_progress();
+    calc_intotal();
   }
 
 
@@ -798,12 +826,11 @@ if(!empty($get_karyawan_self_other)){
     $("#weight_individu_act").val(weight);
     $("#v_score_individu_act").html(scored);
     $("#v_weight_individu_act").html(weight);
-    
+    HitungDeliverables();
     calculate_scored_act();
     calculate_weight_acc();
     calc_progress();
     calc_intotal();
-
   }
 
 

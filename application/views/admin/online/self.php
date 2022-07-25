@@ -502,7 +502,7 @@ if(!empty($get_pertanyaan_self_attitude)){
     var Baris = "<tr>";
 
   // Kolom tombol remove
-    Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-times' style='color:red;'></i></button></td>";
+    Baris += "<td><button class='btn btn-default' id='HapusBaris'><i class='fa fa-minus' style='color:red;'></i></button></td>";
   // kolom input text deliverable
     Baris += "<td>";
       Baris += "<input type='text' class='form-control' required name='add_deliv[";

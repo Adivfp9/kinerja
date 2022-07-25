@@ -207,7 +207,7 @@ public function Updatekaryawan($where,$data,$table){
 // model master company //
 public function get_company(){
     $this->db->select('*');
-    $this->db->from('perusahaan');
+    $this->db->from('perusahaan')->where('pic_email <>', '');
     return $this->db->get()->result_array();
 }
 
